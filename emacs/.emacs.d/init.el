@@ -1,0 +1,270 @@
+;; Установка и настройка package management
+(require 'package)
+(setq package-enable-at-startup nil)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+
+;; Установка use-package, если он не установлен
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Включение use-package
+(eval-when-compile
+  (require 'use-package))
+(require 'bind-key)
+(setq use-package-always-ensure t)
+
+;; Автосохранение файлов
+(use-package files
+  :ensure nil
+  :config
+  (auto-save-visited-mode 1)
+  (setq auto-save-visited-interval 3))
+
+;; Настройка тем и интерфейса
+(use-package modus-themes
+  :init
+  ;; Настройки перед загрузкой темы
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs nil
+        modus-themes-to-toggle '(modus-operandi modus-vivendi)
+        modus-themes-common-palette-overrides
+        '((bg-mode-line-active bg-sage)
+          (fg-mode-line-active fg-main)
+          (border-mode-line-active bg-green-intense)
+          (bg-tab-bar bg-main)
+          (bg-tab-current bg-active)
+          (bg-tab-other bg-dim)
+          (fringe unspecified)
+          (underline-link unspecified)
+          (underline-link-visited unspecified)
+          (underline-link-symbolic unspecified)
+          (fg-completion-match-0 blue)
+          (fg-completion-match-1 magenta-warmer)
+          (fg-completion-match-2 cyan)
+          (fg-completion-match-3 red)
+          (bg-completion-match-0 bg-blue-nuanced)
+          (bg-completion-match-1 bg-magenta-nuanced)
+          (bg-completion-match-2 bg-cyan-nuanced)
+          (bg-completion-match-3 bg-red-nuanced)
+          (comment yellow-faint)
+          (string green-warmer)
+          (prose-done green-faint)
+          (prose-todo red-faint)))
+  :config
+  (load-theme 'modus-operandi :no-confirm)
+  (define-key global-map (kbd "<f12>") #'modus-themes-toggle))
+
+;; Настройка шрифтов
+(set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 200)
+(set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
+
+;; Настройки org-mode
+(use-package org
+  :ensure nil
+  :hook
+  (org-mode . org-indent-mode)
+  :config
+  (setq org-auto-align-tags nil
+        org-tags-column 0
+        org-catch-invisible-edits 'show-and-error
+        org-special-ctrl-a/e t
+        org-hide-emphasis-markers t
+        org-ellipsis "…"
+        org-agenda-files (directory-files-recursively "~/Desktop/Org_files/" "\\.org$")
+        org-agenda-tags-column 0
+        org-agenda-block-separator ?─
+        org-agenda-time-grid '((daily today require-timed)
+                               (800 1000 1200 1400 1600 1800 2000)
+                               " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+        org-agenda-current-time-string "◀── now ─────────────────────────────────────────────────"
+        org-format-latex-options (plist-put org-format-latex-options :scale 1.9)))
+
+;; Настройка org-modern
+(use-package org-modern
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)))
+
+;; Настройка yasnippet
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (yas-global-mode 1))
+
+;; Настройка auto-complete
+(use-package auto-complete
+  :config
+  (ac-config-default))
+
+;; Настройка cdlatex
+(use-package cdlatex
+  :hook ((LaTeX-mode . turn-on-cdlatex)
+         (org-mode . turn-on-org-cdlatex)))
+
+;; Настройка AUCTeX
+(use-package tex
+  :ensure auctex
+  :hook (LaTeX-mode . my-latex-mode-keybindings)
+  :config
+  (defun my-latex-mode-keybindings ()
+    "Custom keybindings for LaTeX mode."
+    (local-set-key (kbd "C-c i") 'indent-for-tab-command)))
+
+;; Настройка aas
+(use-package aas
+  :hook ((LaTeX-mode . aas-activate-for-major-mode)
+         (org-mode . aas-activate-for-major-mode)
+         (TeX-mode . aas-activate-for-major-mode))
+  :config
+  (aas-set-snippets 'text-mode
+    ";o-" "ō"
+    ";i-" "ī"
+    ";a-" "ā"
+    ";u-" "ū"
+    ";e-" "ē")
+  (aas-set-snippets 'org-mode
+    ";latex" (lambda ()
+               (interactive)
+               (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+    ;; Добавьте остальные сниппеты здесь
+    )
+  (aas-set-snippets 'LaTeX-mode
+    ";beg" (lambda ()
+             (interactive)
+             (yas-expand-snippet (yas-lookup-snippet "begin")))
+    ;; Добавьте остальные сниппеты здесь
+    ))
+
+;; Настройка org-roam
+(use-package org-roam
+  :custom
+  (org-roam-directory "~/Desktop/org-roam")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup))
+
+;; Настройка vterm
+(use-package vterm)
+
+;; Настройка evil-mode
+(use-package evil
+  :init
+  (setq evil-want-integration t
+        evil-want-keybinding nil
+        evil-disable-insert-state-bindings t
+        evil-want-C-u-scroll t
+        evil-undo-system 'undo-redo)
+  :config
+  (evil-mode 1)
+  (evil-set-leader nil (kbd "SPC")))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init)
+  (evil-collection-org-setup))
+
+;; Настройка vertico
+(use-package vertico
+  :init
+  (setq vertico-cycle t
+        vertico-resize nil)
+  :config
+  (vertico-mode 1))
+
+;; Настройка orderless
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+;; Настройка marginalia
+(use-package marginalia
+  :config
+  (marginalia-mode))
+
+;; Настройка consult
+(use-package consult
+  :after recentf
+  :bind (("C-s" . consult-line)
+         ("C-x b" . consult-buffer)
+         ("C-c f" . consult-find)
+         ("C-c g" . consult-grep)
+         ("M-y" . consult-yank-pop))
+  :config
+  (setq consult-project-root-function #'projectile-project-root)
+  (evil-define-key 'normal 'global (kbd "<leader>,") 'consult-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>fg") 'consult-grep)
+  (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-recent-file)
+  (evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda))
+
+;; Настройка embark и embark-consult
+(use-package embark
+  :bind (("C-." . embark-act)
+         ("C-;" . embark-dwim))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :after (embark consult)
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
+
+;; Настройка savehist
+(use-package savehist
+  :init
+  (savehist-mode))
+
+;; Настройка expand-region
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)))
+
+;; Настройка recentf
+(use-package recentf
+  :ensure nil
+  :init
+  (recentf-mode 1)
+  :custom
+  (recentf-max-saved-items 100))
+
+;; Настройка projectile
+(use-package projectile
+  :config
+  (projectile-mode 1)
+  (setq projectile-project-search-path '("~/projects/")))
+
+;; Отключение стартового экрана и звукового сигнала
+(setq inhibit-startup-message t)
+(setq visible-bell t)
+
+;; Настройка функций навигации окон
+(defun other-window-backward (&optional n)
+  "Select Nth previous window."
+  (interactive "P")
+  (other-window (- (prefix-numeric-value n))))
+
+(defun other-window-forward (&optional n)
+  "Select Nth next window."
+  (interactive "P")
+  (other-window (prefix-numeric-value n)))
+
+;; Настройка функций прокрутки
+(defun scroll-n-lines-ahead (&optional n)
+  "Scroll N lines ahead."
+  (interactive "P")
+  (scroll-up (prefix-numeric-value n)))
+
+(defun scroll-n-lines-behind (&optional n)
+  "Scroll N lines behind."
+  (interactive "P")
+  (scroll-down (prefix-numeric-value n)))
+
+;; Загрузка внешнего файла конфигурации (если требуется)
+ (org-babel-load-file (expand-file-name "config.org" user-emacs-directory))
+
+;; Настройка completion-in-region для интеграции с consult
+(setq completion-in-region-function 'consult-completion-in-region)
+

@@ -1,0 +1,621 @@
+(auto-save-visited-mode 1)
+(setq auto-save-visited-interval 3)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ac-auto-show-menu nil)
+ '(blink-cursor-mode nil)
+ '(cdlatex-paired-parens "$[{(")
+ '(custom-safe-themes
+   '("99d1e29934b9e712651d29735dd8dcd431a651dfbe039df158aa973461af003e" "9a977ddae55e0e91c09952e96d614ae0be69727ea78ca145beea1aae01ac78d2" "c1638a7061fb86be5b4347c11ccf274354c5998d52e6d8386e997b862773d1d2" "b29ba9bfdb34d71ecf3322951425a73d825fb2c002434282d2e0e8c44fce8185" default))
+ '(display-line-numbers 'relative)
+ '(evil-disable-insert-state-bindings t)
+ '(evil-emacs-state-modes
+   '(5x5-mode bbdb-mode biblio-selection-mode blackbox-mode bookmark-edit-annotation-mode browse-kill-ring-mode bs-mode bubbles-mode bzr-annotate-mode calc-mode cfw:calendar-mode completion-list-mode custom-theme-choose-mode delicious-search-mode desktop-menu-blist-mode desktop-menu-mode dun-mode dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode efs-mode Electric-buffer-menu-mode emms-browser-mode emms-mark-mode emms-metaplaylist-mode emms-playlist-mode ess-help-mode etags-select-mode fj-mode gc-issues-mode gdb-breakpoints-mode gdb-disassembly-mode gdb-frames-mode gdb-locals-mode gdb-memory-mode gdb-registers-mode gdb-threads-mode gist-list-mode git-rebase-mode gomoku-mode google-maps-static-mode ibuffer-mode jde-javadoc-checker-report-mode magit-cherry-mode magit-diff-mode magit-log-mode magit-log-select-mode magit-popup-mode magit-popup-sequence-mode magit-process-mode magit-reflog-mode magit-refs-mode magit-revision-mode magit-stash-mode magit-stashes-mode magit-status-mode mh-folder-mode monky-mode mpuz-mode mu4e-main-mode mu4e-headers-mode mu4e-view-mode notmuch-hello-mode notmuch-search-mode notmuch-show-mode notmuch-tree-mode pdf-outline-buffer-mode pdf-view-mode proced-mode rcirc-mode rebase-mode recentf-dialog-mode reftex-select-bib-mode reftex-select-label-mode reftex-toc-mode sldb-mode slime-inspector-mode slime-thread-control-mode slime-xref-mode snake-mode solitaire-mode sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode tetris-mode tla-annotate-mode tla-archive-list-mode tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode tla-browse-mode tla-category-list-mode tla-changelog-mode tla-follow-symlinks-mode tla-inventory-file-mode tla-inventory-mode tla-lint-mode tla-logs-mode tla-revision-list-mode tla-revlog-mode tla-tree-lint-mode tla-version-list-mode twittering-mode urlview-mode vc-annotate-mode vc-dir-mode vc-git-log-view-mode vc-hg-log-view-mode vc-svn-log-view-mode vm-mode vm-summary-mode w3m-mode wab-compilation-mode xgit-annotate-mode xgit-changelog-mode xgit-diff-mode xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
+ '(evil-search-module 'evil-search)
+ '(evil-undo-system 'undo-redo)
+ '(evil-want-C-u-scroll t)
+ '(org-M-RET-may-split-line '((default)))
+ '(org-agenda-files
+   '("/Users/chestnykh/Desktop/Org_files/.stversions/Lisp_course1~20240502-000827.org" "/Users/chestnykh/Desktop/Org_files/.stversions/wastebook~20240502-000828.org" "/Users/chestnykh/Desktop/Org_files/LaTex_lessons/course1/test.org" "/Users/chestnykh/Desktop/Org_files/evil-mode-lessons/evil.org" "/Users/chestnykh/Desktop/Org_files/evil-mode-lessons/luaSnips.org" "/Users/chestnykh/Desktop/Org_files/evil-mode-lessons/test.org" "/Users/chestnykh/Desktop/Org_files/evil-mode-lessons/vimtex.org" "/Users/chestnykh/Desktop/Org_files/ltximg/University_named_after_Pavlov.org" "/Users/chestnykh/Desktop/Org_files/org_lessons/org-mode.org" "/Users/chestnykh/Desktop/Org_files/org_lessons/test.org" "/Users/chestnykh/Desktop/Org_files/python/test.org" "/Users/chestnykh/Desktop/Org_files/AI_plan.org" "/Users/chestnykh/Desktop/Org_files/About_Init.org" "/Users/chestnykh/Desktop/Org_files/Emacs.org" "/Users/chestnykh/Desktop/Org_files/Fedora.org" "/Users/chestnykh/Desktop/Org_files/Grammar_in_use.org" "/Users/chestnykh/Desktop/Org_files/How_to_prove.org" "/Users/chestnykh/Desktop/Org_files/Linux_Exam.org" "/Users/chestnykh/Desktop/Org_files/Lisp_info.org" "/Users/chestnykh/Desktop/Org_files/Strat.org" "/Users/chestnykh/Desktop/Org_files/Todo.org" "/Users/chestnykh/Desktop/Org_files/University_named_after_Pavlov.org" "/Users/chestnykh/Desktop/Org_files/Visit_in_internet.org" "/Users/chestnykh/Desktop/Org_files/Yasnippets.org" "/Users/chestnykh/Desktop/Org_files/doom-emacs.org" "/Users/chestnykh/Desktop/Org_files/guides.org" "/Users/chestnykh/Desktop/Org_files/if_no_ideas.org" "/Users/chestnykh/Desktop/Org_files/info.org" "/Users/chestnykh/Desktop/Org_files/main.org" "/Users/chestnykh/Desktop/Org_files/org-mod-manual.org" "/Users/chestnykh/Desktop/Org_files/org-test.org" "/Users/chestnykh/Desktop/Org_files/python.org" "/Users/chestnykh/Desktop/Org_files/test.org" "/Users/chestnykh/Desktop/Org_files/wastebook.org"))
+ '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-format-latex-header
+   "\\documentclass{article}\12\\usepackage[usenames]{color}\12[DEFAULT-PACKAGES]\12[PACKAGES]\12\\pagestyle{empty}             % do not remove\12% The settings below are copied from fullpage.sty\12\\setlength{\\textwidth}{\\paperwidth}\12\\addtolength{\\textwidth}{-3cm}\12\\setlength{\\oddsidemargin}{1.5cm}\12\\addtolength{\\oddsidemargin}{-2.54cm}\12\\setlength{\\evensidemargin}{\\oddsidemargin}\12\\setlength{\\textheight}{\\paperheight}\12\\addtolength{\\textheight}{-\\headheight}\12\\addtolength{\\textheight}{-\\headsep}\12\\addtolength{\\textheight}{-\\footskip}\12\\addtolength{\\textheight}{-3cm}\12\\setlength{\\topmargin}{1.5cm}\12\\addtolength{\\topmargin}{-2.54cm}\12")
+ '(org-latex-default-packages-alist
+   '(("AUTO" "inputenc" t
+      ("pdflatex"))
+     ("T1" "fontenc" t
+      ("pdflatex"))
+     ("" "graphicx" t nil)
+     ("" "longtable" nil nil)
+     ("" "wrapfig" nil nil)
+     ("" "rotating" nil nil)
+     ("normalem" "ulem" t nil)
+     ("" "amsmath" t nil)
+     ("" "amssymb" t nil)
+     ("" "capt-of" nil nil)
+     ("" "hyperref" nil nil)))
+ '(org-modern-fold-stars '(("◉" . "◉") ("○" . "○")))
+ '(org-modern-star 'replace)
+ '(package-
+   '(catppuccin-theme vterm pdf-tools key-chord consult undo-fu undo-tree evil vimish-fold sis multiple-cursors expand-region aas cdlatex lorem-ipsum auto-complete avy nerd-icons all-the-icons projectile page-break-lines dashboard math-preview latex-preview-pane ace-jump-mode s epc quelpa vertico org-roam howm jetbrains-darcula-theme modus-themes org-modern doom-themes))
+ '(package-selected-packages
+   '(tree-sitter-langs tree-sitter blacken flycheck elpy lsp-pyright embark-consult embark marginalia orderless helm-descbinds helm evil-collection zenburn-theme yasnippet vterm vimish-fold undo-tree undo-fu quelpa projectile pdf-tools page-break-lines org-super-agenda org-roam org-modern org-bullets nerd-icons multiple-cursors modus-themes minimap math-preview markdown-mode lorem-ipsum latex-preview-pane key-chord jetbrains-darcula-theme expand-region evil epc doom-themes doom dashboard darcula-theme consult cdlatex catppuccin-theme avy auto-complete auctex all-the-icons ace-jump-mode aas))
+ '(pdf-tools-handle-upgrades nil)
+ '(sentence-end-double-space nil))
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(require 'ox-latex)
+
+(ac-config-default)
+
+(add-to-list 'load-path "~/.emacs.d/snippets")	
+(require 'yasnippet)
+(yas-global-mode 1)			
+(yas/load-directory "~/.emacs.d/snippets")
+
+;; Start Modus-themes
+(add-to-list 'load-path "~/.emacs.d/modus-themes")
+;;Деактивируем прежние темы
+(mapc #'disable-theme custom-enabled-themes)
+(load-theme 'modus-operandi :no-confirm)
+
+
+;; Modus operandi
+(mapc #'disable-theme custom-enabled-themes)
+
+;;; For the built-in themes which cannot use `require'.
+
+(use-package emacs
+:config
+(require-theme 'modus-themes) ; `require-theme' is ONLY for the built-in Modus themes
+
+;; Add all your customizations prior to loading the themes
+(setq modus-themes-italic-constructs t
+    modus-themes-bold-constructs nil)
+
+;; Maybe define some palette overrides, such as by using our presets
+(setq modus-themes-common-palette-overrides
+    modus-themes-preset-overrides-intense)
+
+;; Load the theme of your choice.
+(load-theme 'modus-operandi)
+(load-theme 'modus-operandi-tinted)
+(define-key global-map (kbd "<f12>") #'modus-themes-toggle))
+
+;;; For packaged versions which must use `require'.
+(use-package modus-themes
+:ensure t
+:config
+;; Add all your customizations prior to loading the themes
+(setq modus-themes-italic-constructs t
+    modus-themes-bold-constructs nil)
+
+;; Maybe define some palette overrides, such as by using our presets
+(setq modus-themes-common-palette-overrides
+    modus-themes-preset-overrides-intense)
+)
+
+(setq modus-themes-to-toggle '(modus-operandi modus-vivendi))
+
+;; Sage (green/cyan) background, neutral foreground, slightly distinct green border
+(setq modus-themes-common-palette-overrides
+    '((bg-mode-line-active bg-sage)
+    (fg-mode-line-active fg-main)
+    (border-mode-line-active bg-green-intense)))
+
+;; Make the `tab-bar-mode' mode subtle while keepings its original
+;; gray aesthetic.
+(setq modus-themes-common-palette-overrides
+    '((bg-tab-bar bg-main)
+    (bg-tab-current bg-active)
+    (bg-tab-other bg-dim)))
+
+;; Make the fringe invisible
+(setq modus-themes-common-palette-overrides
+    '((fringe unspecified)))
+
+;; No underlines
+(setq modus-themes-common-palette-overrides
+    '((underline-link unspecified)
+    (underline-link-visited unspecified)
+    (underline-link-symbolic unspecified)))
+
+;; Add a nuanced background color to completion matches, while keeping
+;; their foreground intact (foregrounds do not need to be specified in
+;; this case, but we do it for didactic purposes).
+(setq modus-themes-common-palette-overrides
+    '((fg-completion-match-0 blue)
+    (fg-completion-match-1 magenta-warmer)
+    (fg-completion-match-2 cyan)
+    (fg-completion-match-3 red)
+    (bg-completion-match-0 bg-blue-nuanced)
+    (bg-completion-match-1 bg-magenta-nuanced)
+    (bg-completion-match-2 bg-cyan-nuanced)
+    (bg-completion-match-3 bg-red-nuanced)))
+
+;; Faint yellow comments and a different shade of green for strings
+(setq modus-themes-common-palette-overrides
+    '((comment yellow-faint)
+    (string green-warmer)))
+
+(setq modus-themes-common-palette-overrides
+    '((prose-done green-faint)   ; OR replace `green-faint' with `olive'
+    (prose-todo red-faint)))   ; OR replace `red-faint' with `rust'
+
+
+(load-theme 'modus-operandi)
+
+
+
+(setq modus-themes-headings
+    '((1 . t)           ; keep the default style
+    (2 . t)
+    (t . (rainbow)))) ; style for all other headings
+;;End Modus-theme
+
+;; ;;start Catppucino theme
+;; (load-theme 'catppuccin :no-confirm)
+;; ;;end Catppucino theme
+
+(add-hook 'org-mode-hook 'org-indent-mode)
+;; Настройка org-modern
+;; Option 1: Per buffer
+;; (add-hook 'org-mode-hook #'org-modern-mode) 
+;; (add-hook 'org-agenda-finalize-hook #'org-modern-agenda) 
+
+;; Option 2: Globally
+;; (with-eval-after-load 'org (global-org-modern-mode))
+
+
+;; Minimal UI
+(package-initialize)
+;;(menu-bar-mode -1)
+;;(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+
+
+
+
+
+
+
+
+;; Choose some fonts
+(set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 200)
+(set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
+;; (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 200)
+;; (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font")
+
+(setq
+
+;; Edit settings
+org-auto-align-tags nil
+org-tags-column 0
+org-catch-invisible-edits 'show-and-error
+org-special-ctrl-a/e t 
+;; org-insert-heading-respect-content t ;; Если раскоментировать, не будет работать M-<RET> in Org-mode
+
+;; Org styling, hide markup etc.
+org-hide-emphasis-markers t
+;; org-pretty-entities t
+org-ellipsis "…"
+
+;; Agenda styling
+org-agenda-tags-column 0
+org-agenda-block-separator ?─
+org-agenda-time-grid
+'((daily today require-timed)
+(800 1000 1200 1400 1600 1800 2000)
+" ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+org-agenda-current-time-string
+"◀── now ─────────────────────────────────────────────────")
+
+;; (global-org-modern-mode)
+;; Конец настройки org-modern
+
+; Мои настройки
+; Научиться как привязать к команде describe-key сочетание "С-р л". Дело в том, что "л" в качестве аргумента не принимается 
+
+;; Functions for keybinding
+(defun other-window-backward (&optional n)
+"Select Nth window backward"
+(interactive "P")
+(other-window (- (prefix-numeric-value n)))) ; Помним, что nill == 1
+
+(defun other-window-forward (&optional n)
+"Select Nth window forward"
+(interactive "P")
+(other-window (prefix-numeric-value n)))
+
+;; (defalias 'scroll-one-line-ahead 'scroll-up)
+;; (defalias 'scroll-one-line-behind 'scroll-down)
+
+(defun scroll-n-lines-ahead (&optional n)
+"Scroll n lines ahead"
+(interactive "P")
+(scroll-up (prefix-numeric-value n)))
+
+(defun scroll-n-lines-behind (&optional n)
+"Scroll n lines ahead"
+(interactive "P")
+(scroll-down (prefix-numeric-value n)))
+
+;; vterminal
+(use-package vterm
+:ensure t)
+;; end vterminal
+
+;; Start Org-mode
+;; (setq org-agenda-files (list "~/Desktop/Org_files/"))
+(setq org-agenda-files (directory-files-recursively "~/Desktop/Org_files/" "\\.org$"))
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.9)) ; Увеличивает размер превью
+;; End Org-Mode
+
+(use-package tex
+:ensure auctex)
+
+(require 'package)
+(add-to-list 'package-archives
+            '("melpa" . "https://melpa.org/packages/") t)
+
+(when (< emacs-major-version 27)
+;; Для Emacs версий до 27, инициализация package.el производится вручную
+(package-initialize))
+
+;; Автоматически включать cdlatex-mode при открытии .tex файлов
+(add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+;; Переназначение indent-for-tab-command в LaTeX-mode на другую комбинацию
+(defun my-latex-mode-keybindings ()
+"Custom keybindings for LaTeX mode."
+;; Переназначаем indent-for-tab-command с TAB на C-c i
+(local-set-key (kbd "C-c i") 'indent-for-tab-command))
+
+;; Добавляем хук, чтобы он применялся только в LaTeX-mode
+(add-hook 'LaTeX-mode-hook 'my-latex-mode-keybindings)
+
+(use-package aas
+:hook (LaTeX-mode . aas-activate-for-major-mode)
+:hook (org-mode . aas-activate-for-major-mode)
+:hook (TeX-mode . aas-activate-for-major-mode)
+:config
+(aas-set-snippets 'text-mode
+;; expand unconditionally
+";o-" "ō" 
+";i-" "ī"
+";a-" "ā"
+";u-" "ū"
+";e-" "ē")
+(aas-set-snippets 'org-mode
+;; expand unconditionally
+";latex" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+"mk" '(yas "\\\\( $1  \\\\)" )  
+:cond #'texmathp
+; логические операции
+"not" "\\neg"
+"or" "\\lor "
+"and" "\\land "
+"to" "\\to "
+"imp" "\\implies "
+"=>" "\\implies"
+"EE" "\\exists "
+"nEE" "\\neg\\exists "
+"nEE" "\\nexists "
+"VV" "\\forall "
+"iff" "\\iff "
+"fimp" "\\impliedby "
+"<>" "\\leftrightarrow "
+
+
+;; операции теории множеств
+"inn" "\\in "
+"ninn" "\\notin "
+";set" '(yas "\\\\{ $1 \\\\} ")
+"Cc" "\\subset "
+"CC" "\\subseteq "
+"sups" "\\supset "
+"supS" "\\supseteq "
+"xx" "\\times "
+"cap" "\\cap "
+"cup" "\\cup "
+";bcup" "\\bigcup"
+";0" "\\varnothing "
+";co" "\\circ "
+"Ps" '(yas "\\mathscr{$1}($2) ")
+";got" '(yas "\\mathcal{$1} ")
+";F" "\\mathcal{F} "
+"(" '(yas "($1)")
+"l(" "("
+";Z" "\\mathbb{Z}"
+";N" "\\mathbb{N}"
+"|" "\\mid"
+
+;; ariphmetical operations
+"//" '(yas "\\frac{$1 }{$2 } ")
+"td" '(yas "^{$1 } ")
+"sr" "^2 "
+"cb" "^3 "
+"inv" "^{-1} "
+";." "\\cdot"
+
+;; операции сравнения
+"neq" "\\ne "
+"leq" "\\le "
+"geq" "\\ge "
+;;;;
+"ff" '(yas "$1($2) $0")
+"ind" '(yas "_{$0}")
+"larr" "\\leftarrow "
+"..." "\\ldots"
+)
+
+(aas-set-snippets 'LaTeX-mode
+;; expand unconditionally
+
+";beg" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "begin")))
+
+:cond (lambda () (not (texmathp)))
+    ";align" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "alignStar")))
+";usp" "\\usepackage{$0}"
+";;usp" '(yas "\\usepackage[$1]{$0}")
+";\\" '(yas "\\textbackslash $0")
+
+";sec" '(yas "\\section{$0}")
+";sub" '(yas "\\subsection{$0}")
+";;sub" '(yas "\\subsubsection{$0}")
+";theor" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "theorema")))
+";lemma" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "lemma")))
+
+
+"mk" '(yas "\\\\( $0 \\\\)" )
+"dm" '(yas "\\\\[ $0 \\\\]" )
+";def" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "definition")))
+";enum" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "enumerate")))
+";item" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "itemize")))
+
+
+:cond #'texmathp
+"text" '(yas "\\text{$0}")
+";case" (lambda () 
+            (interactive)
+            (yas-expand-snippet (yas-lookup-snippet "cases")))
+
+;; логические операции
+"not" "\\neg"
+"or" "\\lor "
+"and" "\\land "
+"to" "\\to "
+"imp" "\\implies "
+"=>" "\\implies"
+"EE" "\\exists "
+"nEE" "\\neg\\exists "
+"nEE" "\\nexists "
+"VV" "\\forall "
+"iff" "\\iff "
+"fimp" "\\impliedby "
+"<>" "\\leftrightarrow "
+
+
+;; операции теории множеств
+"inn" "\\in "
+"ninn" "\\notin "
+";set" '(yas "\\\\{ $1 \\\\} ")
+"Cc" "\\subset "
+"CC" "\\subseteq "
+"sups" "\\supset "
+"supS" "\\supseteq "
+"xx" "\\times "
+"cap" "\\cap "
+"cup" "\\cup "
+";\\" "\\setminus "
+";bcup" "\\bigcup"
+";0" "\\varnothing "
+";co" "\\circ "
+"Ps" '(yas "\\mathscr{$1}($2) ")
+";got" '(yas "\\mathcal{$1} ")
+;; "(" '(yas "($1)")
+"l(" "("
+;; ";Z" "\\mathbb{Z}"
+;; ";N" "\\mathbb{N}"
+";P" "\\mathscr{P}"
+";F" "\\mathcal{F} "
+"mid" "\\mid "
+
+;; ariphmetical operations
+"//" '(yas "\\frac{$1 }{$2 } ")
+"td" '(yas "^{$1 } ")
+"sr" "^2 "
+"cb" "^3 "
+"inv" "^{-1} "
+";." "\\cdot"
+
+;; операции сравнения
+"neq" "\\ne "
+"leq" "\\le "
+"geq" "\\ge "
+;;;;
+"ff" '(yas "$1($2) ")
+"ind" '(yas "_{$0}")
+"larr" "\\leftarrow "
+"..." "\\ldots"
+)
+
+)
+
+
+;; start Org-roam
+(use-package org-roam
+:ensure t
+:custom
+(org-roam-directory "~/Desktop/org-roam")
+:bind (("C-c n l" .  org-roam-buffer-toggle)
+        ("C-c n f" .  org-roam-node-find)
+        ("C-c n i" .  org-roam-node-insert))
+:config
+(org-roam-setup))
+
+;; end Org-roam
+
+;; Убираем стандартный экран, заменяя его пустым
+(setq inhibit-startup-message t)
+;; Делаем так, чтобы не было звоночка при ошибке, а был визуальный знак
+(setq visible-bell t)
+
+(require 'org)  ; Убедитесь, что org-mode загружен, чтобы его карта клавиш была доступна
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(modus-themes-heading-1 ((t nil)) t))
+
+(require 'package)
+(add-to-list 'package-archives
+            '("melpa" . "http://melpa.org/packages/") t)
+
+
+(require 'expand-region)
+
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"
+                        "~/Downloads/testdir/"))
+
+;; подключаем evil-mode
+;; Download Evil
+;; (unless (package-installed-p 'evil)
+;; (package-install 'evil))
+(use-package evil
+:ensure t
+:init
+(setq evil-want-integration t)
+(setq evil-want-keybinding nil)
+:config
+(evil-mode 1))
+
+(use-package evil-collection
+:after evil
+:ensure t
+:config
+(evil-collection-init)
+(evil-collection-org-setup)
+)
+
+
+;; Enable Evil
+(require 'evil)
+(evil-mode 1)
+(evil-set-leader nil (kbd "SPC"))
+
+
+
+;; Делаем так, чтобы при вводе команды после : и нажатии tab всплывала подсказка а vertico
+(setq completion-in-region-function 'consult-completion-in-region)
+
+
+;; The `vertico' package applies a vertical layout to the minibuffer.
+;; It also pops up the minibuffer eagerly so we can see the available
+;; options without further interactions.  This package is very fast
+;; and just works", though it also is highly customisable in case we
+;; need to modify its behaviour.
+;;
+;; Further reading: https://protesilaos.com/emacs/dotemacs#h:cff33514-d3ac-4c16-a889-ea39d7346dc5
+(use-package vertico
+:ensure t
+:config
+:bind
+:init
+(setq vertico-cycle t)
+(setq vertico-resize nil)
+;; Использование Vertico для M-x
+(evil-define-key 'normal 'global (kbd "<leader>km") 'describe-bindings) 
+(vertico-mode 1)
+)
+
+;; Установка и настройка Orderless для гибкого поиска
+(use-package orderless
+:ensure t
+:init
+(setq completion-styles '(orderless basic)
+    completion-category-defaults nil
+    completion-category-overrides '((file (styles partial-completion)))))
+
+;; Установка и настройка Marginalia для аннотаций
+(use-package marginalia
+:ensure t
+:init
+(marginalia-mode))
+
+(use-package recentf
+:ensure nil  ;; recentf — встроенный пакет, установка не требуется
+:init
+(recentf-mode 1)  ;; Включение режима
+:custom
+(recentf-max-saved-items 100)        ;; Максимальное количество сохраняемых файлов
+:bind
+) 
+
+;; Установка и настройка Consult для расширенных команд
+(use-package consult
+:ensure t
+:after (recentf)
+:bind (("C-s" . consult-line)            ;; Поиск строки
+        ("C-x b" . consult-buffer)        ;; Переключение буферов
+        ("C-c f" . consult-find)          ;; Поиск файлов
+        ("C-c g" . consult-grep)          ;; Поиск с помощью grep
+        ("M-y" . consult-yank-pop)        ;; История вставок
+        ;; Добавьте другие биндинги по необходимости
+        )
+:config
+(evil-define-key 'normal 'global (kbd "<leader>,") 'consult-buffer) 
+(evil-define-key 'normal 'global (kbd "<leader>fg") 'consult-grep) 
+(evil-define-key 'normal 'global (kbd "<leader>km") 'describe-bindings) 
+(evil-define-key 'normal 'global (kbd "<leader>SPC") 'recentf) 
+(evil-define-key 'normal 'global (kbd "<leader>oa") 'org-agenda) 
+  ;; Настройка для интеграции с другими пакетами
+  (setq consult-project-root-function #'projectile-project-root))
+
+;; Установка и настройка Embark для действий над кандидатами
+(use-package embark
+  :ensure t
+  :bind
+  (("C-." . embark-act)                    ;; Выполнить действие
+   ("C-;" . embark-dwim))                  ;; Выполнить разумное действие
+  :init
+  ;; Показывать контекстную информацию в минибуфере
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+;; Установка Embark-Consult для интеграции между Embark и Consult (опционально)
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+;; Установка Savehist для сохранения истории поиска
+(use-package savehist
+  :ensure t
+  :init
+  (savehist-mode))
+
+;; Подключаем внешний файл конфигурации
+(org-babel-load-file (expand-file-name "config.org" user-emacs-directory))

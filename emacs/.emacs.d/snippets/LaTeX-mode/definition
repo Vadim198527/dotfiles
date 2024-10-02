@@ -1,0 +1,7 @@
+# key: def
+# name: definition
+# group: enviroments
+# --
+\begin{definition}
+  $0
+\end{definition}

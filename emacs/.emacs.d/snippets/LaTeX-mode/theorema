@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: theorema
+# key: theorema
+# group: enviroments
+# --
+\begin{theorem}
+  $0
+\end{theorem}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: lemmaFrame 
+# key: lemma
+# --
+*** Lemma-$1
+**** Formulation: $2
+**** Proof: $3%

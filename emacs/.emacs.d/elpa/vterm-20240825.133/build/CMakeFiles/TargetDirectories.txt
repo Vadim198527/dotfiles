@@ -1,0 +1,4 @@
+/Users/chestnykh/.emacs.legacy/elpa/vterm-20240825.133/build/CMakeFiles/vterm-module.dir
+/Users/chestnykh/.emacs.legacy/elpa/vterm-20240825.133/build/CMakeFiles/run.dir
+/Users/chestnykh/.emacs.legacy/elpa/vterm-20240825.133/build/CMakeFiles/edit_cache.dir
+/Users/chestnykh/.emacs.legacy/elpa/vterm-20240825.133/build/CMakeFiles/rebuild_cache.dir
