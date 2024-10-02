@@ -73,7 +73,7 @@
         org-special-ctrl-a/e t
         org-hide-emphasis-markers t
         org-ellipsis "…"
-        org-agenda-files (directory-files-recursively "~/Desktop/Org_files/" "\\.org$")
+        org-agenda-files (directory-files-recursively "~/docs" "\\.org$")
         org-agenda-tags-column 0
         org-agenda-block-separator ?─
         org-agenda-time-grid '((daily today require-timed)
