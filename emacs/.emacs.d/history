@@ -7,7 +7,7 @@
 (setq org-read-date-history '("   "))
 (setq yes-or-no-p-history '("yes" "no" ":no" "o" "no" "yes"))
 (setq consult-org--history '("jj"))
-(setq extended-command-history '("rgrep" "term" "delete-file" "org-toggle-pretty-entities" "package-install" "package-delete" "package-install" "consult-org-agenda" "recentf"))
+(setq extended-command-history '("quelpa-upgrade" "rgrep" "term" "delete-file" "org-toggle-pretty-entities" "package-install" "package-delete" "package-install" "consult-org-agenda" "recentf"))
 (setq consult--grep-history '("#" "#[^TO]" "#TODO" "#"))
 (setq buffer-name-history '("info.org" "blocks~20240502-000827.org" "Todo~20240502-000827.org" "*Python*"))
 (setq read-expression-history '("(setq completion-styles '(orderless basic)
