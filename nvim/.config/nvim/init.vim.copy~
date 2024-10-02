@@ -1,0 +1,130 @@
+set number
+set relativenumber
+set smarttab
+set mouse=a
+syntax enable set encoding=utf-8
+set nocompatible
+set cursorline
+set completeopt-=preview
+inoremap jk <Esc>
+nnoremap <C-l> z.
+" inoremap оо <Esc>
+call plug#begin('~/.config/nvim/plugins')
+Plug 'lervag/vimtex'
+Plug 'sheerun/vim-polyglot'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/tpope/vim-commentary'
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'sirver/ultisnips'
+Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-tree/nvim-web-devicons' " optional
+Plug 'nvim-tree/nvim-tree.lua'
+call plug#end()
+" Запуск python сочетанием F9
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+" Сочетания клавиш для Nvim Tree
+nnoremap <leader>t :NvimTreeToggle<CR>
+
+" Настраиваем сниппеты
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+let g:tex_flavor = 'latex' "Уточняем какой Тех
+"Отключаем автоматическое открытие окна Quickfix
+let g:vimtex_quickfix_mode = 0
+let g:vimtex_view_method = 'skim'
+let g:everforest_background = 'soft'
+" colorscheme everforest
+" colorscheme catppuccin-frappe  
+" colorscheme catppuccin-frappe "catppuccin-macchiato, catppuccin-mocha
+let g:tex_flavor='latex'
+set conceallevel=1
+let g:tex_conceal='abdmg'
+" nnoremap <C-a> ^
+nnoremap <C-e> $
+nnoremap <C-ф> ^
+nnoremap <C-у> $
+" Сочетания для coc.nvim
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+"" Emacs-like перемещения в режиме ввода
+" inoremap <C-p> <Up>
+" inoremap <C-n> <Down>
+" inoremap <C-b> <Left>
+" inoremap <C-f> <Right>
+
+" inoremap <C-з> <Up>
+" inoremap <C-т> <Down>
+" inoremap <C-и> <Left>
+" inoremap <C-а> <Right>
+
+
+map й q
+map ц w
+map у e
+map к r
+map е t
+map н y
+map г u
+map ш i
+map щ o
+map з p
+map х [
+map ъ ]
+map ф a
+map ы s
+map в d
+map а f
+map п g
+map р h
+map о j
+map л k
+map д l
+map ж ;
+map э '
+map ё \
+map я z
+map ч x
+map с c
+map м v
+map и b
+map т n
+map ь m
+map б ,
+map ю .
+map Й Q
+map Ц W
+map У E
+map К R
+map Е T
+map Н Y
+map Г U
+map Ш I
+map Щ O
+map З P
+map Х {
+map Ъ }
+map Ф A
+map Ы S
+map В D
+map А F
+map П G
+map Р H
+map О J
+map Л K
+map Д L
+map Ж :
+map Э "
+map Я Z
+map Ч X
+map С C
+map М V
+map И B
+map Т N
+map Ь M
+map Б <
+map Ю >
+map Ё /|
