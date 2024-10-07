@@ -4,6 +4,8 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
+;; Установка размера шрифта для HiDPI
+;; (set-face-attribute 'default nil :height 200) ;; 200 соответствует 10pt * 20
 
 ;; Установка use-package, если он не установлен
 (unless (package-installed-p 'use-package)
@@ -58,7 +60,7 @@
   (define-key global-map (kbd "<f12>") #'modus-themes-toggle))
 
 ;; Настройка шрифтов
-(set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 200)
+(set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 150)
 (set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
 
 ;; Настройки org-mode
@@ -85,7 +87,7 @@
 ;; Настройка org-modern
 (use-package org-modern
   :hook ((org-mode . org-modern-mode)
-         (org-agenda-finalize . org-modern-agenda)))
+	 (org-agenda-finalize . org-modern-agenda)))
 
 ;; Настройка yasnippet
 (use-package yasnippet
@@ -148,10 +150,11 @@
   (org-roam-setup))
 
 ;; Настройка vterm
-(use-package vterm)
+;; (use-package vterm)
 
 ;; Настройка evil-mode
 (use-package evil
+  :ensure t
   :init
   (setq evil-want-integration t
         evil-want-keybinding nil
@@ -164,9 +167,13 @@
 
 (use-package evil-collection
   :after evil
-  :config
+  :ensure t
+  :init
   (evil-collection-init)
-  (evil-collection-org-setup))
+  (evil-collection-org-setup)
+  ;; :config
+  ;; (add-hook 'org-agenda-mode-hook 'evil-normal-state)
+  )
 
 ;; Настройка vertico
 (use-package vertico
@@ -189,6 +196,7 @@
 
 ;; Настройка consult
 (use-package consult
+  :ensure t
   :after recentf
   :bind (("C-s" . consult-line)
          ("C-x b" . consult-buffer)
@@ -268,3 +276,18 @@
 ;; Настройка completion-in-region для интеграции с consult
 (setq completion-in-region-function 'consult-completion-in-region)
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-emacs-state-modes
+   '(5x5-mode archive-mode bbdb-mode biblio-selection-mode blackbox-mode bookmark-edit-annotation-mode browse-kill-ring-mode bs-mode bubbles-mode bzr-annotate-mode calc-mode cfw:calendar-mode completion-list-mode custom-theme-choose-mode debugger-mode delicious-search-mode desktop-menu-blist-mode desktop-menu-mode dun-mode dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode efs-mode Electric-buffer-menu-mode emms-browser-mode emms-mark-mode emms-metaplaylist-mode emms-playlist-mode ess-help-mode etags-select-mode fj-mode gc-issues-mode gdb-breakpoints-mode gdb-disassembly-mode gdb-frames-mode gdb-locals-mode gdb-memory-mode gdb-registers-mode gdb-threads-mode gist-list-mode git-rebase-mode gomoku-mode google-maps-static-mode jde-javadoc-checker-report-mode magit-cherry-mode magit-diff-mode magit-log-mode magit-log-select-mode magit-popup-mode magit-popup-sequence-mode magit-process-mode magit-reflog-mode magit-refs-mode magit-revision-mode magit-stash-mode magit-stashes-mode magit-status-mode mh-folder-mode monky-mode mpuz-mode mu4e-main-mode mu4e-headers-mode mu4e-view-mode notmuch-hello-mode notmuch-search-mode notmuch-show-mode notmuch-tree-mode org-agenda-mode pdf-outline-buffer-mode pdf-view-mode proced-mode rcirc-mode rebase-mode recentf-dialog-mode sldb-mode slime-inspector-mode slime-thread-control-mode slime-xref-mode snake-mode solitaire-mode sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode tar-mode tetris-mode tla-annotate-mode tla-archive-list-mode tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode tla-browse-mode tla-category-list-mode tla-changelog-mode tla-follow-symlinks-mode tla-inventory-file-mode tla-inventory-mode tla-lint-mode tla-logs-mode tla-revision-list-mode tla-revlog-mode tla-tree-lint-mode tla-version-list-mode twittering-mode urlview-mode vc-annotate-mode vc-dir-mode vc-hg-log-view-mode vc-svn-log-view-mode vm-mode vm-summary-mode w3m-mode wab-compilation-mode xgit-annotate-mode xgit-changelog-mode xgit-diff-mode xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
+ '(package-selected-packages
+   '(true vterm zenburn-theme wfnames vimish-fold vertico undo-tree undo-fu tree-sitter-langs quelpa projectile pdf-tools page-break-lines org-super-agenda org-roam org-modern org-bullets orderless nerd-icons multiple-cursors modus-themes minimap math-preview marginalia lsp-pyright lorem-ipsum latex-preview-pane key-chord jetbrains-darcula-theme flycheck expand-region evil-collection epc embark-consult elpy doom-themes doom dashboard darcula-theme cdlatex catppuccin-theme blacken avy auto-complete auctex async all-the-icons ace-jump-mode aas)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

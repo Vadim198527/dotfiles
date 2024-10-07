@@ -27,7 +27,7 @@ return {
 
             configs.setup({
                 ensure_installed = { "lua", "python", "latex" },
-                -- ignore_install = { "latex" },
+                ignore_install = { "org" },
                 highlight = {
                     enable = true,
                     disable = { "latex" },

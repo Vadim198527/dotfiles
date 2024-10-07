@@ -1,3 +1,22 @@
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Функция для переключения между английским и русским
+(defun toggle-russian-input-method ()
+"Переключить метод ввода между английским и русским."
+(interactive)
+(if (string-equal current-input-method "russian-computer")
+    (deactivate-input-method)
+    (set-input-method "russian-computer")))
+
+;; Отображение текущего метода ввода в строке состояния
+(setq-default mode-line-misc-info
+            (append mode-line-misc-info
+                    '((:eval (when current-input-method
+                                (format " [%s]" current-input-method))))))
+
+(evil-define-key 'normal 'global (kbd "<leader>km") 'describe-bindings) 
 (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-ex-nohighlight)  
 (evil-define-key 'normal 'global (kbd "<leader>chk") 'describe-key)  
 (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
@@ -12,7 +31,8 @@
 (evil-define-key 'normal 'global (kbd "<leader>:") 'execute-extended-command) 
 (evil-define-key 'normal 'global (kbd "C-i") 'recenter-top-bottom)
 (evil-define-key 'insert 'global (kbd "C-i") 'recenter-top-bottom)
-(evil-define-key 'insert global-map (kbd "C-SPC") 'toggle-input-method)
+;; Привязка функции к C-SPC в режиме вставки Evil
+(evil-define-key 'insert global-map (kbd "C-SPC") 'toggle-russian-input-method)
 
 ;; вертикальное разделение экрана
 (evil-define-key 'normal 'global (kbd "<leader>w/") 'split-window-right)
@@ -29,8 +49,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows) 
 
 ;; переход к другому окну
-(evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)  
-
+(evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)
 ;; Перемещение между окнами
 (evil-define-key 'normal 'global (kbd "C-h") 'evil-window-left)  
 (evil-define-key 'normal 'global (kbd "C-l") 'evil-window-right)  

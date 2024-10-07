@@ -4,15 +4,11 @@ n = 10
 xp = 1
 x = 1
 
-# for i in range(3, n + 1):
-#     x = xp + xpp
-#     print(x)
-#     xpp = xp
-#     xp = x
-#
-# # Питоновский способ решения
-# xp = 1
-
-for i in range(2, n + 1):
-    xp, x = x, x + xp
+for i in range(3, n + 1):
+    # x = xp + xpp
     print(x)
+    xpp = xp
+    xp = x
+
+# Питоновский способ решения
+xp = 1

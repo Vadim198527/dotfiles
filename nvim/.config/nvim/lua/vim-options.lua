@@ -3,11 +3,12 @@ vim.g.maplocalleader = " "
 -- ortur
 -- vim.opt.wrap = true
 -- vim.opt.wrapmargin = 15
+vim.o.timeout = true
+vim.o.timeoutlen = 6000
 vim.opt.backspace = "2"
 vim.opt.showcmd = true
 vim.opt.laststatus = 2
 vim.opt.autowrite = true
-vim.opt.cursorline = true
 vim.opt.autoread = true
 vim.opt.tabstop = 4
 vim.cmd("set softtabstop=2")
@@ -27,10 +28,11 @@ vim.opt.encoding = "utf-8"
 vim.opt.compatible = false
 
 -- Highlight the current line
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 
 -- Disable preview window in completion
 vim.opt.completeopt:remove("preview")
+
 
 vim.api.nvim_set_keymap("n", "<C-i>", "zz", { noremap = true })
 -- Перемещение текущей строки в центр экрана при нажатии Ctrl + l в режиме вставки
@@ -54,27 +56,27 @@ vim.api.nvim_set_keymap("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent 
 vim.api.nvim_set_keymap("n", "<C-l>", ":wincmd l<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function()
-		vim.api.nvim_set_keymap(
-			"n",
-			"<F9>",
-			":w<CR>:botright 10split | terminal python3 %<CR>",
-			{ noremap = true, silent = true }
-		)
-		vim.api.nvim_set_keymap(
-			"i",
-			"<F9>",
-			":w<CR>:botright 10split | terminal python3 %<CR>",
-			{ noremap = true, silent = true }
-		)
-		vim.api.nvim_set_keymap(
-			"n",
-			"<leader>rc",
-			":w<CR>:!python3 %<CR>",
-			{ noremap = true, silent = true }
-		)
-	end,
+    pattern = "python",
+    callback = function()
+        vim.api.nvim_set_keymap(
+            "n",
+            "<F9>",
+            ":w<CR>:botright 10split | terminal python3 %<CR>",
+            { noremap = true, silent = true }
+        )
+        vim.api.nvim_set_keymap(
+            "i",
+            "<F9>",
+            ":w<CR>:botright 10split | terminal python3 %<CR>",
+            { noremap = true, silent = true }
+        )
+        vim.api.nvim_set_keymap(
+            "n",
+            "<leader>rc",
+            ":w<CR>:!python3 %<CR>",
+            { noremap = true, silent = true }
+        )
+    end,
 })
 
 
@@ -129,10 +131,9 @@ function _G.smart_tab()
     if vim.fn.pumvisible() == 1 then
         return vim.api.nvim_replace_termcodes("<C-n>", true, true, true)
 
-    -- 1. Если можно развернуть сниппет
+        -- 1. Если можно развернуть сниппет
     elseif luasnip.expandable() then
         return vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-snippet", true, true, true)
-
     else
         local line = vim.fn.getline(".")
         local next_char = line:sub(col + 1, col + 1)
@@ -141,10 +142,9 @@ function _G.smart_tab()
         if next_char:match("[%]%)}'\"]") then
             return vim.api.nvim_replace_termcodes("<Right>", true, true, true)
 
-        -- 3. Если можно перейти к следующей позиции в сниппете
+            -- 3. Если можно перейти к следующей позиции в сниппете
         elseif luasnip.jumpable(1) then
             return vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-next", true, true, true)
-
         else
             -- 4. Вставляем символ табуляции или выполняем отступ
             if col == 0 or line:sub(1, col):match("^%s*$") then
@@ -158,11 +158,10 @@ function _G.smart_tab()
     end
 end
 
+vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', { expr = true, noremap = true })
 
-vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
-
-vim.api.nvim_set_keymap('i', '<Plug>luasnip-expand-snippet', '<cmd>lua require("luasnip").expand()<CR>', {silent = true})
-vim.api.nvim_set_keymap('i', '<Plug>luasnip-jump-next', '<cmd>lua require("luasnip").jump(1)<CR>', {silent = true})
+vim.api.nvim_set_keymap('i', '<Plug>luasnip-expand-snippet', '<cmd>lua require("luasnip").expand()<CR>', { silent = true })
+vim.api.nvim_set_keymap('i', '<Plug>luasnip-jump-next', '<cmd>lua require("luasnip").jump(1)<CR>', { silent = true })
 
 
 -- Назначаем клавишу Tab в режиме вставки
@@ -197,5 +196,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
 -- vim.cmd("map <leader>q :q<CR>")
 vim.cmd("map e ea")
-
-

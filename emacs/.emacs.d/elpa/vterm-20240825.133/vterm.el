@@ -3,7 +3,8 @@
 ;; Copyright (C) 2017-2020 by Lukas Fürmetz & Contributors
 ;;
 ;; Author: Lukas Fürmetz <fuermetz@mailbox.org>
-;; Version: 0.0.2
+;; Package-Version: 20240825.133
+;; Package-Revision: 988279316fc8
 ;; URL: https://github.com/akermu/emacs-libvterm
 ;; Keywords: terminals
 ;; Package-Requires: ((emacs "25.1"))
