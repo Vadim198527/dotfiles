@@ -1,5 +1,6 @@
 # commentary.vim
 
+
 Comment stuff out.  Use `gcc` to comment out a line (takes a count),
 `gc` to comment out the target of a motion (for example, `gcap` to
 comment out a paragraph), `gc` in visual mode to comment out the selection,
@@ -15,6 +16,7 @@ minimalism, it weighs in at under 100 lines of code.
 
 Oh, and it uncomments, too.  The above maps actually toggle, and `gcgc`
 uncomments a set of adjacent commented lines.
+
 
 ## Installation
 
