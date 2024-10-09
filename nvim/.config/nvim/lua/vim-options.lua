@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
 -- ortur
 -- vim.opt.wrap = true
 -- vim.opt.wrapmargin = 15
@@ -26,7 +27,7 @@ vim.opt.mouse = "a"
 vim.opt.encoding = "utf-8"
 -- Disable Vi compatibility mode
 vim.opt.compatible = false
-
+vim.cmd('set clipboard+=unnamedplus')
 -- Highlight the current line
 -- vim.opt.cursorline = true
 
