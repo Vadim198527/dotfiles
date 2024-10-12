@@ -1,7 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- ortur
+-- ortur  sdf
+-- bdsflk sdflkjds
+-- bosdf  sdlfk	sdf
 -- vim.opt.wrap = true
 -- vim.opt.wrapmargin = 15
 vim.o.timeout = true
@@ -185,7 +186,7 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.smart_s_tab()", { expr = true, no
 
 -- Отмена последнего действия при нажатии Ctrl + / в режиме вставки
 vim.api.nvim_set_keymap("i", "<C-/>", "<C-o>u", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("i", "<C-r>", "<C-o><C-r>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("i", "<C-r>", "<C-o><C-r>", { noremap = true, silent = true })
 
 -- Меняем текущую дирректорию
 vim.api.nvim_create_autocmd("BufEnter", {

@@ -55,6 +55,7 @@ return {
 					{ name = "luasnip", option = { use_show_condition = false } }, -- For luasnip users.
 					-- { name = "ultisnips" }, -- For ultisnips users.
 					{ name = "vimtex" },
+					{ name = 'path' },
 					-- { name = 'snippy' }, -- For snippy users.
 				}, {
 					{ name = "buffer" },
