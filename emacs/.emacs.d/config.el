@@ -16,6 +16,10 @@
                     '((:eval (when current-input-method
                                 (format " [%s]" current-input-method))))))
 
+;; Центрировать строку с курсором
+(evil-define-key 'normal 'global (kbd "C-i") 'recenter-top-bottom) 
+(evil-define-key 'insert 'global (kbd "C-i") 'recenter-top-bottom) 
+
 (evil-define-key 'normal 'global (kbd "<leader>km") 'describe-bindings) 
 (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-ex-nohighlight)  
 (evil-define-key 'normal 'global (kbd "<leader>chk") 'describe-key)  
@@ -63,12 +67,6 @@
 
 ;; переход к другому окну
 (evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)  
-
-;; Перемещение между окнами
-(evil-define-key 'normal 'global (kbd "C-h") 'evil-window-left)  
-(evil-define-key 'normal 'global (kbd "C-l") 'evil-window-right)  
-(evil-define-key 'normal 'global (kbd "C-j") 'evil-window-down)  
-(evil-define-key 'normal 'global (kbd "C-k") 'evil-window-up)  
 
 ;; comment or uncomment line
 (evil-define-key 'normal 'global (kbd "<leader>cl") 'comment-line)
@@ -119,7 +117,6 @@
   (global-set-key "\C-x\C-n" 'other-window-forward)
   (global-set-key (kbd "C-ч C-т") 'other-window-forward)
   (global-set-key (kbd "C-ч щ") 'other-window)
-
 
 
   (global-set-key (kbd "C-н") 'yank)

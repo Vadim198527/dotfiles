@@ -12,7 +12,7 @@ local f = ls.function_node
 local events = require("luasnip.util.events")
 
 return {
-    s({ trig = "p" }, fmta("print(<>)", { i(1) })),
+    s({ trig = "pr" }, fmta("print(<>)", { i(1) })),
     s(
         { trig = "if" },
         fmta(

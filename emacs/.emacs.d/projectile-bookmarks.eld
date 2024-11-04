@@ -1,1 +1,1 @@
-("~/docs/" "~/" "~/dotfiles/" "~/.emacs.d/")
+("~/docs/" "~/dotfiles/" "~/" "~/.emacs.d/" "~/xkbswitch-macosx/" "~/www/" "~/redis-stable/" "~/qmk_firmware/" "~/powerlevel10k/" "~/pdf-tools/" "~/mathjax/" "~/libxkbswitch-macosx/" "~/dotfiles.copy/" "~/doom-emacs/" "~/archiso-t2/")

@@ -26,13 +26,16 @@ return {
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "lua", "python", "latex" },
+                ensure_installed = { "lua", "python", "latex", "html" },
                 ignore_install = { "org" },
                 highlight = {
                     enable = true,
                     disable = { "latex" },
                 },
-                indent = { enable = true },
+                indent = {
+                    enable = true,
+                    disable = { "html" },
+                },
             })
         end,
     },

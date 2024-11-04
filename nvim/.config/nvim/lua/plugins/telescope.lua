@@ -7,6 +7,14 @@ return {
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
     },
     {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        config = function()
+            -- open file_browser with the path of the current buffer
+            vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+        end,
+    },
+    {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -15,6 +23,16 @@ return {
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown({}),
+                    },
+                },
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-d>"] = require("telescope.actions").delete_buffer,
+                        },
+                        n = {
+                            ["d"] = require("telescope.actions").delete_buffer,
+                        },
                     },
                 },
             })
@@ -36,7 +54,20 @@ return {
                 { desc = "Show all buffer lexical entities" }
             )
             vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
-            vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap=true, silent=true })
+            vim.api.nvim_set_keymap(
+                "n",
+                "<leader>rn",
+                "<cmd>lua vim.lsp.buf.rename()<CR>",
+                { noremap = true, silent = true }
+            )
+            require("telescope").setup({})
+            vim.api.nvim_set_keymap(
+                "c",
+                "<C-p>",
+                '<Cmd>lua require("telescope.builtin").commands()<CR>',
+                { noremap = true, silent = true }
+            )
+
             require("telescope").load_extension("ui-select")
         end,
     },
@@ -46,7 +77,7 @@ return {
             require("telescope").setup({
                 extensions = {
                     ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({"gruvbox-material"}),
+                        require("telescope.themes").get_dropdown({ "gruvbox-material" }),
                     },
                 },
             })
