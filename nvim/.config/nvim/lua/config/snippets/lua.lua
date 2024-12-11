@@ -12,5 +12,39 @@ local f = ls.function_node
 local events = require("luasnip.util.events")
 
 return {
-    s({ trig = "pr" }, fmta("print(<>)", { i(1) })),
+	s({ trig = "pr" }, fmta("print(<>)", { i(1) })),
+	s(
+		{ trig = "fn" },
+		fmta(
+			[[
+    function <>(<>)
+        <>
+    end
+    ]],
+			{ i(1), i(2), i(3) }
+		)
+	),
+	s(
+		{ trig = "if" },
+		fmta(
+			[[
+    if <> then
+        <>
+    end
+    ]],
+			{ i(1), i(2) }
+		)
+	),
+	s(
+		{ trig = "for" },
+		fmta(
+			[[
+    for <> do
+        <>
+    end
+    ]],
+			{ i(1), i(2) }
+		)
+	),
+	-- s({ trig = "<>", snippetType = "autosnippet" }, fmta("~= ", {})),
 }
