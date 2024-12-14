@@ -86,16 +86,16 @@ return {
 			--     },
 			-- })
 
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-					{ name = "buffer" },
-				}, {
-					{ name = "cmdline" },
-				}),
-				matching = { disallow_symbol_nonprefix_matching = false },
-			})
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 		{ name = "buffer" },
+			-- 	}, {
+			-- 		{ name = "cmdline" },
+			-- 	}),
+			-- 	matching = { disallow_symbol_nonprefix_matching = false },
+			-- })
 			-- Отключаем автодополнение для файлов с расширением .txt
 			cmp.setup.filetype("txt", {
 				enabled = false, -- Отключаем nvim-cmp для файлов .txt

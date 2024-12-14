@@ -14,7 +14,7 @@ local events = require("luasnip.util.events")
 return {
 	s({ trig = "pr" }, fmta("print(<>)", { i(1) })),
 	s(
-		{ trig = "fn" },
+		{ trig = "fu" },
 		fmta(
 			[[
     function <>(<>)
@@ -46,5 +46,5 @@ return {
 			{ i(1), i(2) }
 		)
 	),
-	-- s({ trig = "<>", snippetType = "autosnippet" }, fmta("~= ", {})),
+	s({ trig = "re" }, fmta("return ", {})),
 }

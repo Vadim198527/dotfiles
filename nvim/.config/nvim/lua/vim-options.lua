@@ -125,13 +125,13 @@ keymap("i", "<C-f>", "<Tab>", { noremap = true, silent = true })
 keymap("i", "<C-/>", "<C-o>u", { noremap = true, silent = true })
 -- keymap("i", "<C-r>", "<C-o><C-r>", { noremap = true, silent = true })
 
--- -- Меняем текущую дирректорию
--- vim.api.nvim_create_autocmd("BufEnter", {
--- 	pattern = "*",
--- 	callback = function()
--- 		vim.cmd("silent! lcd %:p:h")
--- 	end,
--- })
+-- Меняем текущую дирректорию
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		vim.cmd("silent! lcd %:p:h")
+	end,
+})
 keymap("n", "<leader>h", ":nohlsearch<CR>")
 
 -- resize window
@@ -151,6 +151,8 @@ keymap("n", "<leader>ni", ":Neorg index<CR>", { desc = "Move cursor right in ins
 keymap("n", "<leader>R", ":set relativenumber!<CR>", { desc = "Toggle relativenumber" })
 keymap("n", "<leader>N", ":set number!<CR>", { desc = "Toggle number" })
 keymap("n", "<leader>T", ":lua MiniFiles.open()<cr>", { desc = "Open Mini.files" })
+keymap("n", "<leader>sa", "ggVG", { desc = "Select All" })
+keymap("n", "<leader>ya", ":%y+<CR>", { desc = "Yank All" })
 vim.cmd([[
 nnoremap <leader>F :call FoldColumnd()<CR>
 

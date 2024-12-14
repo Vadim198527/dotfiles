@@ -81,7 +81,7 @@ return {
 				{ desc = "Show all buffer lexical entities" }
 			)
 			vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
-			vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "Key maps" })
+			-- vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "Key maps" })
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>rn",
