@@ -28,10 +28,18 @@ vim.opt.autoindent = false
 vim.opt.smartindent = false
 vim.opt.cindent = false
 vim.opt.softtabstop = 4
+-- Делаем так, чтобы нажатие o не создавало строку с комментарием
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.opt.formatoptions:remove("o")
+	end,
+})
+--
+-- vim.opt.formatoptions:remove('o')
 vim.cmd(":syntax enable")
 vim.cmd(":syntax on")
 vim.cmd(":set foldmethod=indent")
-vim.cmd(":set foldcolumn=4")
+vim.cmd(":set foldcolumn=0")
 vim.cmd(":set foldlevel=99")
 -- Highlight the current line
 vim.opt.cursorline = true
@@ -42,9 +50,11 @@ vim.opt.completeopt:remove("preview")
 -- vim.cmd("autocmd VimLeave * mksession! ~/.config/nvim/session.vim")
 -- keymap("n", "<leader>ss", ":source ~/.config/nvim/session.vim<CR>", { noremap = true })
 keymap("n", "<C-;>", "zz", { noremap = true })
+keymap("n", "\27[28;6;39~", "zz", { noremap = true })
 keymap("n", "<C-p>", "o<Left><Right><Esc>", { noremap = true })
 -- Перемещение текущей строки в центр экрана при нажатии Ctrl + l в режиме вставки
 keymap("i", "<C-;>", "<C-o>zz", { noremap = true, silent = true })
+keymap("i", "\27[28;6;39~", "<C-o>zz", { noremap = true, silent = true })
 -- keymap("n", "<C-a>", "^", { noremap = true, silent = true })
 -- keymap("n", "<C-e>", "$", { noremap = true })
 keymap("n", "<leader>w/", ":vsplit<CR>", { noremap = true })
@@ -66,7 +76,6 @@ keymap("n", "<C-j>", ":wincmd j<CR>", { noremap = true, silent = true })
 keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
 -- keymap("v", "J", ":m '>+1<CR>gv=gv")
 -- keymap("v", "K", ":m '>-2<CR>gv=gv")
-
 vim.cmd(':xnoremap <leader>p "_dP')
 vim.cmd(":autocmd BufWritePre *.vim :normal gg=G``")
 
@@ -139,14 +148,12 @@ keymap("n", "_", ":resize -1<CR>")
 keymap("n", "+", ":resize +1<CR>")
 keymap("n", "<leader>sv", ":w<CR>:source %<CR>")
 keymap("v", "<leader>sv", ":<c-u>w<CR>:source %<CR>")
-keymap("c", "<C-k>", "<C-h>", { desc = "Delete char" })
-keymap("i", "<C-k>", "<C-h>", { desc = "Delete char" })
-keymap("i", "<C-h>", "<Left>", { desc = "Move cursor left in insert mode" })
-keymap("c", "<C-h>", "<Left>", { desc = "Move cursor left in insert mode" })
+keymap("i", "<C-j>", "<Left>", { desc = "Move cursor left in insert mode" })
+keymap("c", "<C-j>", "<Left>", { desc = "Move cursor left in insert mode" })
 keymap("i", "<C-l>", "<Right>", { desc = "Move cursor right in insert mode" })
 keymap("c", "<C-l>", "<Right>", { desc = "Move cursor right in insert mode" })
 keymap("i", "<C-CR>", "<esc>o", { noremap = true })
-keymap("i", "<C-j>", "<esc>o", { noremap = true })
+keymap("i", "<C-k>", "<esc>o", { noremap = true })
 keymap("n", "<leader>ni", ":Neorg index<CR>", { desc = "Move cursor right in insert mode" })
 keymap("n", "<leader>R", ":set relativenumber!<CR>", { desc = "Toggle relativenumber" })
 keymap("n", "<leader>N", ":set number!<CR>", { desc = "Toggle number" })

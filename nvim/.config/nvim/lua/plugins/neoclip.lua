@@ -36,11 +36,12 @@ return {
 				close_telescope = true,
 			},
 			keys = {
-				telescope = {
+                telescope = {
 					i = {
 						-- select = "<cr>",
-						paste = "<cr>",
-						paste_behind = "<c-k>",
+						paste = "<c-k>",
+						paste_behind = "<cr>",
+						-- paste_behind = "<c-k>",
 						replay = "<c-q>", -- replay a macro
 						delete = "<c-d>", -- delete an entry
 						edit = "<c-e>", -- edit an entry
@@ -60,8 +61,8 @@ return {
 				},
 				fzf = {
 					select = "default",
-					paste = "ctrl-p",
-					paste_behind = "ctrl-k",
+					-- paste = "ctrl-p",
+					-- paste_behind = "ctrl-k",
 					custom = {},
 				},
 			},

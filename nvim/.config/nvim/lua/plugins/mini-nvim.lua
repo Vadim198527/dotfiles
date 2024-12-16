@@ -14,6 +14,7 @@ return {
                     enable = false
                 },
 			})
+            -- require("mini.pairs").setup({})
 		end,
 	},
 }
