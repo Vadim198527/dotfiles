@@ -28,13 +28,14 @@ vim.opt.autoindent = false
 vim.opt.smartindent = false
 vim.opt.cindent = false
 vim.opt.softtabstop = 4
+
 -- Делаем так, чтобы нажатие o не создавало строку с комментарием
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
 		vim.opt.formatoptions:remove("o")
 	end,
 })
---
+
 -- vim.opt.formatoptions:remove('o')
 vim.cmd(":syntax enable")
 vim.cmd(":syntax on")
@@ -43,20 +44,21 @@ vim.cmd(":set foldcolumn=0")
 vim.cmd(":set foldlevel=99")
 -- Highlight the current line
 vim.opt.cursorline = true
-
+-- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- Disable preview window in comple
 vim.opt.completeopt:remove("preview")
 -- -- Автоматическое сохранение сессии при выходе
--- vim.cmd("autocmd VimLeave * mksession! ~/.config/nvim/session.vim")
--- keymap("n", "<leader>ss", ":source ~/.config/nvim/session.vim<CR>", { noremap = true })
-keymap("n", "<C-;>", "zz", { noremap = true })
-keymap("n", "\27[28;6;39~", "zz", { noremap = true })
+-- keymap("n", "<C-;>", "zz", { noremap = true })
+-- keymap("n", "\27[28;6;39~", "zz", { noremap = true })
+keymap("n", "<F5>", "zz", { noremap = true })
 keymap("n", "<C-p>", "o<Left><Right><Esc>", { noremap = true })
 -- Перемещение текущей строки в центр экрана при нажатии Ctrl + l в режиме вставки
 keymap("i", "<C-;>", "<C-o>zz", { noremap = true, silent = true })
-keymap("i", "\27[28;6;39~", "<C-o>zz", { noremap = true, silent = true })
--- keymap("n", "<C-a>", "^", { noremap = true, silent = true })
--- keymap("n", "<C-e>", "$", { noremap = true })
+keymap("i", "<F5>", "<C-o>zz", { noremap = true, silent = true })
+-- keymap("i", "\27[28;6;39~", "<C-o>zz", { noremap = true, silent = true })
+keymap("n", "<C-a>", "^", { noremap = true, silent = true })
+keymap("n", "<C-e>", "$", { noremap = true })
 keymap("n", "<leader>w/", ":vsplit<CR>", { noremap = true })
 keymap("n", "<leader>ww", ":wincmd w<CR>", { noremap = true, silent = true })
 keymap("n", "<leader>w-", ":split<CR>", { noremap = true })
@@ -67,7 +69,7 @@ keymap("i", "<C-a>", "<esc>I", { noremap = true })
 keymap("i", "<C-e>", "<esc>A", { noremap = true })
 keymap("c", "<C-a>", "<Home>", { noremap = true })
 keymap("c", "<C-e>", "<End>", { noremap = true })
-
+--
 keymap("n", "<C-h>", ":wincmd h<CR>", { noremap = true, silent = true })
 keymap("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
 keymap("n", "<C-l>", ":wincmd l<CR>", { noremap = true, silent = true })
@@ -134,13 +136,6 @@ keymap("i", "<C-f>", "<Tab>", { noremap = true, silent = true })
 keymap("i", "<C-/>", "<C-o>u", { noremap = true, silent = true })
 -- keymap("i", "<C-r>", "<C-o><C-r>", { noremap = true, silent = true })
 
--- Меняем текущую дирректорию
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	callback = function()
-		vim.cmd("silent! lcd %:p:h")
-	end,
-})
 keymap("n", "<leader>h", ":nohlsearch<CR>")
 
 -- resize window

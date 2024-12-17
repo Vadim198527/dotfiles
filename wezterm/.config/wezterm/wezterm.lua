@@ -186,11 +186,11 @@ config = {
             mods = "CTRL",
             action = wezterm.action.SendString("\x1b[27;5;39~"), -- Отправляем уникальную последовательность
         },
-        {
-            key = ";",
-            mods = "CTRL",
-            action = wezterm.action.SendString("\x1b[28;6;39~"), -- Отправляем уникальную последовательность
-        },
+        -- {
+        --     key = ";",
+        --     mods = "CTRL",
+        --     action = wezterm.action.SendString("\x1b[28;6;39~"), -- Отправляем уникальную последовательность
+        -- },
         -- {
         -- 	key = "c",
         -- 	mods = "LEADER",
@@ -213,6 +213,7 @@ config = {
         { key = "7",          mods = "CMD",        action = wezterm.action.SendKey({ key = "7", mods = "ALT" }) },
         { key = "8",          mods = "CMD",        action = wezterm.action.SendKey({ key = "8", mods = "ALT" }) },
         { key = "9",          mods = "CMD",        action = wezterm.action.SendKey({ key = "9", mods = "ALT" }) },
+        { key = ";",          mods = "CTRL",        action = wezterm.action.SendKey({ key = "F5", mods = "" }) },
 
         -- {
         -- 	key = "/",

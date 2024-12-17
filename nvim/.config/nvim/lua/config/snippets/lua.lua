@@ -47,4 +47,14 @@ return {
 		)
 	),
 	s({ trig = "re" }, fmta("return ", {})),
+	s(
+        { trig = "con" }, 
+        fmta(
+            [[
+            config = function()
+                <>
+            end
+            ]],
+            {i(1)})
+    ),
 }

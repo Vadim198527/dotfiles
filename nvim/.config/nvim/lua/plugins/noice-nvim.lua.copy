@@ -27,6 +27,18 @@ return {
                     ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
                 },
             },
+            messages = {
+                enabled = true, -- убеждаемся, что сообщения включены
+            },
+            -- добавляем маршрут
+            routes = {
+                {
+                    filter = {
+                        event = "msg_showmode", -- данный тип сообщений отвечает за "recording"
+                    },
+                    view = "notify", -- можете выбрать другой view, например "mini" или что-то еще
+                },
+            },
             -- you can enable a preset for easier configuration
             presets = {
                 -- bottom_search = true, -- use a classic bottom cmdline for search
