@@ -13,6 +13,7 @@ local events = require("luasnip.util.events")
 
 return {
 	s({ trig = "pr" }, fmta("print(<>)", { i(1) })),
+	s({ trig = "l" }, fmta("local ", {})),
 	s(
 		{ trig = "fu" },
 		fmta(
@@ -40,6 +41,17 @@ return {
 		fmta(
 			[[
     for <> do
+        <>
+    end
+    ]],
+			{ i(1), i(2) }
+		)
+	),
+	s(
+		{ trig = "whi" },
+		fmta(
+			[[
+    while <> do
         <>
     end
     ]],

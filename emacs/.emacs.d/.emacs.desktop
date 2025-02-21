@@ -2,54 +2,222 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Dec 16 13:32:41 2024
+;; Created Thu Feb 20 22:55:06 2025
 ;; Desktop file format version 208
 ;; Emacs version 29.4
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26464 457 314825 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#ffffff") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen) (scroll-bar-foreground . "#9f9f9f") (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "#000000") (font-parameter) (environment) (last-focus-update) (tabs (current-tab (name . "init.el") (explicit-name))) (frameset--id . "99A7-DF18-CC54-E362") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (visibility . t) (height . 34) (width . 80) (left . 542) (top . 141)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 84) (min-pixel-width . 90) (min-pixel-height-ignore . 63) (min-pixel-width-ignore . 36) (min-pixel-height-safe . 21) (min-pixel-width-safe . 18)) leaf (pixel-width . 736) (pixel-height . 693) (total-width . 81) (total-height . 33) (normal-height . 1.0) (normal-width . 1.0) (buffer "langImg.txt" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 266) (start . 1)) (prev-buffers ("init.el" 11138 11426) ("test.lisp" 1 1) ("*scratch*" 1 1))))])
+(setq desktop-saved-frameset [frameset 1 (26551 34970 989668 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#ffffff") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground . "#9f9f9f") (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "#000000") (font-parameter) (environment) (last-focus-update . t) (frameset--id . "B67A-32B0-33F0-50D4") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (tabs (current-tab (name . "Similarities.rkt") (explicit-name))) (lsp-ui-doc-buffer . "Unprintable entity") (visibility . t) (height . 49) (width . 184) (left . 940) (top . 151)) ((min-height . 4) (min-width . 20) (min-height-ignore . 3) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 84) (min-pixel-width . 180) (min-pixel-height-ignore . 63) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 21) (min-pixel-width-safe . 36)) hc (pixel-width . 1672) (pixel-height . 1008) (total-width . 186) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 835) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "ortur.rkt" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 12) (start . 1)) (prev-buffers ("ortur.rkt" 1 12) ("repl.rkt" 1 403) ("olan.rkt" 11566 11778) ("Using_abstractions.rkt" 3201 3536) ("langImg.txt" 1 36) ("test.md" 1 1172) ("Similarities.rkt" 2857 3386) ("langResp.txt" 1 1) ("Itunes.rkt" 5262 7398) ("Intermezzo_1.rkt" 64 940) ("init.el" 11594 13471) ("config.el" 4956 5116))) (leaf (last . t) (pixel-width . 837) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "*Racket REPL </>*" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 101) (start . 1)) (prev-buffers ("Numbers.rkt" 3690 5552) ("test_for_Emacs.txt" 1 1) ("Computing_conditionaly.rkt" 1593 3132) ("main.c" 1 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
-(setq tags-table-list '("/Users/chestnykh/dotfiles/emacs/.emacs.d/TAGS"))
-(setq search-ring '(#("\"" 0 1 (isearch-case-fold-search t isearch-regexp-function nil)) #("k" 0 1 (isearch-case-fold-search t isearch-regexp-function nil))))
-(setq regexp-search-ring '(#("pare" 0 4 (isearch-case-fold-search nil)) #("slime" 0 5 (isearch-case-fold-search t)) #("company" 0 7 (isearch-case-fold-search t)) #("tab" 0 3 (isearch-case-fold-search t)) #("vertico" 0 7 (isearch-case-fold-search t)) #("ivy" 0 3 (isearch-case-fold-search t)) #("evil-mo" 0 7 (isearch-case-fold-search t))))
-(setq register-alist '((48 . #("(ABS -5)\n" 0 1 (yank-handler (evil-yank-line-handler nil t) fontified t) 1 7 (yank-handler (evil-yank-line-handler nil t) fontified t) 7 8 (yank-handler (evil-yank-line-handler nil t) fontified t) 8 9 (yank-handler (evil-yank-line-handler nil t) fontified t)))))
-(setq file-name-history '("~/PycharmProjects/klllll/langImg.txt" "~/Desktop/Ege_Inf/main.py" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/docs/Org_files/info.org" "~/docs/Org_files/Todo.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/guides/hyprland.org" "~/docs/guides/guide.org" "~/docs/Org_files/wastebook.org" "~/docs/Org_files/Todo.org" "~/docs/Org_files/evil-mode-lessons/test.py" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/config.org" "~/docs/Org_files/evil-mode-lessons/test.org" "~/docs/Org_files/How_to_prove.tex" "~/docs/Org_files/evil-mode-lessons/test.org" "~/" "~/docs/Org_files/evil-mode-lessons/test.org" "~/.emacs.d/init.el" "~/docs/Org_files/evil-mode-lessons/test.org" "~/docs/guides/guide.org" "~/docs/Org_files/Todo.org" "~/docs/Org_files/info.org" "~/docs/guides/guide.org" "~/docs/Org_files/Todo.org" "~/docs/guides/hyprland.org" "~/docs/guides/git.org" "~/.emacs.d/init.el" "~/docs/Org_files/How_to_prove.org" "~/.emacs.d/init.el" "~/docs/Org_files/How_to_prove.tex" "~/docs/Org_files/evil-mode-lessons/test.org" "~/docs/Org_files/test.org" "~/dotfiles/emacs/.emacs.d/init.copy" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/init.copy" "~/docs/Org_files/test.py" "~/docs/Org_files/Todo.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/config.org" "~/.emacs.d/" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/" "~/.emacs.d/config.org" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Org_files/test_for_Emacs.txt" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/.emacs.d/config.el" "~/.emacs.d/init.el" "~/Desktop/Org_files/test_for_Emacs.txt" "~/.emacs.legacy/init.el" "~/Desktop/Org_files/info.org" "~/Desktop/Org_files/" "~/Desktop/Org_files/info.org" "~/Desktop/Org_files/" "~/Desktop/Org_files/wastebook.org" "~/.emacs.legacy/config.org" "~/Information/other/tmux.org" "~/Desktop/Org_files/map_of_knowledge.org" "~/Desktop/Org_files/tmux.org" "~/Desktop/Org_files/org_lessons/test.org" "~/.emacs.legacy/init.el" "~/Desktop/Org_files/.stversions/blocks~20240502-000827.org" "~/Desktop/Org_files/.stversions/Todo~20240502-000827.org" "~/Desktop/Org_files/python/test.org" "~/Desktop/Org_files/Todo.org" "~/Desktop/Org_files/evil-mode-lessons/evil.org" "~/Desktop/Org_files/evil-mode-lessons/test.org" "~/Desktop/Org_files/test.py" "~/.emacs.legacy/init.el" "~/Desktop/Org_files/evil-mode-lessons/test.org" "~/Desktop/Org_files/evil-mode-lessons/" "~/Desktop/Org_files/evil-mode-lessons/evil.org" "~/Desktop/Org_files/test.py" "~/.emacs.legacy/init.el"))
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring '(#("craf" 0 4 (isearch-case-fold-search t)) #("cra" 0 3 (isearch-case-fold-search t)) #("[0-9]*. *" 0 9 (isearch-case-fold-search t isearch-regexp-function nil)) #("[0-9]*. " 0 8 (isearch-case-fold-search t isearch-regexp-function nil)) #("^[0-9]*. " 0 9 (isearch-case-fold-search nil isearch-regexp-function nil)) #("[1-9]*. " 0 8 (isearch-case-fold-search nil isearch-regexp-function nil)) #("C-h" 0 3 (isearch-case-fold-search nil)) #("paredi" 0 6 (isearch-case-fold-search t)) #("^\n" 0 2 (isearch-case-fold-search t)) #("\\<\n\\>" 0 5 (isearch-case-fold-search t)) #("track1" 0 6 (isearch-case-fold-search t)) #("t" 0 1 (isearch-case-fold-search t)) #("date2" 0 5 (isearch-case-fold-search t)) #("posn-y" 0 6 (isearch-case-fold-search t)) #("explod" 0 6 (isearch-case-fold-search t)) #("^\\d\\." 0 5 (isearch-case-fold-search nil isearch-regexp-function nil))))
+(setq register-alist '((48 . #("Let me explain the highlighted words from the text:\n" 0 52 (yank-handler (evil-yank-line-handler nil t))))))
+(setq file-name-history '("~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Numbers.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/Ege/main.py" "~/Project/main.c" "~/" "~/test-c/" "~/Desktop/Ege/olan.c" "~/Desktop/Ege/test.clj" "~/test-c/hello.c" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/Ege/test.scm" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/Desktop/htdp/Batch_program.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Batch_program.rkt" "~/dotfiles/emacs/.emacs.d/" "~/Desktop/htdp/Arithmetic_of_imgs.rkt" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/Desktop/htdp/Arithmetic.rkt" "~/Desktop/Ege/main.py" "~/.emacs.d/config.org" "~/Desktop/htdp/preface.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/preface.rkt" "~/.emacs.d/init.el" "/sshx:vadim@192.168.1.117:/home/vadim/bora.txt" "~/.emacs.d/init.el" "ssh vadim@192.168.1.117" "~/PycharmProjects/klllll/main.py" "~/.config/nvim/lua/vim-options.lua" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/Ege_Inf/main.py" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/docs/Org_files/info.org" "~/docs/Org_files/Todo.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/.emacs.d/init.el" "~/.emacs.d/config.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/guides/hyprland.org" "~/docs/guides/guide.org" "~/docs/Org_files/wastebook.org" "~/docs/Org_files/Todo.org" "~/docs/Org_files/evil-mode-lessons/test.py" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/config.org" "~/docs/Org_files/evil-mode-lessons/test.org" "~/docs/Org_files/How_to_prove.tex" "~/docs/Org_files/evil-mode-lessons/test.org" "~/" "~/docs/Org_files/evil-mode-lessons/test.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/ortur.rkt"
+  "ortur.rkt"
+  'racket-mode
+  '(auto-revert-mode font-lock-mode eldoc-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode racket-xp-mode paredit-mode)
+  12
+  '(29 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26551 34970 81354 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (29))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Numbers.rkt"
+  "Numbers.rkt"
+  'racket-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode font-lock-mode eldoc-mode evil-local-mode racket-xp-mode paredit-mode auto-revert-mode)
+  5552
+  '(5552 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26550 49309 328357 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5552 5552 5552 5552 3974 3614 3613 3390 3389 3342 3341 3105 3104 3105 3341 3342))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/docs/Org_files/test_for_Emacs.txt"
+  "test_for_Emacs.txt"
+  'text-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode evil-local-mode font-lock-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 26550 49285 246721 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Project/main.c"
+  "main.c"
+  'c-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-inline-completion-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode evil-local-mode font-lock-mode lsp-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 26550 49278 569974 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/usr/local/Cellar/minimal-racket/8.15/share/racket/collects/racket/repl.rkt"
+  "repl.rkt"
+  'racket-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode font-lock-mode eldoc-mode evil-local-mode racket-xp-mode paredit-mode)
+  403
+  '(403 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26550 48944 306610 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (403 403 403 403 403 403 402 1795))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/olan.rkt"
+  "olan.rkt"
+  'racket-mode
+  '(font-lock-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
+  11778
+  '(11778 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26550 48841 646352 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Using_abstractions.rkt"
+  "Using_abstractions.rkt"
+  'racket-mode
+  '(auto-revert-mode font-lock-mode eldoc-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode racket-xp-mode paredit-mode)
+  3536
+  '(3536 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26550 48814 906358 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (264 265 16 16 16 16))))
+
 (desktop-create-buffer 208
   "/Users/chestnykh/PycharmProjects/klllll/langImg.txt"
   "langImg.txt"
   'text-mode
-  '(company-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode font-lock-mode)
-  266
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode display-line-numbers-mode font-lock-mode auto-revert-mode)
+  36
+  '(36 nil)
+  nil
+  nil
+  '((buffer-display-time 26549 57569 61826 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (12034 25 1 1 1 10749 1 1 1 11316 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/docs/Org_files/test.md"
+  "test.md"
+  'markdown-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode font-lock-mode eldoc-mode evil-local-mode auto-revert-mode)
+  1172
+  '(1172 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26547 22879 635548 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (11113 5 9322 10467 12166 13174 4119 4129 4254 4348 4342 12095 10956 10956 20 21))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Similarities.rkt"
+  "Similarities.rkt"
+  'racket-mode
+  '(font-lock-mode eldoc-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode racket-xp-mode paredit-mode auto-revert-mode)
+  3386
+  '(3386 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26547 15802 782987 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (3386 3386 433 16 16 16 16 16 4024 16 16 16 16 16 16))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/PycharmProjects/klllll/langResp.txt"
+  "langResp.txt"
+  'text-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode display-line-numbers-mode font-lock-mode)
+  1
   '(1 nil)
   nil
   nil
-  '((buffer-display-time 26464 427 276960 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1))))
+  '((buffer-display-time 26824 63745 952253 190000) (overwrite-mode))
+  '((mark-ring (1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Itunes.rkt"
+  "Itunes.rkt"
+  'racket-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode auto-revert-mode paredit-mode font-lock-mode eldoc-mode evil-local-mode racket-xp-mode)
+  7398
+  '(7398 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26869 53365 839237 828000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (7398 930 3865 1524 3549 3824 115 5943 608 608 115 115 115 115 115 115))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Intermezzo_1.rkt"
+  "Intermezzo_1.rkt"
+  'racket-mode
+  '(paredit-mode racket-xp-mode evil-mc-mode corfu-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode display-line-numbers-mode eldoc-mode font-lock-mode auto-revert-mode)
+  940
+  '(940 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26916 45009 808146 466000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (129 133 133 65 65 65 65 1 65 65))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/emacs/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
-  '(company-quickhelp-local-mode paredit-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode eldoc-mode font-lock-mode company-mode)
-  11426
-  '(11426 nil)
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode evil-local-mode eldoc-mode font-lock-mode paredit-mode)
+  13471
+  '(13471 nil)
   nil
   nil
-  '((buffer-display-time 26481 41950 409402 567000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (11718 12154 12154 12198 12057 12057 12008 12559 12439 12357 12357 12199 11877 12154 12072 12074))))
+  '((buffer-display-time 27005 63717 480906 742000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (13785 13454 13454 14001 13968 13968 13968 13968 13968 13968 13968 13968 13968 13968 13968 13968))))
 
 (desktop-create-buffer 208
-  "/Users/chestnykh/test.lisp"
-  "test.lisp"
-  'lisp-mode
-  '(company-quickhelp-local-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode font-lock-mode paredit-mode company-mode sly-mode sly-editing-mode)
+  "/Users/chestnykh/dotfiles/emacs/.emacs.d/config.el"
+  "config.el"
+  'emacs-lisp-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode paredit-mode evil-local-mode eldoc-mode font-lock-mode)
+  5116
+  '(5116 nil)
+  nil
+  nil
+  '((buffer-display-time 27050 51374 865776 380000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5116 5761 5116 5761 5116 5761 5116 5761 5116 5761 5116 5761 5722 5116 5769 5769))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/Ege/main.py"
+  "main.py"
+  'python-mode
+  '(lsp-completion-mode flymake-mode lsp-diagnostics-mode lsp-headerline-breadcrumb-mode lsp-modeline-code-actions-mode lsp-modeline-diagnostics-mode lsp-modeline-workspace-status-mode lsp-lens-mode lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode eldoc-mode lsp-managed-mode evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode evil-local-mode font-lock-mode lsp-mode lsp-inline-completion-mode)
   1
   '(1 nil)
   nil
   nil
-  '((buffer-display-time 26464 427 234338 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
-  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 27050 51364 926594 380000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/htdp/Computing_conditionaly.rkt"
+  "Computing_conditionaly.rkt"
+  'racket-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode paredit-mode racket-xp-mode evil-local-mode eldoc-mode font-lock-mode auto-revert-mode)
+  3132
+  '(3132 nil)
+  nil
+  nil
+  '((indent-tabs-mode) (buffer-display-time 26550 49279 571376 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (3132 3132 3132 3132 3132 3132 3050 3050 2855 2627 527 527 527 527 527 527))))
 

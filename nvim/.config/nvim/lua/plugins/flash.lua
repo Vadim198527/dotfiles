@@ -19,6 +19,9 @@ return {
 				highlight = { backdrop = false },
 			},
 		},
+        jump = {
+            pos = "start"
+        }
 	},
     -- stylua: ignore
     keys = {

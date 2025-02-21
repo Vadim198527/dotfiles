@@ -7,7 +7,8 @@ return {
 				-- Your textobject-related config here
 				textobjects = {
 					select = {
-						enable = true,
+						-- enable = true,
+						enable = false,
 						lookahead = true, -- Автоматический переход к следующему совпадению
 						keymaps = {
 							["af"] = "@call.outer", -- Выделение вызова функции целиком
@@ -37,7 +38,7 @@ return {
 					keymaps = {
 						init_selection = "<CR>", -- начать выделение
 						node_incremental = "<CR>", -- увеличить выделение
-						scope_incremental = "<S-CR>", -- увеличить до следующей области видимости
+						-- scope_incremental = "<S-CR>", -- увеличить до следующей области видимости
 						node_decremental = "<BS>", -- уменьшить выделение
 					},
 				},
@@ -58,6 +59,7 @@ return {
 					"latex",
 					"html",
 					"css",
+                    "c",
 					"markdown",
 					"markdown_inline",
 					"norg",
@@ -65,9 +67,13 @@ return {
 					"vim",
 					"markdown", -- для документации
 					"bash",
+					"scheme",
+					"clojure",
+					"racket",
+					"org",
 				},
-                autoinstall = true,
-				ignore_install = { "org" },
+				autoinstall = true,
+				-- ignore_install = { "org" },
 				highlight = {
 					enable = true,
 					disable = { "latex" },
@@ -77,6 +83,7 @@ return {
 					disable = { "html" },
 				},
 				autopairs = { enable = true },
+				-- autopairs = { enable = false },
 			})
 		end,
 	},

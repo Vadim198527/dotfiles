@@ -3,12 +3,14 @@ return {
 	event = "InsertEnter",
 	config = function()
 		require("nvim-autopairs").setup({
+            check_ts = true,
 			map_bs = true, -- map the <BS> key
 			map_c_h = true, -- Map the <C-h> key to delete a pair
 			enable_check_bracket_line = false, -- Позволяет выходить за скобки в любой позиции строки
 			ignored_next_char = "[%w%.]", -- Игнорирует буквенно-цифровые символы
 			enable_moveright = true, -- Автоматически перемещаться за закрывающую скобку
-			disable_filetype = { "TelescopePrompt", "tex" },
+			-- disable_filetype = { "TelescopePrompt", "tex" },
+			disable_filetype = { "TelescopePrompt", "racket"},
 		})
 		-- Инициализация nvim-cmp
 		local cmp = require("cmp")
@@ -20,3 +22,4 @@ return {
 		-- })
 	end,
 }
+

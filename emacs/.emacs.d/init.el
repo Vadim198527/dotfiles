@@ -3,10 +3,18 @@
 (setq package-enable-at-startup nil)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
 ;; Установка размера шрифта для HiDPI
 ;; (set-face-attribute 'default nil :height 200) ;; 200 соответствует 10pt * 20
 
+;; Отключаем центрирование при перемещении вниз экрана
+(setq scroll-conservatively 101)
+
+;; Включаем отображение номеров строк
+(global-display-line-numbers-mode 1)
+
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/")
+             t)
 ;; Установка use-package, если он не установлен
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -26,6 +34,14 @@
   :config
   (auto-save-visited-mode 1)
   (setq auto-save-visited-interval 3))
+
+(use-package avy
+  :config
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal 'global (kbd "C-/") 'avy-goto-char-timer)
+    ;; (evil-define-key 'normal 'global (kbd "C-/") 'avy-goto-char)
+    )
+  )
 
 ;; Настройка тем и интерфейса
 (use-package modus-themes
@@ -78,12 +94,12 @@
 ;; ;;   (load-theme 'doom-gruvbox t)
 ;; ;;   (set-face-attribute 'default nil :family "JetBrainsMonoNL Nerd Font Mono" :height 160))
 ;;
-;; ;; (use-package catppuccin-theme
-;; ;;   :ensure t
-;; ;;   :config
-;; ;;   (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
-;; ;;   (catppuccin-reload)
-;; ;;   (set-face-attribute 'default nil :family "JetBrainsMonoNL Nerd Font Mono" :height 160))
+;; (use-package catppuccin-theme
+;;   :ensure t
+;;   :config
+;;   (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
+;;   (catppuccin-reload)
+;;   (set-face-attribute 'default nil :family "JetBrainsMonoNL Nerd Font Mono" :height 160))
 
 
 ;; Настройки org-mode
@@ -140,23 +156,23 @@
          (TeX-mode . aas-activate-for-major-mode))
   :config
   (aas-set-snippets 'text-mode
-    ";o-" "ō"
-    ";i-" "ī"
-    ";a-" "ā"
-    ";u-" "ū"
-    ";e-" "ē")
+		    ";o-" "ō"
+		    ";i-" "ī"
+		    ";a-" "ā"
+		    ";u-" "ū"
+		    ";e-" "ē")
   (aas-set-snippets 'org-mode
-    ";latex" (lambda ()
-	       (interactive)
-	       (yas-expand-snippet (yas-lookup-snippet "latexCode")))
-    ;; Добавьте остальные сниппеты здесь
-    )
+		    ";latex" (lambda ()
+			       (interactive)
+			       (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+		    ;; Добавьте остальные сниппеты здесь
+		    )
   (aas-set-snippets 'LaTeX-mode
-    ";beg" (lambda ()
-	     (interactive)
-	     (yas-expand-snippet (yas-lookup-snippet "begin")))
-    ;; Добавьте остальные сниппеты здесь
-    ))
+		    ";beg" (lambda ()
+			     (interactive)
+			     (yas-expand-snippet (yas-lookup-snippet "begin")))
+		    ;; Добавьте остальные сниппеты здесь
+		    ))
 
 ;; Настройка org-roam
 (use-package org-roam
@@ -182,7 +198,8 @@
         evil-undo-system 'undo-redo)
   :config
   (evil-mode 1)
-  (evil-set-leader nil (kbd "SPC")))
+  (evil-set-leader nil (kbd "SPC"))
+  )
 
 (use-package evil-collection
   :after evil
@@ -199,17 +216,18 @@
   :init
   (setq vertico-cycle t
         vertico-resize nil)
+  ;; :bind (:map minibuffer-local-map
+  ;; 	      ("C-n" . vertico-next)
+  ;; 	      ("C-p" . vectico-previous))
   :config
-  (vertico-mode 1))
+  (vertico-mode 1)
+  )
 
-;; Настройка orderless
-(use-package orderless
-  :init
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+
+
 ;; Настройка marginalia
 (use-package marginalia
+  :after vertico
   :config
   (marginalia-mode))
 
@@ -217,13 +235,8 @@
 (use-package consult
   :ensure t
   :after recentf
-  :bind (("C-s" . consult-line)
-         ("C-x b" . consult-buffer)
-         ("C-c f" . consult-find)
-         ("C-c g" . consult-grep)
-         ("M-y" . consult-yank-pop))
   :config
-  (setq consult-project-root-function #'projectile-project-root)
+  ;; (setq consult-project-root-function #'projectile-project-root)
   (evil-define-key 'normal 'global (kbd "<leader>,") 'consult-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>fg") 'consult-grep)
   (evil-define-key 'normal 'global (kbd "<leader>SPC") 'consult-recent-file)
@@ -231,8 +244,7 @@
 
 ;; Настройка embark и embark-consult
 (use-package embark
-  :bind (("C-." . embark-act)
-         ("C-;" . embark-dwim))
+  :bind (("C-." . embark-act))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 
@@ -257,11 +269,11 @@
   :custom
   (recentf-max-saved-items 100))
 
-;; Настройка projectile
-(use-package projectile
-  :config
-  (projectile-mode 1)
-  (setq projectile-project-search-path '("~/projects/")))
+;; ;; Настройка projectile
+;; (use-package projectile
+;;   :config
+;;   (projectile-mode 1)
+;;   (setq projectile-project-search-path '("~/projects/")))
 
 ;; Отключение стартового экрана и звукового сигнала
 (setq inhibit-startup-message t)
@@ -289,133 +301,186 @@
   (interactive "P")
   (scroll-down (prefix-numeric-value n)))
 
-;; Загрузка внешнего файла конфигурации (если требуется)
-(org-babel-load-file (expand-file-name "config.org" user-emacs-directory))
 
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
+  :ensure t
   :init
   (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "PATH"))
+  ;; (exec-path-from-shell-copy-env "PATH")
+  )
 
 (use-package lsp-mode
-  :commands (lsp lsp-deferred)
-  :hook ((python-mode . lsp-deferred)) ; запуск lsp при открытии python-файлов
+  :ensure t
+  :commands lsp
+  :hook ((python-mode . lsp)
+	 (c-mode . lsp)) ; запуск lsp при открытии python-файлов
   :init
   ;; Настройки, опционально
   (setq lsp-keymap-prefix "C-c l") ; быстрый доступ к командам lsp
+  (setq lsp-log-io t)
   :config
   ;; Для небольших проектов можно отключить персистентный серверный кэш
   (setq lsp-enable-file-watchers nil)
+  ;; (setq lsp-file-watch-threshold 15000)
+  ;; (setq lsp-clients-clangd-executable "/usr/bin/clangd")
   ;; Можно настроить логирование или другие параметры через
   ;; (setq lsp-log-io t) для отладки
   )
-(use-package elpy
-  :ensure t
-  :defer t
-  :init
-  (elpy-enable)
-  :bind
-  (:map elpy-mode-map
-	("C-c C-c" . elpy-shell-send-region-or-buffer)   ; запуск региона или всего буфера
-	("C-c C-r" . elpy-shell-send-region)             ; запуск только выделенного региона
-	("C-c C-z" . elpy-shell-switch-to-shell))        ; переключение в Python shell
-  :config
-  (setq python-shell-interpreter "python3"
-	python-shell-interpreter-args "-i"
-	python-shell-completion-native-enable nil  ; отключаем native completion
-	python-shell-completion-native-disabled-interpreters '("python3"))
-  ;; Используйте следующую строку, если предпочитаете IPython
-  ;; (setq python-shell-interpreter "ipython"
-  ;;       python-shell-interpreter-args "-i --simple-prompt")
-  
-  ;; Опционально: настройка форматирования с помощью black
-  (add-hook 'elpy-mode-hook
-	    (lambda ()
-	      (add-hook 'before-save-hook
-			'elpy-black-fix-code nil t)))
-  
-  ;; Опционально: использование flycheck вместо flymake
-  (when (require 'flycheck nil t)
-    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
-
-
-;; ;; Вариант 2: Corfu вместо Company (более современный подход)
-;; ;; Для corfu потребуется Emacs 28+ или установка corfu из ELPA/MELPA
-;; (use-package corfu
-;;   :init
-;;   (global-corfu-mode)
-;;   :config
-;;   (setq corfu-auto t
-;; 	corfu-auto-delay 0
-;; 	corfu-auto-prefix 1
-;; 	corfu-quit-no-match 'separator))
-
-
-;; Дополнительно: lsp-ui для красивых всплывающих подсказок и отображения информации
 (use-package lsp-ui
-  :after lsp-mode
-  :commands lsp-ui-mode
-  :hook ((lsp-mode . lsp-ui-mode))
-  :config
-  (setq lsp-ui-doc-enable t
-        lsp-ui-sideline-enable t
-        lsp-ui-peek-enable t)
-  )
-
-;; Company - глобальный режим автодополнения
-(use-package company
-  :init
-  (global-company-mode)
-  :config
-  ;; Настройки удобства: например, таймауты, минимальная длина префикса
-  (setq company-idle-delay 0.2
-        company-minimum-prefix-length 1))
-
-;; (use-package slime
-;;   :config
-;;   (setq inferior-lisp-program "sbcl") ; Укажите ваш Lisp (sbcl, ccl и т.д.)
-;;   (slime-setup '(slime-fancy))
-;;   ;; Подключаем slime-company для автодополнения
-;;   (use-package slime-company
-;;     :after (slime company)
-;;     :config
-;;     ;; Опциональные настройки
-;;     (setq slime-company-completion 'fuzzy
-;;           slime-company-after-completion 'slime-company-just-one-space)
-;;     (add-hook 'slime-mode-hook #'company-mode)
-;;     (add-hook 'slime-repl-mode-hook #'company-mode)))
-
-(use-package sly
   :ensure t
+  :commands lsp-ui-mode
+  :init
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+(use-package clang-format
+  :ensure t
+  :bind (:map c-mode-map
+              ("C-c f" . clang-format-region)))
+
+;; (use-package ccls
+;;   :ensure t
+;;   :config
+;;   :hook ((c-mode) .
+;;          (lambda () (require 'ccls) (lsp)))
+;;   (setq ccls-executable "/usr/local/bin/ccls")
+;;   ;; (setq ccls-initialization-options
+;; 	;; '(:index (:comments 2) :completion (:detailedLabel t))
+;; 	)
+
+;; Вариант 2: Corfu вместо Company (более современный подход)
+;; Для corfu потребуется Emacs 28+ или установка corfu из ELPA/MELPA
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t) 
+  (corfu-preview-current 'insert)
+  (corfu-preselect 'prompt)
+  (corfu-quit-at-boundary t)
+  :init
+  (global-corfu-mode)
+  (corfu-popupinfo-mode)
+  (corfu-history-mode)
+  (setq corfu-popupinfo-delay '(0.5 . 0.2))
   :config
-  ;; По умолчанию использовать SBCL
-  (setq inferior-lisp-program "sbcl")
-  ;; Включаем fancy режим для документации
-  (setq sly-complete-symbol-function 'sly-flex-completions)
-  ;; Добавляем хуки для включения документации
-  (add-hook 'sly-mode-hook 'company-mode)
-  (add-hook 'sly-mrepl-mode-hook 'company-mode)
-  ;; Настраиваем отображение документации
-  ;; (setq sly-autodoc-use-multiline t)
-  ;; (setq sly-description-autofocus t)
+
+  (setq
+   corfu-auto t
+   corfu-auto-delay 0
+   corfu-auto-prefix 1
+   corfu-quit-no-match 'separator
+   )
   )
 
-;; ;; Добавляем company-quickhelp для отображения документации во всплывающих окнах
-;; (use-package company-quickhelp
-;;   :ensure t
-;;   :after company
-;;   :config
-;;   (company-quickhelp-mode 1)
-;;   (setq company-quickhelp-delay 0.5))
+(use-package cape
+  ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
+  ;; Press C-c p ? to for help.
+  :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
+  ;; Alternatively bind Cape commands individually.
+  ;; :bind (("C-c p d" . cape-dabbrev)
+  ;;        ("C-c p h" . cape-history)
+  ;;        ("C-c p f" . cape-file)
+  ;;        ...)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+  ;; (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  ;; (add-hook 'completion-at-point-functions #'cape-history)
+  ;; ...
+  )
 
+;; Optionally use the `orderless' completion style.
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion)))
+					(command (styles orderless basic))
+					(variable (styles orderless basic))
+					(symbol (styles orderless basic)))
+        orderless-component-separator "[ -]"))
+
+;; https://www.racket-mode.com/#Install-Update-and-Uninstall 
+(use-package racket-mode
+  :mode ("\\.rkt\\'")
+  :hook (racket-mode . racket-xp-mode)
+  :config
+  (evil-define-key 'normal racket-mode-map (kbd "<leader>de") '(lambda () (interactive)
+								 (racket-xp-mode t)))
+  (evil-define-key 'normal racket-mode-map (kbd "<leader>dd") '(lambda () (interactive) 
+								 (racket-xp-mode -1))))
 ;; Удобное редактирование Lisp-кода (структурное редактирование)
 (use-package paredit
-  :hook ((lisp-mode . paredit-mode)
-	 (slime-repl-mode . paredit-mode)
-	 (emacs-lisp-mode . paredit-mode)))
+  :config
+  (dolist (m '(emacs-lisp-mode-hook
+	       racket-mode-hook
+	       racket-repl-mode-hook))
+    (add-hook m #'paredit-mode))
+  (evil-define-key 'normal paredit-mode-map (kbd "<)") 'paredit-forward-slurp-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd ">)") 'paredit-forward-barf-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd ">(") 'paredit-backward-slurp-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd "<(") 'paredit-backward-barf-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd "|") 'paredit-split-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>jn") 'paredit-join-sexps)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>(") 'paredit-wrap-round)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>d(") 'paredit-splice-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>pr") 'paredit-raise-sexp)
+  (evil-define-key 'normal paredit-mode-map (kbd "F") 'paredit-forward)
+  (evil-define-key 'normal paredit-mode-map (kbd "B") 'paredit-backward)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>bu") 'paredit-backward-up)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>bd") 'paredit-backward-down)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>fu") 'paredit-forward-up)
+  (evil-define-key 'normal paredit-mode-map (kbd "<leader>fd") 'paredit-forward-down)
+  (evil-define-key 'insert paredit-mode-map (kbd "RET") 'paredit-newline)
+  (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-newline)
+  (evil-define-key 'normal racket-repl-mode (kbd "C-h") 'evil-window-left)  
+  (evil-define-key 'insert racket-repl-mode (kbd "C-h") 'evil-window-left)  
+  (evil-define-key 'insert paredit-mode-map (kbd "C-h") 'paredit-backward-delete))
+
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode))
+
+
+(use-package cmuscheme
+  :ensure nil               ;; т.к. это встроенный пакет Emacs
+  :commands (run-scheme)    ;; автозагрузка при вызове M-x run-scheme
+  :config
+  ;; Указываем, что основная программа для Scheme — это MIT Scheme
+  (setq scheme-program-name "mit-scheme")
+
+  ;; Опционально: если хотите, чтобы при M-x run-scheme создавался
+  ;; буфер с именем "MIT Scheme" вместо "*scheme*":
+  (setq cmuscheme-name "MIT Scheme"))
+
+
+;; (use-package multiple-cursors
+;;   :config
+;;   (global-unset-key (kbd "M-<down-mouse-1>"))
+;;   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+;;   (evil-define-key 'normal 'global (kbd "C-n") 'mc/mark-next-like-this)
+;;   (setq mc/always-run-for-all t)
+;;   ;; (evil-define-key 'normal 'global (kbd "C-n") 'mc/mark-all-like-this)
+;;   )
+
+(use-package evil-mc
+  :after evil
+  :config
+  (global-evil-mc-mode 1)
+  ;; (evil-define-key 'normal evil-mc-key-map (kbd "C-n") #'evil-mc-make-and-goto-next-cursor)
+  (with-eval-after-load 'evil-mc
+    ;; Привязываем C-n к команде evil-mc-make-and-goto-next-match в normal state
+    (evil-define-key 'normal evil-mc-key-map (kbd "C-n") #'evil-mc-make-and-goto-next-match)
+    ;; (опционально) Аналогично для visual state
+    (evil-define-key 'visual evil-mc-key-map (kbd "C-n") #'evil-mc-make-and-goto-next-match)
+    (evil-define-key 'normal evil-mc-key-map (kbd "<leader>cl") #'evil-mc-undo-all-cursors)
+    (evil-define-key 'visual evil-mc-key-map (kbd "<leader>cl") #'evil-mc-undo-all-cursors)
+    ))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -428,10 +493,15 @@
    '(5x5-mode bbdb-mode biblio-selection-mode blackbox-mode bookmark-edit-annotation-mode browse-kill-ring-mode bs-mode bubbles-mode bzr-annotate-mode calc-mode cfw:calendar-mode completion-list-mode custom-theme-choose-mode delicious-search-mode desktop-menu-blist-mode desktop-menu-mode dun-mode dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode efs-mode Electric-buffer-menu-mode emms-browser-mode emms-mark-mode emms-metaplaylist-mode emms-playlist-mode ess-help-mode etags-select-mode fj-mode gc-issues-mode gdb-breakpoints-mode gdb-disassembly-mode gdb-frames-mode gdb-locals-mode gdb-memory-mode gdb-registers-mode gdb-threads-mode gist-list-mode git-rebase-mode gomoku-mode google-maps-static-mode jde-javadoc-checker-report-mode magit-cherry-mode magit-diff-mode magit-log-mode magit-log-select-mode magit-popup-mode magit-popup-sequence-mode magit-process-mode magit-reflog-mode magit-refs-mode magit-revision-mode magit-stash-mode magit-stashes-mode magit-status-mode mh-folder-mode monky-mode mpuz-mode mu4e-main-mode mu4e-headers-mode mu4e-view-mode notmuch-hello-mode notmuch-search-mode notmuch-show-mode notmuch-tree-mode org-agenda-mode pdf-outline-buffer-mode pdf-view-mode proced-mode rcirc-mode rebase-mode recentf-dialog-mode sldb-mode slime-inspector-mode slime-thread-control-mode slime-xref-mode snake-mode solitaire-mode sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode tetris-mode tla-annotate-mode tla-archive-list-mode tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode tla-browse-mode tla-category-list-mode tla-changelog-mode tla-follow-symlinks-mode tla-inventory-file-mode tla-inventory-mode tla-lint-mode tla-logs-mode tla-revision-list-mode tla-revlog-mode tla-tree-lint-mode tla-version-list-mode twittering-mode urlview-mode vc-annotate-mode vc-dir-mode vc-hg-log-view-mode vc-svn-log-view-mode vm-mode vm-summary-mode w3m-mode wab-compilation-mode xgit-annotate-mode xgit-changelog-mode xgit-diff-mode xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(which-key dap-mode gruvbox gruvbox-theme true vterm zenburn-theme wfnames vimish-fold vertico undo-tree undo-fu tree-sitter-langs quelpa projectile pdf-tools page-break-lines org-super-agenda org-roam org-modern org-bullets orderless nerd-icons multiple-cursors modus-themes minimap math-preview marginalia lorem-ipsum latex-preview-pane key-chord jetbrains-darcula-theme flycheck expand-region evil-collection epc embark-consult elpy doom-themes doom dashboard darcula-theme cdlatex catppuccin-theme blacken avy auto-complete auctex async all-the-icons ace-jump-mode aas)))
+   '(evil-mc cape avy racket-mode which-key dap-mode gruvbox gruvbox-theme true vterm zenburn-theme wfnames vimish-fold undo-tree undo-fu tree-sitter-langs quelpa pdf-tools page-break-lines org-super-agenda org-roam org-modern org-bullets orderless nerd-icons modus-themes minimap math-preview marginalia lorem-ipsum latex-preview-pane key-chord jetbrains-darcula-theme expand-region evil-collection epc elpy doom-themes doom dashboard darcula-theme cdlatex catppuccin-theme blacken auto-complete auctex async all-the-icons ace-jump-mode aas)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Загрузка внешнего файла конфигурации (если требуется)
+;; (org-babel-load-file (expand-file-name "config.org" user-emacs-directory))
+(load-file "~/dotfiles/emacs/.emacs.d/config.el")

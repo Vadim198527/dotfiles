@@ -12,7 +12,7 @@ return {
 		config = function()
 			-- disable netrw at the very start of your init.lua
 			require("nvim-tree").setup({
-                hijack_cursor = true,
+				hijack_cursor = true,
 				-- Заставляет nvim-tree учитывать директорию текущего буфера
 				respect_buf_cwd = true,
 
@@ -30,8 +30,13 @@ return {
 					--     ignore_list = {},
 					-- },
 				},
+				view = {
+					centralize_selection = true,
+				},
+
 				renderer = {
 					root_folder_label = false,
+					indent_width = 1,
 				},
 			})
 

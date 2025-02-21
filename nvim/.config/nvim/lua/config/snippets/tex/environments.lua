@@ -150,4 +150,36 @@ return {
             end,
         }
     ),
+    s(
+        { trig = "equ", dscr = "equation" },
+        fmta(
+            [[
+                \begin{equation}
+                    <>
+                \end{equation}
+            ]],
+            { i(1) }
+        ),
+        {
+            condition = function()
+                return not in_mathzone()
+            end,
+        }
+    ),
+    s(
+        { trig = "cas", dscr = "cases" },
+        fmta(
+            [[
+                \begin{cases}
+                    <>
+                \end{cases}
+            ]],
+            { i(1) }
+        ),
+        {
+            condition = function()
+                return in_mathzone()
+            end,
+        }
+    ),
 }

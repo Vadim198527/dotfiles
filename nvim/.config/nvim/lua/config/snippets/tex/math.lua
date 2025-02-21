@@ -82,6 +82,11 @@ return {
             return in_mathzone()
         end,
     }),
+    s({ trig = "=>", snippetType = "autosnippet" }, { t("\\implies ") }, {
+        condition = function()
+            return in_mathzone()
+        end,
+    }),
     s({ trig = "AA", snippetType = "autosnippet" }, { t("\\forall ") }, { condition = in_mathzone }),
     s({ trig = "EE", snippetType = "autosnippet" }, { t("\\exists ") }, { condition = in_mathzone }),
     s({ trig = "or", snippetType = "autosnippet" }, { t("\\lor ") }, { condition = in_mathzone }),

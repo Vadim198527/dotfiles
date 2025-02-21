@@ -6,7 +6,8 @@
 ;; Maintainer: Yoav Marco <yoavm448@gmail.com>
 ;; Created: April 17, 2020
 ;; Modified: February 20, 2022
-;; Version: 1.2
+;; Package-Version: 20230303.2214
+;; Package-Revision: ddc2b7a58a22
 ;; Keywords: abbrev, tools
 ;; Homepage: https://github.com/ymarco/auto-activating-snippets
 ;; Package-Requires: ((emacs "26.3"))

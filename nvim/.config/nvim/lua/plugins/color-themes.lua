@@ -18,7 +18,7 @@ return {
                     },
                 },
             })
-            -- vim.cmd.colorscheme("catppuccin-mocha")
+            vim.cmd.colorscheme("catppuccin-mocha")
             -- vim.cmd.colorscheme("catppuccin-latte")
         end,
     },
@@ -34,7 +34,7 @@ return {
             vim.g.gruvbox_gruvbox_material_enable_bold = true
             vim.g.gruvbox_material_visual = "green background"
             -- vim.g.gruvbox_material_visual = "reverse"
-            vim.cmd.colorscheme("gruvbox-material")
+            -- vim.cmd.colorscheme("gruvbox-material")
         end,
     },
     {

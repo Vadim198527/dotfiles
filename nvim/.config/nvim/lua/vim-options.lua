@@ -23,17 +23,44 @@ vim.opt.termguicolors = true
 vim.opt.compatible = false
 vim.opt.ignorecase = true -- Игнорировать регистр при поиске
 vim.opt.smartcase = true
-vim.opt.clipboard = "unnamedplus"
-vim.opt.autoindent = false
-vim.opt.smartindent = false
-vim.opt.cindent = false
-vim.opt.softtabstop = 4
+-- vim.opt.clipboard = "unnamedplus"
 
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.cindent = true
+vim.opt.softtabstop = 4
+vim.opt.autochdir = true
+vim.opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
+
+vim.cmd([[
+set undofile
+set undodir=~/.config/nvim/undo
+set undolevels=1000
+]])
+
+vim.cmd([[
+	let g:python_indent = {}
+	let g:python_indent.disable_parentheses_indenting = v:false
+	let g:python_indent.closed_paren_align_last_line = v:false
+	let g:python_indent.searchpair_timeout = 150
+	let g:python_indent.continue = 'shiftwidth()'
+	let g:python_indent.open_paren = 'shiftwidth()'
+	let g:python_indent.nested_paren = 'shiftwidth()'
+]])
+-- vim.opt.guicursor = "n-v-c:block-Cursor,i:block-Cursor,i:blinkon0"
+-- vim.cmd(":set listchars=eol:↲")
+
+-- Добавьте это в init.lua
+vim.filetype.add({
+    extension = {
+        rkt = "racket",
+    },
+})
 -- Делаем так, чтобы нажатие o не создавало строку с комментарием
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		vim.opt.formatoptions:remove("o")
-	end,
+    callback = function()
+        vim.opt.formatoptions:remove("o")
+    end,
 })
 
 -- vim.opt.formatoptions:remove('o')
@@ -44,18 +71,28 @@ vim.cmd(":set foldcolumn=0")
 vim.cmd(":set foldlevel=99")
 -- Highlight the current line
 vim.opt.cursorline = true
--- vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 -- Disable preview window in comple
 vim.opt.completeopt:remove("preview")
--- -- Автоматическое сохранение сессии при выходе
--- keymap("n", "<C-;>", "zz", { noremap = true })
--- keymap("n", "\27[28;6;39~", "zz", { noremap = true })
-keymap("n", "<F5>", "zz", { noremap = true })
+keymap("v", "<leader>dl", '"_d', { noremap = true, silent = true })
+keymap("n", "<C-c>", '"+y', { noremap = true, silent = true })
+keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
+keymap("v", "<C-v>", '"+p', { noremap = true, silent = true })
+keymap("n", "<leader>p", '"+p', { noremap = true, silent = true })
+keymap("v", "<leader>p", '"+p', { noremap = true, silent = true })
+keymap("n", "<leader>cp", '"+y', { noremap = true, silent = true })
+keymap("v", "<leader>cp", '"+y', { noremap = true, silent = true })
+
+keymap("n", "<F5>", function()
+    vim.cmd("normal! zz")
+    vim.cmd("normal! 6")
+end, { noremap = true })
+keymap("i", "<F5>", function()
+    vim.cmd("normal! zz")
+    vim.cmd("normal! 6")
+end, { noremap = true })
 keymap("n", "<C-p>", "o<Left><Right><Esc>", { noremap = true })
--- Перемещение текущей строки в центр экрана при нажатии Ctrl + l в режиме вставки
-keymap("i", "<C-;>", "<C-o>zz", { noremap = true, silent = true })
-keymap("i", "<F5>", "<C-o>zz", { noremap = true, silent = true })
 -- keymap("i", "\27[28;6;39~", "<C-o>zz", { noremap = true, silent = true })
 keymap("n", "<C-a>", "^", { noremap = true, silent = true })
 keymap("n", "<C-e>", "$", { noremap = true })
@@ -72,55 +109,78 @@ keymap("c", "<C-e>", "<End>", { noremap = true })
 --
 keymap("n", "<C-h>", ":wincmd h<CR>", { noremap = true, silent = true })
 keymap("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
-keymap("n", "<C-l>", ":wincmd l<CR>", { noremap = true, silent = true })
-keymap("n", "<C-j>", ":wincmd j<CR>", { noremap = true, silent = true })
--- Копирование выделенного текста в системный буфер обмена с помощью Cmd+C
+
 keymap("v", "<D-c>", '"+y', { noremap = true, silent = true })
+keymap("x", "y", "y`>", { silent = true })
 -- keymap("v", "J", ":m '>+1<CR>gv=gv")
--- keymap("v", "K", ":m '>-2<CR>gv=gv")
-vim.cmd(':xnoremap <leader>p "_dP')
+-- keymap("v", "K", ":m '>-2<CR>Pgv=gv")
+-- vim.cmd(':xnoremap <leader>p "_dP')
 vim.cmd(":autocmd BufWritePre *.vim :normal gg=G``")
+vim.cmd([[autocmd TermOpen * startinsert | terminal]])
 
 function RunCode()
-	-- Сохраняем текущий файл
-	vim.cmd("w")
-	-- Получаем тип файла
-	local filetype = vim.bo.filetype
+    -- Сохраняем текущий файл
+    vim.cmd("w")
+    -- Получаем тип файла
+    local filetype = vim.bo.filetype
 
-	-- Таблица соответствий типов файлов и команд для запуска
-	local run_cmds = {
-		python = "!python3 %",
-		lua = "!lua %",
-		-- Вы можете добавить другие языки по необходимости
-		javascript = "!node %",
-	}
+    -- Таблица соответствий типов файлов и команд для запуска
+    local run_cmds = {
+        python = "!python3 %",
+        lua = "!lua %",
+        -- Вы можете добавить другие языки по необходимости
+        javascript = "!node %",
+        -- c = "botright 15split | terminal gcc -o a.out % && ./a.out",
+    }
 
-	-- Получаем команду для текущего типа файла
-	local cmd = run_cmds[filetype]
+    -- Получаем команду для текущего типа файла
+    local cmd = run_cmds[filetype]
 
-	if cmd then
-		-- Выполняем команду
-		vim.cmd(cmd)
-	else
-		-- Выводим сообщение, если тип файла не поддерживается
-		print("Невозможно выполнить этот тип файла: " .. filetype)
-	end
+    if cmd then
+        -- Выполняем команду
+        vim.cmd(cmd)
+    else
+        -- Выводим сообщение, если тип файла не поддерживается
+        print("Невозможно выполнить этот тип файла: " .. filetype)
+    end
 end
 
 keymap("n", "<leader>rc", ":lua RunCode()<CR>", { noremap = true, silent = true })
+local function olan()
+    vim.cmd("write")
+    local bufList = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufList) do
+        local bufName = vim.api.nvim_buf_get_name(buf)
+        if string.match(bufName, "^term://") ~= nil then
+            vim.api.nvim_buf_delete(buf, { force = true })
+        end
+    end
+    -- vim.cmd("botright 15split | terminal gcc -o a.out % && ./a.out")
+    vim.cmd(
+        "silent !tmux send-keys -t .1 'clear && gcc -o a.out "
+        .. vim.fn.expand("%")
+        .. " && ./a.out' C-m && tmux select-pane -t .1"
+    )
+end
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "c",
+    callback = function()
+        vim.keymap.set("n", "<leader>rc", olan, { buffer = true })
+    end,
+})
 -- Глобальная переменная для отслеживания состояния раскладки
 _G.is_russian = false
 
 -- Функция для переключения раскладки
 function _G.toggle_keymap()
-	if _G.is_russian then
-		vim.o.keymap = ""
-		_G.is_russian = false
-	else
-		vim.o.keymap = "russian-jcukenwin"
-		_G.is_russian = true
-	end
+    if _G.is_russian then
+        vim.o.keymap = ""
+        _G.is_russian = false
+    else
+        vim.o.keymap = "russian-jcukenwin"
+        _G.is_russian = true
+    end
 end
 
 -- Настройка сочетаний клавиш
@@ -130,7 +190,8 @@ keymap("i", "<C-Space>", "<C-o>:lua toggle_keymap()<CR>", { noremap = true, sile
 keymap("i", "<Plug>luasnip-expand-snippet", '<cmd>lua require("luasnip").expand()<CR>', { silent = true })
 keymap("i", "<Plug>luasnip-jump-next", '<cmd>lua require("luasnip").jump(1)<CR>', { silent = true })
 
-keymap("i", "<C-f>", "<Tab>", { noremap = true, silent = true })
+-- keymap("i", "<C-f>", "<Tab>", { noremap = true, silent = true })
+keymap("i", "<C-l>", "<Tab>", { noremap = true, silent = true })
 
 -- Отмена последнего действия при нажатии Ctrl + / в режиме вставки
 keymap("i", "<C-/>", "<C-o>u", { noremap = true, silent = true })
@@ -143,18 +204,22 @@ keymap("n", "_", ":resize -1<CR>")
 keymap("n", "+", ":resize +1<CR>")
 keymap("n", "<leader>sv", ":w<CR>:source %<CR>")
 keymap("v", "<leader>sv", ":<c-u>w<CR>:source %<CR>")
-keymap("i", "<C-j>", "<Left>", { desc = "Move cursor left in insert mode" })
-keymap("c", "<C-j>", "<Left>", { desc = "Move cursor left in insert mode" })
-keymap("i", "<C-l>", "<Right>", { desc = "Move cursor right in insert mode" })
-keymap("c", "<C-l>", "<Right>", { desc = "Move cursor right in insert mode" })
+keymap("i", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in insert mode" })
+keymap("c", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in insert mode" })
+keymap("i", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
+keymap("c", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
+keymap("c", "<leader><C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
 keymap("i", "<C-CR>", "<esc>o", { noremap = true })
-keymap("i", "<C-k>", "<esc>o", { noremap = true })
+-- keymap("i", "<C-k>", "<esc>o", { noremap = true })
+keymap("i", "<C-j>", "<esc>o", { noremap = true })
+keymap("i", "<C-k>", "<CR>", { noremap = true })
 keymap("n", "<leader>ni", ":Neorg index<CR>", { desc = "Move cursor right in insert mode" })
 keymap("n", "<leader>R", ":set relativenumber!<CR>", { desc = "Toggle relativenumber" })
 keymap("n", "<leader>N", ":set number!<CR>", { desc = "Toggle number" })
 keymap("n", "<leader>T", ":lua MiniFiles.open()<cr>", { desc = "Open Mini.files" })
 keymap("n", "<leader>sa", "ggVG", { desc = "Select All" })
 keymap("n", "<leader>ya", ":%y+<CR>", { desc = "Yank All" })
+keymap("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 vim.cmd([[
 nnoremap <leader>F :call FoldColumnd()<CR>
 
@@ -166,6 +231,7 @@ function! FoldColumnd()
     endif
 endfunction
 ]])
+
 vim.cmd([[
 nnoremap <leader>q :call QuickFixToggle()<cr>
 
@@ -182,10 +248,10 @@ endfunction
 ]])
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = "IncSearch", -- или любая другая группа подсветки
-			timeout = 150, -- длительность подсветки в миллисекундах
-		})
-	end,
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "IncSearch", -- или любая другая группа подсветки
+            timeout = 150, -- длительность подсветки в миллисекундах
+        })
+    end,
 })
