@@ -13,4 +13,5 @@ return {
 	config = function()
 		-- Конфигурация после загрузки (если нужна)
 	end,
+    -- ollllla
 }
