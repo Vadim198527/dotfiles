@@ -110,7 +110,6 @@ return {
 				vim.keymap.set("n", "<leader>?", "<Plug>(sexp_convolute)", { buffer = true })
 				vim.keymap.set("n", "<leader>rf", "<Plug>(sexp_raise_list)", { buffer = true })
 				vim.keymap.set("n", "<leader>re", "<Plug>(sexp_raise_element)", { buffer = true })
-                
 			end
 
 			-- Автоматически применяем маппинги для нужных типов файлов

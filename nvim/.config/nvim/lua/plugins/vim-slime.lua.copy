@@ -1,0 +1,13 @@
+-- В твоем файле конфигурации lazy.nvim
+return {
+  -- ... другие плагины
+
+  {
+    "jpalardy/vim-slime",
+    config = function()
+      -- Конфигурация vim-slime будет здесь (см. Шаг 2)
+    end,
+  },
+
+  -- ...
+}

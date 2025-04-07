@@ -4,7 +4,7 @@ return {
 	keys = {
 		-- Will use Telescope if installed or a vim.ui.select picker otherwise
 		{ "<leader>sl", "<cmd>SessionSearch<CR>", desc = "Session search" },
-		{ "<leader>ws", "<cmd>SessionSave<CR>", desc = "Save session" },
+		{ "<leader>sw", "<cmd>SessionSave<CR>", desc = "Save session" },
 		{ "<leader>wa", "<cmd>SessionToggleAutoSave<CR>", desc = "Toggle autosave" },
 	},
 	---enables autocomplete for opts

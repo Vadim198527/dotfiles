@@ -10,22 +10,22 @@ return {
                     F = ai.gen_spec.treesitter({a = '@function.outer', i = '@function.inner'})
                 },
             })
-            -- require("mini.surround").setup({
-            --     custom_surroundings = nil,
-            --     mappings = {
-            --         add = "ys",
-            --         delete = "ds",
-            --         find = "",
-            --         find_left = "",
-            --         highlight = "",
-            --         replace = "cs",
-            --         update_n_lines = "",
-            --
-            --         -- Add this only if you don't want to use extended mappings
-            --         suffix_last = "l",
-            --         suffix_next = "n",
-            --     },
-            -- })
+            require("mini.surround").setup({
+                custom_surroundings = nil,
+                mappings = {
+                    add = ",ys",
+                    delete = ",ds",
+                    find = "",
+                    find_left = "",
+                    highlight = "",
+                    replace = ",cs",
+                    update_n_lines = "",
+
+                    -- Add this only if you don't want to use extended mappings
+                    suffix_last = "l",
+                    suffix_next = "n",
+                },
+            })
             require("mini.operators").setup({})
             -- require("mini.pairs").setup()
             -- local map_bs = function(lhs, rhs)

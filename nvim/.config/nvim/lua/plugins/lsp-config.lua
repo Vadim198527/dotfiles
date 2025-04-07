@@ -121,6 +121,7 @@ return {
 				-- 	underline = true,
 				-- })
 
+
 				vim.diagnostic.config({
 					virtual_text = true, -- Отключаем виртуальный текст справа
 					signs = true, -- Оставляем значки слева

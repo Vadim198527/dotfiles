@@ -23,7 +23,7 @@ return {
 			pattern = "norg",
 			callback = function()
 				vim.keymap.set("n", "<S-Right>", "<Plug>(neorg.qol.todo-items.todo.task-cycle)", { buffer = true })
-				vim.keymap.set("n", "<localleader>tc", ":Neorg toc right<CR>", { buffer = true })
+				-- vim.keymap.set("n", "<localleader>tc", ":Neorg toc right<CR>", { buffer = true })
 				vim.keymap.set("i", "<C-.>", "<Plug>(neorg.promo.promote)", { buffer = true })
 				vim.keymap.set("i", "<C-,>", "<Plug>(neorg.promo.demote)", { buffer = true })
 				vim.keymap.set("n", "<C-.>", "<Plug>(neorg.promo.promote)", { buffer = true })

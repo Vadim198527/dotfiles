@@ -1,15 +1,16 @@
+-- В твоем файле конфигурации lazy.nvim
 return {
-	{
-		{
-			"mg979/vim-visual-multi",
-			config = function()
-				-- Функция для удобного назначения клавиш
-				vim.g.VM_mouse_mappings = 1
-				local opts = { noremap = true, silent = true }
-				vim.api.nvim_set_keymap("n", "<M-LeftMouse>", "<Plug>(VM-Mouse-Cursor)", opts)
-				vim.api.nvim_set_keymap("n", "<M-RightMouse>", "<Plug>(VM-Mouse-Word)", opts)
-				vim.api.nvim_set_keymap("n", "<M-C-RightMouse>", "<Plug>(VM-Mouse-Column)", opts)
-			end,
-		},
-	},
+	"mg979/vim-visual-multi",
+	init = function()
+		vim.cmd([[let g:VM_leader = {'default': '\\'}]])
+		vim.cmd([[let g:VM_maps = {}]])
+		-- vim.cmd([[let g:VM_maps['Add Cursor Down'] = '<M-j>']])
+		-- vim.cmd([[let g:VM_maps['Add Cursor Up'] = '<M-k>']])
+		vim.cmd([[let g:VM_maps['Select All'] = '<leader>ma']])
+        vim.cmd([[let g:VM_maps['Start Regex Search'] = '<leader>mr']])
+		vim.g.VM_mouse_mappings = 1
+	end,
+	config = function()
+		-- Конфигурация после загрузки (если нужна)
+	end,
 }

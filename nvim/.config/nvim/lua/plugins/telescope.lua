@@ -71,7 +71,7 @@ return {
 			-- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>cs", builtin.colorscheme, { desc = "Change color scheme" })
-			vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" })
+			-- vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" })
 			vim.keymap.set("n", "<leader>rg", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "Key maps" })
 			vim.keymap.set(
@@ -80,7 +80,7 @@ return {
 				builtin.lsp_document_symbols,
 				{ desc = "Show all buffer lexical entities" }
 			)
-			vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
+			-- vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
 			-- vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "Key maps" })
 			vim.api.nvim_set_keymap(
 				"n",

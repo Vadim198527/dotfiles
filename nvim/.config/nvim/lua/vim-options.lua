@@ -2,6 +2,7 @@ local keymap = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.o.timeout = true
+
 vim.o.timeoutlen = 6000
 vim.opt.backspace = "2"
 vim.opt.showcmd = true
@@ -35,7 +36,7 @@ vim.opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 vim.cmd([[
 set undofile
 set undodir=~/.config/nvim/undo
-set undolevels=1000
+set undolevels=500
 ]])
 
 vim.cmd([[
@@ -75,14 +76,17 @@ vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,termina
 -- Disable preview window in comple
 vim.opt.completeopt:remove("preview")
 keymap("v", "<leader>dl", '"_d', { noremap = true, silent = true })
-keymap("n", "<C-c>", '"+y', { noremap = true, silent = true })
-keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
-keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
-keymap("v", "<C-v>", '"+p', { noremap = true, silent = true })
+-- keymap("n", "<C-c>", '"+y', { noremap = true, silent = true })
+-- keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+-- keymap("n", "<C-v>", '"+p', { noremap = true, silent = true })
+-- keymap("v", "<C-v>", '"+p', { noremap = true, silent = true })
 keymap("n", "<leader>p", '"+p', { noremap = true, silent = true })
 keymap("v", "<leader>p", '"+p', { noremap = true, silent = true })
-keymap("n", "<leader>cp", '"+y', { noremap = true, silent = true })
-keymap("v", "<leader>cp", '"+y', { noremap = true, silent = true })
+keymap("n", "<leader>y", '"+y', { noremap = true, silent = true })
+keymap("v", "<leader>y", '"+y', { noremap = true, silent = true })
+
+
+keymap("n", "<leader>ch", ':AvanteClear<cr>', { noremap = true, silent = true })
 
 keymap("n", "<F5>", function()
     vim.cmd("normal! zz")
@@ -117,6 +121,9 @@ keymap("x", "y", "y`>", { silent = true })
 -- vim.cmd(':xnoremap <leader>p "_dP')
 vim.cmd(":autocmd BufWritePre *.vim :normal gg=G``")
 vim.cmd([[autocmd TermOpen * startinsert | terminal]])
+
+keymap("n", "<C-.>", "<C-a>")
+keymap("n", "<C-,>", "<C-x>")
 
 function RunCode()
     -- Сохраняем текущий файл
@@ -198,7 +205,7 @@ keymap("i", "<C-/>", "<C-o>u", { noremap = true, silent = true })
 -- keymap("i", "<C-r>", "<C-o><C-r>", { noremap = true, silent = true })
 
 keymap("n", "<leader>h", ":nohlsearch<CR>")
-
+vim.opt.hlsearch = false
 -- resize window
 keymap("n", "_", ":resize -1<CR>")
 keymap("n", "+", ":resize +1<CR>")
@@ -208,7 +215,6 @@ keymap("i", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in ins
 keymap("c", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in insert mode" })
 keymap("i", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
 keymap("c", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
-keymap("c", "<leader><C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
 keymap("i", "<C-CR>", "<esc>o", { noremap = true })
 -- keymap("i", "<C-k>", "<esc>o", { noremap = true })
 keymap("i", "<C-j>", "<esc>o", { noremap = true })
@@ -218,7 +224,7 @@ keymap("n", "<leader>R", ":set relativenumber!<CR>", { desc = "Toggle relativenu
 keymap("n", "<leader>N", ":set number!<CR>", { desc = "Toggle number" })
 keymap("n", "<leader>T", ":lua MiniFiles.open()<cr>", { desc = "Open Mini.files" })
 keymap("n", "<leader>sa", "ggVG", { desc = "Select All" })
-keymap("n", "<leader>ya", ":%y+<CR>", { desc = "Yank All" })
+keymap("n", "<leader>cp", ":%y+<CR>", { desc = "Yank All" })
 keymap("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 vim.cmd([[
 nnoremap <leader>F :call FoldColumnd()<CR>
@@ -255,3 +261,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         })
     end,
 })
+-- 1. Указываем, что цель - tmux
+vim.g.slime_target = "tmux"
+
+-- 2. Задаем конфигурацию по умолчанию, чтобы избежать вопросов
+vim.g.slime_default_config = {
+  -- Имя сокета tmux. "default" почти всегда правильно, если ты не запускал tmux с особыми флагами -L или -S.
+  socket_name = "default",
+  -- Целевая панель. "{last}" - панель, активная перед текущей. Идеально для переключения Neovim <-> REPL.
+  target_pane = "{last}"
+}
+
+-- 3. (Рекомендуется) Включаем bracketed paste для tmux
+-- Это помогает корректно вставлять многострочный код в REPL.
+vim.g.slime_bracketed_paste = 1

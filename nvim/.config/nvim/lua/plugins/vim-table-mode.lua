@@ -6,6 +6,5 @@ vim.g.table_mode_disable_tableize_mappings = 1
 return {
   "dhruvasagar/vim-table-mode",
   config = function()
-    vim.api.nvim_set_keymap("n", ",tm", ":TableModeToggle<CR>", { noremap = true, silent = true })
   end,
 }
