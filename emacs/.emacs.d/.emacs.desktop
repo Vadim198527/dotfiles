@@ -2,54 +2,54 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Apr  7 01:34:06 2025
+;; Created Wed Apr  9 13:21:02 2025
 ;; Desktop file format version 208
 ;; Emacs version 30.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26611 350 93685 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#cdd6f4") (background-color . "#1e1e2e") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . dark) (cursor-color . "#f5e0dc") (font-parameter) (environment) (last-focus-update) (frameset--id . "E5EE-3691-41AE-9ACB") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (visibility . t) (height . 49) (width . 184) (left . 2) (top . 9)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 84) (min-pixel-width . 180) (min-pixel-height-ignore . 42) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 21) (min-pixel-width-safe . 36)) hc (pixel-width . 1672) (pixel-height . 1008) (total-width . 186) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 835) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "test.md" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5379) (start . 4317)) (prev-buffers ("langImg.txt" 1 1) ("init.el" 3604 4337) ("test.md" 1 10) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 837) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "langImg.txt" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 4456) (start . 3713)))))])
+(setq desktop-saved-frameset [frameset 1 (26614 18958 865051 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#cdd6f4") (background-color . "#1e1e2e") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . dark) (cursor-color . "#f5e0dc") (font-parameter) (environment) (last-focus-update) (frameset--id . "E5EE-3691-41AE-9ACB") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (visibility . t) (height . 49) (width . 184) (left . 2) (top . 9)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 84) (min-pixel-width . 180) (min-pixel-height-ignore . 42) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 21) (min-pixel-width-safe . 36)) hc (pixel-width . 1672) (pixel-height . 1008) (total-width . 186) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 837) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5013586956521738) (buffer "test.md" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 6100) (start . 5142)) (prev-buffers ("langImg.txt" 1 1) ("init.el" 3604 4337) ("test.md" 1 10) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 835) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.4986413043478261) (buffer "langImg.txt" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5443) (start . 4270)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
 (setq regexp-search-ring '(#("clink" 0 5 (isearch-case-fold-search t)) #("clin" 0 4 (isearch-case-fold-search t)) #("grub" 0 4 (isearch-case-fold-search t)) #("gruv" 0 4 (isearch-case-fold-search t)) #("squas" 0 5 (isearch-case-fold-search t)) #("raft" 0 4 (isearch-case-fold-search t)) #("pa" 0 2 (isearch-case-fold-search t)) #("perve" 0 5 (isearch-case-fold-search t)) #("cata" 0 4 (isearch-case-fold-search t)) #("catppuccin" 0 10 (isearch-case-fold-search t)) #("several" 0 7 (isearch-case-fold-search t)) #("pro" 0 3 (isearch-case-fold-search t)) #("light" 0 5 (isearch-case-fold-search t)) #("defr" 0 4 (isearch-case-fold-search t)) #("di" 0 2 (isearch-case-fold-search t)) #("sus" 0 3 (isearch-case-fold-search t))))
-(setq register-alist '((107) (48 . #("  (set-face-attribute 'default nil :family \"Iosevka Nerd Font\" :height 170)\n" 0 35 (yank-handler (evil-yank-line-handler nil t) fontified t) 35 42 (yank-handler (evil-yank-line-handler nil t) face font-lock-builtin-face fontified t) 42 43 (yank-handler (evil-yank-line-handler nil t) fontified t) 43 62 (yank-handler (evil-yank-line-handler nil t) face font-lock-string-face fontified t) 62 63 (yank-handler (evil-yank-line-handler nil t) fontified t) 63 70 (yank-handler (evil-yank-line-handler nil t) face font-lock-builtin-face fontified t) 70 76 (yank-handler (evil-yank-line-handler nil t) fontified t)))))
+(setq register-alist '((107) (48 . "Extremely bad ")))
 (setq file-name-history '("~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/gemini_image_analysis_results.txt" "~/PycharmProjects/klllll/langImg_openrouter.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/main.py" "~/.emacs.d/init.el" "~/PycharmProjects/klllll/" "~/PycharmProjects/klllll/langImg.txt" "~/.emacs.d/init.el" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Numbers.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/Ege/main.py" "~/Project/main.c" "~/" "~/test-c/" "~/Desktop/Ege/olan.c" "~/Desktop/Ege/test.clj" "~/test-c/hello.c" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/Ege/test.scm" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/Desktop/htdp/Batch_program.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Batch_program.rkt" "~/dotfiles/emacs/.emacs.d/" "~/Desktop/htdp/Arithmetic_of_imgs.rkt" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/Desktop/htdp/Arithmetic.rkt" "~/Desktop/Ege/main.py" "~/.emacs.d/config.org" "~/Desktop/htdp/preface.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/preface.rkt" "~/.emacs.d/init.el" "/sshx:vadim@192.168.1.117:/home/vadim/bora.txt" "~/.emacs.d/init.el" "ssh vadim@192.168.1.117" "~/PycharmProjects/klllll/main.py" "~/.config/nvim/lua/vim-options.lua" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/Ege_Inf/main.py" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/docs/Org_files/info.org" "~/docs/Org_files/Todo.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/.emacs.d/init.el" "~/.emacs.d/config.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/chestnykh/docs/Org_files/test.md"
-  "test.md"
-  'markdown-mode
-  '(evil-local-mode eldoc-mode font-lock-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
-  5379
-  '(5364 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 26611 278 554694 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (2853 10))))
-
-(desktop-create-buffer 208
   "/Users/chestnykh/PycharmProjects/klllll/langImg.txt"
   "langImg.txt"
   'text-mode
-  '(font-lock-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
-  4456
-  '(582 nil)
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode display-line-numbers-mode font-lock-mode)
+  5443
+  '(4984 nil)
   nil
   nil
-  '((buffer-display-time 26611 278 554047 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (582 1))))
+  '((buffer-display-time 26614 18909 770672 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (4984 582 582 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/docs/Org_files/test.md"
+  "test.md"
+  'markdown-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode font-lock-mode eldoc-mode evil-local-mode)
+  6100
+  '(5885 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26614 18909 770671 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5885 5382 5638 5364 2853 10))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/emacs/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
-  '(eldoc-mode font-lock-mode evil-local-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode paredit-mode)
+  '(paredit-mode evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode evil-local-mode font-lock-mode eldoc-mode)
   4337
   '(4337 nil)
   nil
   nil
-  '((buffer-display-time 26611 262 858500 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((buffer-display-time 26613 11157 185928 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
   '((mark-ring (3753 3498 3790 3491 2587 2587 3970 3970 3738 3213 3213 3213 3213 3213 3735 4068))))
 

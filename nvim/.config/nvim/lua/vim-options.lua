@@ -48,8 +48,6 @@ vim.cmd([[
 	let g:python_indent.open_paren = 'shiftwidth()'
 	let g:python_indent.nested_paren = 'shiftwidth()'
 ]])
--- vim.opt.guicursor = "n-v-c:block-Cursor,i:block-Cursor,i:blinkon0"
--- vim.cmd(":set listchars=eol:↲")
 
 -- Добавьте это в init.lua
 vim.filetype.add({
@@ -85,8 +83,7 @@ keymap("v", "<leader>p", '"+p', { noremap = true, silent = true })
 keymap("n", "<leader>y", '"+y', { noremap = true, silent = true })
 keymap("v", "<leader>y", '"+y', { noremap = true, silent = true })
 
-
-keymap("n", "<leader>ch", ':AvanteClear<cr>', { noremap = true, silent = true })
+keymap("n", "<leader>ch", ":AvanteClear<cr>", { noremap = true, silent = true })
 
 keymap("n", "<F5>", function()
     vim.cmd("normal! zz")
@@ -266,12 +263,28 @@ vim.g.slime_target = "tmux"
 
 -- 2. Задаем конфигурацию по умолчанию, чтобы избежать вопросов
 vim.g.slime_default_config = {
-  -- Имя сокета tmux. "default" почти всегда правильно, если ты не запускал tmux с особыми флагами -L или -S.
-  socket_name = "default",
-  -- Целевая панель. "{last}" - панель, активная перед текущей. Идеально для переключения Neovim <-> REPL.
-  target_pane = "{last}"
+    -- Имя сокета tmux. "default" почти всегда правильно, если ты не запускал tmux с особыми флагами -L или -S.
+    socket_name = "default",
+    -- Целевая панель. "{last}" - панель, активная перед текущей. Идеально для переключения Neovim <-> REPL.
+    target_pane = "{last}",
 }
 
 -- 3. (Рекомендуется) Включаем bracketed paste для tmux
 -- Это помогает корректно вставлять многострочный код в REPL.
 vim.g.slime_bracketed_paste = 1
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+        -- Вариант А: Точно как основной фон
+        vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#1e1e2e" })
+
+        -- Вариант Б: Чуть темнее (Mantle)
+        -- vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#181825" })
+
+        -- Опционально: Настроить цвет выделения
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#313244" }) -- Surface0
+        -- *** УСТАНАВЛИВАЕМ ЦВЕТ РАМКИ ***
+        -- Используем цвет 'Crust' как цвет переднего плана (fg) для рамки
+        vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#6c7086" })
+    end,
+})
