@@ -2,6 +2,7 @@ local keymap = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.o.timeout = true
+-- sldkfj
 
 vim.o.timeoutlen = 6000
 vim.opt.backspace = "2"
@@ -36,7 +37,7 @@ vim.opt.matchpairs = { "(:)", "{:}", "[:]", "<:>" }
 vim.cmd([[
 set undofile
 set undodir=~/.config/nvim/undo
-set undolevels=500
+set undolevels=400
 ]])
 
 vim.cmd([[

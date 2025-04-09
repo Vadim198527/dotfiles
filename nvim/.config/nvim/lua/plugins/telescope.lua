@@ -65,13 +65,15 @@ return {
 			})
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Open file" })
-			vim.keymap.set("n", "<leader>.", builtin.find_files, { desc = "Open file" })
+			-- vim.keymap.set("n", "<leader>.", builtin.find_files, { desc = "Open file" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fine grep" })
 			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "Old files" })
 			-- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Telescope buffers" })
 			vim.keymap.set("n", "<leader>cs", builtin.colorscheme, { desc = "Change color scheme" })
-			-- vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" })
+			vim.keymap.set("n", "<leader>lsd", builtin.lsp_document_symbols, { desc = "Lsp Document's symbols" })
+			vim.keymap.set("n", "<leader>lsw", builtin.lsp_workspace_symbols, { desc = "Lsp Workspase's symbols" })
+			-- vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" }d
 			vim.keymap.set("n", "<leader>rg", builtin.registers, { desc = "Registers" })
 			vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "Key maps" })
 			vim.keymap.set(
