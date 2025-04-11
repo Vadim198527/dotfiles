@@ -32,7 +32,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		-- dependencies = { "saghen/blink.cmp" },
+		dependencies = { "saghen/blink.cmp" },
 
 		-- example using `opts` for defining servers
 		opts = {

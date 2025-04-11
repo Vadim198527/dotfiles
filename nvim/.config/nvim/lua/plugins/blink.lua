@@ -29,35 +29,51 @@ return {
         -- C-k: Toggle signature help (if signature.enabled = true)
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        -- snippets = { preset = "luasnip" },
+        snippets = {
+            preset = "luasnip",
+            -- Function to use when expanding LSP provided snippets
+            expand = function(snippet)
+                vim.snippet.expand(snippet)
+            end,
+            -- Function to use when checking if a snippet is active
+            active = function(filter)
+                return vim.snippet.active(filter)
+            end,
+            -- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
+            jump = function(direction)
+                vim.snippet.jump(direction)
+            end,
+        },
+
         keymap = {
-            preset = "none", -- Начнем с чистого листа для ясности
-            ["<Tab>"] = {
-                function(cmp)
-                    local luasnip = require("luasnip")
-                    if luasnip.expand_or_jumpable() then
-                        vim.schedule(function()
-                            luasnip.expand_or_jump()
-                        end)
-                        cmp.hide()
-                        -- !! Возвращаем {}, чтобы blink.cmp понял, что действие обработано !!
-                        -- !! и не выполнял fallback !!
-                        return {}
-                    elseif cmp.visible() then
-                        cmp.select_next({ behavior = cmp.SelectBehavior.Select })
-                        -- !! Тоже возвращаем {}, чтобы предотвратить fallback !!
-                        return {}
-                    else
-                        -- Возвращаем 'fallback' только если мы ДЕЙСТВИТЕЛЬНО хотим вставить Tab
-                        return "fallback"
-                    end
-                end,
-                -- Fallback все еще здесь на случай, если функция вернет именно 'fallback'
-                "fallback",
-            },
+            preset = "super-tab", -- Начнем с чистого листа для ясности
+            -- ["<Tab>"] = {
+            --     function(cmp)
+            --         local luasnip = require("luasnip")
+            --         if luasnip.expand_or_jumpable() then
+            --             vim.schedule(function()
+            --                 luasnip.expand_or_jump()
+            --             end)
+            --             cmp.hide()
+            --             -- !! Возвращаем {}, чтобы blink.cmp понял, что действие обработано !!
+            --             -- !! и не выполнял fallback !!
+            --             return {}
+            --         elseif cmp.visible() then
+            --             cmp.select_next({ behavior = cmp.SelectBehavior.Select })
+            --             -- !! Тоже возвращаем {}, чтобы предотвратить fallback !!
+            --             return {}
+            --         else
+            --             -- Возвращаем 'fallback' только если мы ДЕЙСТВИТЕЛЬНО хотим вставить Tab
+            --             return "fallback"
+            --         end
+            --     end,
+            --     -- Fallback все еще здесь на случай, если функция вернет именно 'fallback'
+            --     "fallback",
+            -- },
             -- preset = "none",
             -- ["<CR>"] = { "accept", "fallback" },
             -- ["<C-Space>"] = {},
+            ["<C-space>"] = {},
             ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
             ["<C-n>"] = { "select_next", "fallback" },
             ["<C-p>"] = { "select_prev", "fallback" },
@@ -76,7 +92,7 @@ return {
                 window = {
                     border = "rounded",
                     winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder",
-                }
+                },
             },
             list = { selection = { preselect = false, auto_insert = true } },
             menu = {
@@ -98,16 +114,16 @@ return {
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-            default = { "lsp", "path", "buffer" },
+            default = { "lsp", "path", "buffer", "snippets" },
             -- Добавляем эту функцию для фильтрации
-            transform_items = function(_, items)
-                -- Загружаем типы, если еще не загружены
-                local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-                -- Возвращаем только те элементы, у которых kind НЕ Snippet
-                return vim.tbl_filter(function(item)
-                    return item.kind ~= CompletionItemKind.Snippet
-                end, items)
-            end,
+            -- transform_items = function(_, items)
+            --     -- Загружаем типы, если еще не загружены
+            --     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+            --     -- Возвращаем только те элементы, у которых kind НЕ Snippet
+            --     return vim.tbl_filter(function(item)
+            --         return item.kind ~= CompletionItemKind.Snippet
+            --     end, items)
+            -- end,
             min_keyword_length = function(ctx)
                 -- ctx - это объект контекста, который передает blink.cmp
                 -- Он содержит информацию о текущем состоянии, включая режим
@@ -117,7 +133,7 @@ return {
                     return 0
                 else
                     -- В других режимах (например, 'insert') запускать после 3 символов
-                    return 3
+                    return 2
                 end
             end,
         },

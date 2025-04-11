@@ -70,7 +70,7 @@ return {
 					"scheme",
 					"clojure",
 					"racket",
-					"org",
+					-- "org",
 				},
 				autoinstall = true,
 				-- ignore_install = { "org" },
