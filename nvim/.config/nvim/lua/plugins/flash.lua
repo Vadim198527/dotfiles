@@ -21,8 +21,8 @@ return {
 			},
 		},
 		jump = {
-			pos = "end",
-			-- pos = "start",
+			-- pos = "end",
+			pos = "start",
 		},
 	},
     -- stylua: ignore

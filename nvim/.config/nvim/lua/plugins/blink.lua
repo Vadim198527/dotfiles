@@ -30,7 +30,7 @@ return {
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         snippets = {
-            preset = "luasnip",
+            -- preset = "luasnip",
             -- Function to use when expanding LSP provided snippets
             expand = function(snippet)
                 vim.snippet.expand(snippet)
@@ -46,31 +46,14 @@ return {
         },
 
         keymap = {
-            preset = "super-tab", -- Начнем с чистого листа для ясности
-            -- ["<Tab>"] = {
-            --     function(cmp)
-            --         local luasnip = require("luasnip")
-            --         if luasnip.expand_or_jumpable() then
-            --             vim.schedule(function()
-            --                 luasnip.expand_or_jump()
-            --             end)
-            --             cmp.hide()
-            --             -- !! Возвращаем {}, чтобы blink.cmp понял, что действие обработано !!
-            --             -- !! и не выполнял fallback !!
-            --             return {}
-            --         elseif cmp.visible() then
-            --             cmp.select_next({ behavior = cmp.SelectBehavior.Select })
-            --             -- !! Тоже возвращаем {}, чтобы предотвратить fallback !!
-            --             return {}
-            --         else
-            --             -- Возвращаем 'fallback' только если мы ДЕЙСТВИТЕЛЬНО хотим вставить Tab
-            --             return "fallback"
-            --         end
-            --     end,
-            --     -- Fallback все еще здесь на случай, если функция вернет именно 'fallback'
-            --     "fallback",
-            -- },
-            -- preset = "none",
+            -- preset = "super-tab", -- Начнем с чистого листа для ясности
+            preset = "none", -- Убираем любые дефолтные пресеты
+            ["<Tab>"] = {
+                function(cmp)
+                    cmp.hide()
+                end,
+                "fallback",
+            },
             -- ["<CR>"] = { "accept", "fallback" },
             -- ["<C-Space>"] = {},
             ["<C-space>"] = {},
@@ -114,7 +97,7 @@ return {
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-            default = { "lsp", "path", "buffer", "snippets" },
+            default = { "lsp", "path", "buffer" },
             -- Добавляем эту функцию для фильтрации
             -- transform_items = function(_, items)
             --     -- Загружаем типы, если еще не загружены
@@ -200,5 +183,5 @@ return {
         --     },
         -- },
     },
-    opts_extend = { "sources.default" },
+    -- opts_extend = { "sources.default" },
 }

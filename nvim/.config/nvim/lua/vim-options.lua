@@ -71,7 +71,7 @@ vim.cmd(":set foldcolumn=0")
 vim.cmd(":set foldlevel=99")
 -- Highlight the current line
 vim.opt.cursorline = true
-vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = "blank,buffers,folds,help,tabpages,winsize,winpos,terminal"
 -- Disable preview window in comple
 vim.opt.completeopt:remove("preview")
 keymap("v", "<leader>dl", '"_d', { noremap = true, silent = true })
@@ -213,6 +213,7 @@ keymap("i", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in ins
 keymap("c", "<C-b>", "<Left>", { noremap = true, desc = "Move cursor left in insert mode" })
 keymap("i", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
 keymap("c", "<C-f>", "<Right>", { noremap = true, desc = "Move cursor right in insert mode" })
+keymap("c", "<C-g>", "<C-f>", { noremap = true, desc = "Move cursor right in insert mode" })
 keymap("i", "<C-CR>", "<esc>o", { noremap = true })
 -- keymap("i", "<C-k>", "<esc>o", { noremap = true })
 keymap("i", "<C-j>", "<esc>o", { noremap = true })
