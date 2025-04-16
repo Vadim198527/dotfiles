@@ -1,4 +1,8 @@
 local keymap = vim.keymap.set
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.o.timeout = true
@@ -219,16 +223,15 @@ keymap("i", "<C-CR>", "<esc>o", { noremap = true })
 keymap("i", "<C-j>", "<esc>o", { noremap = true })
 -- keymap("i", "<C-k>", "<CR>", { noremap = true })
 
-
 -- -- vim.api.nvim_input работает с передачей кода клавиш на более низком уровне
 -- vim.keymap.set('i', '<C-k>', function()
 --     vim.api.nvim_input(vim.api.nvim_replace_termcodes('<CR>', true, false, true))
 -- end, { noremap = true, silent = true })
 
-vim.keymap.set('i', '<C-k>', function()
-    local keys = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
-    vim.api.nvim_feedkeys(keys, 't', true)
-end, {noremap = true})
+vim.keymap.set("i", "<C-k>", function()
+    local keys = vim.api.nvim_replace_termcodes("<CR>", true, false, true)
+    vim.api.nvim_feedkeys(keys, "t", true)
+end, { noremap = true })
 
 keymap("n", "<leader>ni", ":Neorg index<CR>", { desc = "Move cursor right in insert mode" })
 keymap("n", "<leader>R", ":set relativenumber!<CR>", { desc = "Toggle relativenumber" })

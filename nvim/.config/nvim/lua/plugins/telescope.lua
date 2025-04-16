@@ -65,8 +65,11 @@ return {
                 },
             })
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Open file" })
-            -- vim.keymap.set("n", "<leader>.", builtin.find_files, { desc = "Open file" })
+            -- vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Open file" })
+            vim.keymap.set("n", "<leader>ff", function ()
+                local buf_path = vim.fn.expand("%:p:h")
+                builtin.find_files({cwd = buf_path})
+            end, { desc = "Open file" })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fine grep" })
             vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "Old files" })
             -- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
@@ -102,13 +105,13 @@ return {
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("ui-select")
             require("telescope").load_extension("file_browser")
-            vim.api.nvim_create_user_command("TelescopePath", function()
-                vim.ui.input({ prompt = "Path: ", completion = "dir" }, function(path)
-                    if path then
-                        require("telescope.builtin").find_files({ cwd = path })
-                    end
-                end)
-            end, {})
+            -- vim.api.nvim_create_user_command("TelescopePath", function()
+            --     vim.ui.input({ prompt = "Path: ", completion = "dir" }, function(path)
+            --         if path then
+            --             require("telescope.builtin").find_files({ cwd = path })
+            --         end
+            --     end)
+            -- end, {})
         end,
     },
     {

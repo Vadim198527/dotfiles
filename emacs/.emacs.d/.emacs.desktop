@@ -2,54 +2,90 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri Apr 11 23:18:35 2025
+;; Created Tue Apr 15 12:16:45 2025
 ;; Desktop file format version 208
 ;; Emacs version 30.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26617 31003 473815 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#cdd6f4") (background-color . "#1e1e2e") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . dark) (cursor-color . "#f5e0dc") (font-parameter) (environment) (last-focus-update) (frameset--id . "E5EE-3691-41AE-9ACB") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (visibility . t) (tabs (current-tab (name . "test.md") (explicit-name))) (height . 49) (width . 184) (left . 2) (top . 9)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 84) (min-pixel-width . 180) (min-pixel-height-ignore . 42) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 21) (min-pixel-width-safe . 36)) hc (pixel-width . 1672) (pixel-height . 1008) (total-width . 186) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 837) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5013586956521738) (buffer "test.md" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 589) (start . 1)) (prev-buffers ("langImg.txt" 1 199) ("test.md" 1 6539) ("init.el" 3604 4337) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 835) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.4986413043478261) (buffer "langImg.txt" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 628) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (26622 9213 12374 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-17-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#cdd6f4") (background-color . "#1e1e2e") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground) (scroll-bar-background) (display-type . color) (background-mode . dark) (cursor-color . "#f5e0dc") (font-parameter) (environment) (last-focus-update) (frameset--id . "FF03-C006-3079-AD4B") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (tabs (current-tab (name . "test.md") (explicit-name))) (lsp-ui-doc-buffer . "Unprintable entity") (visibility . t) (height . 49) (width . 184) (left . 2) (top . 9)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 8) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 84) (min-pixel-width . 180) (min-pixel-height-ignore . 42) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 21) (min-pixel-width-safe . 36)) hc (pixel-width . 1672) (pixel-height . 1008) (total-width . 186) (total-height . 48) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 835) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "test.md" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5600) (start . 5097)) (prev-buffers ("main.py" 1 286) ("init.el" 9080 9754))) (leaf (last . t) (pixel-width . 837) (pixel-height . 1008) (total-width . 93) (total-height . 48) (normal-height . 1.0) (normal-width . 0.5) (buffer "langImg.txt" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5966) (start . 5223)) (prev-buffers ("langImg.txt" 4945 5645) ("test.md" 1 1)))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
 (setq search-ring nil)
-(setq regexp-search-ring '(#("sated" 0 5 (isearch-case-fold-search t)) #("clink" 0 5 (isearch-case-fold-search t)) #("clin" 0 4 (isearch-case-fold-search t)) #("grub" 0 4 (isearch-case-fold-search t)) #("gruv" 0 4 (isearch-case-fold-search t)) #("squas" 0 5 (isearch-case-fold-search t)) #("raft" 0 4 (isearch-case-fold-search t)) #("pa" 0 2 (isearch-case-fold-search t)) #("perve" 0 5 (isearch-case-fold-search t)) #("cata" 0 4 (isearch-case-fold-search t)) #("catppuccin" 0 10 (isearch-case-fold-search t)) #("several" 0 7 (isearch-case-fold-search t)) #("pro" 0 3 (isearch-case-fold-search t)) #("light" 0 5 (isearch-case-fold-search t)) #("defr" 0 4 (isearch-case-fold-search t)) #("di" 0 2 (isearch-case-fold-search t))))
-(setq register-alist '((107) (48 . #("Second-place finisher," 0 22 (markdown-list-item ((249 289 0 3 "3. " nil (249 252 249 249 249 251 251 252))) fontified t)))))
-(setq file-name-history '("~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/gemini_image_analysis_results.txt" "~/PycharmProjects/klllll/langImg_openrouter.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/main.py" "~/.emacs.d/init.el" "~/PycharmProjects/klllll/" "~/PycharmProjects/klllll/langImg.txt" "~/.emacs.d/init.el" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Numbers.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/Ege/main.py" "~/Project/main.c" "~/" "~/test-c/" "~/Desktop/Ege/olan.c" "~/Desktop/Ege/test.clj" "~/test-c/hello.c" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/Ege/test.scm" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/Desktop/htdp/Batch_program.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Batch_program.rkt" "~/dotfiles/emacs/.emacs.d/" "~/Desktop/htdp/Arithmetic_of_imgs.rkt" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/Desktop/htdp/Arithmetic.rkt" "~/Desktop/Ege/main.py" "~/.emacs.d/config.org" "~/Desktop/htdp/preface.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/preface.rkt" "~/.emacs.d/init.el" "/sshx:vadim@192.168.1.117:/home/vadim/bora.txt" "~/.emacs.d/init.el" "ssh vadim@192.168.1.117" "~/PycharmProjects/klllll/main.py" "~/.config/nvim/lua/vim-options.lua" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/Ege_Inf/main.py" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org" "~/.emacs.d/init.el" "~/docs/Org_files/info.org" "~/docs/Org_files/Todo.org" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/.emacs.d/init.el" "~/.emacs.d/config.org"))
+(setq regexp-search-ring '(#("majo" 0 4 (isearch-case-fold-search t)) #("pytho" 0 5 (isearch-case-fold-search t)) #("tr" 0 2 (isearch-case-fold-search t)) #("pylint" 0 6 (isearch-case-fold-search t)) #("pylsp" 0 5 (isearch-case-fold-search t)) #("lsp" 0 3 (isearch-case-fold-search nil)) #("y a" 0 3 (isearch-case-fold-search t)) #("yank" 0 4 (isearch-case-fold-search t)) #("spc" 0 3 (isearch-case-fold-search t)) #("space" 0 5 (isearch-case-fold-search t)) #("<space" 0 6 (isearch-case-fold-search t)) #("leader>" 0 7 (isearch-case-fold-search t)) #("<leader>" 0 8 (isearch-case-fold-search t)) #("ya" 0 2 (isearch-case-fold-search t)) #("trees" 0 5 (isearch-case-fold-search t)) #("\\_<while\\_>" 0 11 (isearch-case-fold-search nil))))
+(setq register-alist '((104) (97 . [102 114 59 99 119 111 108 97 110 escape 117 18]) (107) (48 . "To have a very friendly, harmonious relationship")))
+(setq file-name-history '("~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jedi/third_party/typeshed/stdlib/3/os/" "~/dotfiles/emacs/.emacs.d/init.el" "~/Desktop/Ege/main.py" "~/.emacs.d/snippets/python-mode/./" "~/dotfiles/emacs/.emacs.d/snippets/org-mode/" "~/.emacs.d/snippets/" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/gemini_image_analysis_results.txt" "~/PycharmProjects/klllll/langImg_openrouter.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/main.py" "~/.emacs.d/init.el" "~/PycharmProjects/klllll/" "~/PycharmProjects/klllll/langImg.txt" "~/.emacs.d/init.el" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Numbers.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/Ege/main.py" "~/Project/main.c" "~/" "~/test-c/" "~/Desktop/Ege/olan.c" "~/Desktop/Ege/test.clj" "~/test-c/hello.c" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/Ege/test.scm" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Intervals.rkt" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/dotfiles/emacs/.emacs.d/" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/.emacs.d/init.el" "~/Desktop/htdp/Virtual_pets.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/Desktop/htdp/Batch_program.rkt" "~/Desktop/htdp/Designing_functions.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Batch_program.rkt" "~/dotfiles/emacs/.emacs.d/" "~/Desktop/htdp/Arithmetic_of_imgs.rkt" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.org" "~/Desktop/htdp/Arithmetic.rkt" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/config.el" "~/Desktop/htdp/Arithmetic.rkt" "~/Desktop/Ege/main.py" "~/.emacs.d/config.org" "~/Desktop/htdp/preface.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/preface.rkt" "~/.emacs.d/init.el" "/sshx:vadim@192.168.1.117:/home/vadim/bora.txt" "~/.emacs.d/init.el" "ssh vadim@192.168.1.117" "~/PycharmProjects/klllll/main.py" "~/.config/nvim/lua/vim-options.lua" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/Ege_Inf/main.py" "~/dotfiles/emacs/.emacs.d/config.org" "~/.emacs.d/init.el" "~/Desktop/Ege_Inf/main.py" "~/docs/Org_files/info.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
-(desktop-create-buffer 208
-  "/Users/chestnykh/docs/Org_files/test.md"
-  "test.md"
-  'markdown-mode
-  '(evil-local-mode eldoc-mode font-lock-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
-  589
-  '(584 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 26617 30877 87290 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (6539 6537 6539 6420 1 6539 1 6539 6539 6539 1 1 1 1 1 6539))))
-
 (desktop-create-buffer 208
   "/Users/chestnykh/PycharmProjects/klllll/langImg.txt"
   "langImg.txt"
   'text-mode
   '(font-lock-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
-  628
-  '(628 nil)
+  5966
+  '(1479 nil)
   nil
   nil
-  '((buffer-display-time 26617 30877 87290 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (377 6689 6689 267 78 78 78 6689 1 6689 1 1 6689 1 1 1))))
+  '((buffer-display-time 26622 8113 831086 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5627))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/docs/Org_files/test.md"
+  "test.md"
+  'markdown-mode
+  '(font-lock-mode eldoc-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
+  5600
+  '(5418 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26622 9117 916298 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (5198 4155 6527 6527 95 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/Ege/main.py"
+  "main.py"
+  'python-ts-mode
+  '(font-lock-mode eldoc-mode display-line-numbers-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode)
+  286
+  '(286 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26622 7994 170846 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (410 58 410 410 410 410 392 410 410 115 181 181 38 358 358 358))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/emacs/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
-  '(eldoc-mode font-lock-mode evil-local-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode corfu-mode evil-mc-mode paredit-mode)
-  4337
-  '(4337 nil)
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode font-lock-mode eldoc-mode evil-local-mode paredit-mode)
+  9754
+  '(9754 nil)
   nil
   nil
-  '((buffer-display-time 26614 63206 22077 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (3753 3498 3790 3491 2587 2587 3970 3970 3738 3213 3213 3213 3213 3213 3735 4068))))
+  '((buffer-display-time 26888 44952 133598 276000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (10104 10082 10082 10114 10111 10111 10200 10200 10003 9593 9593 9593 9593 10001 10001 10001))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/dotfiles/emacs/.emacs.d/config.el"
+  "config.el"
+  'emacs-lisp-mode
+  '(evil-mc-mode corfu-mode evil-collection-unimpaired-mode yas-minor-mode display-line-numbers-mode paredit-mode evil-local-mode eldoc-mode font-lock-mode)
+  4921
+  '(4921 nil)
+  nil
+  nil
+  '((buffer-display-time 26622 7990 366366 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (8477 8477 1469 1298 1271 1146 1129 1101 940 859 8477 2383 2383 2387 2556 7166))))
+
+(desktop-create-buffer 208
+  "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jedi/third_party/typeshed/stdlib/3/builtins.pyi"
+  "builtins.pyi"
+  'python-mode
+  '(lsp-ui-doc-mode lsp-ui-sideline-mode lsp-ui-mode lsp-mode flymake-mode lsp-inline-completion-mode lsp-modeline-workspace-status-mode evil-mc-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode corfu-mode display-line-numbers-mode font-lock-mode eldoc-mode)
+  46603
+  '(46603 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-display-time 26622 7994 170777 0) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (46603))))
 

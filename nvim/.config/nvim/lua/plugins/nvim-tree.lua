@@ -38,6 +38,9 @@ return {
 					root_folder_label = false,
 					indent_width = 1,
 				},
+				actions = {
+					use_system_clipboard = true, -- Отключаем системный буфер обмена
+				},
 			})
 
 			vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeToggle<cr>", { silent = true, noremap = true })

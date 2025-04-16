@@ -5,7 +5,7 @@ return {
 		dependencies = {
 			-- "tpope/vim-sexp-mappings-for-regular-people",
 			"tpope/vim-repeat",
-			"tpope/vim-surround",
+			-- "tpope/vim-surround",
 		},
 		ft = { "clojure", "scheme", "lisp", "racket" },
 		config = function()

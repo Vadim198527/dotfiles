@@ -107,7 +107,7 @@
     (kill-ring-save (point-min) (point-max))))
 ;; Предположим, что <leader> = пробел (SPC).
 ;; Если у вас другой <leader>, подставьте нужное сочетание.
-(evil-define-key 'normal 'global (kbd "<leader> y a")
+(evil-define-key 'normal 'global (kbd "<leader> c p")
   #'my-evil-copy-whole-buffer)
 ;; переход к другому окну
 (evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)
@@ -116,6 +116,31 @@
 (evil-define-key 'normal 'global (kbd "C-l") 'evil-window-right)  
 (evil-define-key 'normal 'global (kbd "C-j") 'evil-window-down)  
 (evil-define-key 'normal 'global (kbd "C-k") 'evil-window-up)  
+
+;; Открлючаем и включаем обратно подсветку Lsp
+(evil-define-key 'normal 'global (kbd "<leader>dd") (lambda ()
+						      (interactive)
+						      (flymake-mode -1)))  
+(evil-define-key 'normal 'global (kbd "<leader>de") (lambda ()
+						      (interactive)
+						      (flymake-mode 1)))  
+
+(defun my/run-current-python-file ()
+  "Compile the current buffer's Python file using 'python file.py'."
+  (interactive)
+  (if buffer-file-name
+      ;; Проверяем (необязательно), что это .py файл
+      (if (string= (file-name-extension buffer-file-name) "py")
+          (compile (concat "python3 " (shell-quote-argument buffer-file-name)))
+	(message "Current buffer is not a Python (.py) file"))
+    (message "Current buffer is not visiting a file")))
+
+;; Назначаем <leader>rc в normal state для запуска функции
+(evil-define-key 'normal 'global (kbd "<leader>rc") 'my/run-current-python-file)
+
+
+(evil-define-key 'insert 'global (kbd "C-k") (kbd "RET"))
+(evil-define-key 'insert global-map (kbd "C-h") (kbd "DEL"))
 
 ;; закрытие всех окон, кроме текущего
 (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows) 
@@ -128,7 +153,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>tl") 'toggle-truncate-lines) 
 
 (evil-define-key 'insert 'global (kbd "C-w") 'backward-kill-word)
-(evil-define-key 'insert 'global (kbd "C-h") 'backward-delete-char-untabify)
+;; (evil-define-key 'insert 'global (kbd "C-h") 'backward-delete-char-untabify)
 (define-key evil-normal-state-map (kbd "C-p")
             (lambda ()
               (interactive)
