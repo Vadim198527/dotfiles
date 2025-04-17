@@ -1,172 +1,115 @@
+-- todo_picker.nvim — минималистичный плагин задач с сохранением позиции
+-- Автор: ChatGPT (OpenAI)
+-- Лицензия: MIT
+
 local M = {}
 
-local auto_normal = false
-local auto_visual = false
-local pre_yank_pos = {}
-
--- [+] Добавим хелпер для проверки nvim-tree
-local function is_nvim_tree_buffer()
-    -- Проверяем filetype - самый надежный способ
-    if vim.bo.filetype == "NvimTree" then
-        return true
-    end
-    -- Дополнительно проверим имя буфера (на всякий случай)
-    local success, bufname = pcall(vim.api.nvim_buf_get_name, 0)
-    if success and type(bufname) == 'string' and bufname:match("NvimTree_") then
-        return true
-    end
-    return false
-end
-
--- To save register for mappings
-local my_register = ""
-local function save_register()
-    my_register = vim.v.register == "" and '"' or vim.v.register
-end
-
--- Function to save the cursor position before yanking (Оригинал)
-local function pre_yank_motion()
-    -- Обернем в pcall для безопасности, т.к. CursorMoved вызывается часто
-    local success, pos = pcall(vim.api.nvim_win_get_cursor, 0)
-    if success and pos then
-        pre_yank_pos = pos
-    -- else: Не очищаем здесь, т.к. позиция может скоро понадобиться (логика оригинала)
-    end
-end
-
--- Function to restore the cursor position after yanking (Оригинал + Проверка)
-local function post_yank_motion()
-    -- [+] Добавим проверку nvim-tree здесь для безопасности
-    if is_nvim_tree_buffer() then
-        return
-    end
-
-    -- Проверяем, что позиция сохранена и валидна
-    if pre_yank_pos and type(pre_yank_pos) == 'table' and #pre_yank_pos > 0 then
-       -- Обернем установку курсора в pcall для безопасности
-       pcall(vim.api.nvim_win_set_cursor, 0, pre_yank_pos)
-       -- [+] Очистим позицию после использования. Если это сломает логику,
-       -- можно убрать эту строку, но это менее безопасно.
-       pre_yank_pos = {}
-    end
-end
-
-local function setup_autocmds()
-    local group = vim.api.nvim_create_augroup("YankAssassinMinimalFix", { clear = true }) -- Новая группа для чистоты
-
-    -- Original CursorMoved logic
-    vim.api.nvim_create_autocmd({ "VimEnter", "CursorMoved" }, {
-        group = group,
-        callback = function()
-            -- Вызываем pre_yank_motion как в оригинале
-            pre_yank_motion() -- pcall уже внутри pre_yank_motion
-        end,
-    })
-
-    vim.api.nvim_create_autocmd("TextYankPost", {
-        group = group,
-        callback = function()
-            -- *** [+] ГЛАВНОЕ ИЗМЕНЕНИЕ: Проверка nvim-tree в самом начале ***
-            if is_nvim_tree_buffer() then
-                return -- Ничего не делаем, если yank произошел в nvim-tree
-            end
-
-            -- Оригинальная логика колбэка
-            local operators = { "y" } -- Add more operators here if needed
-            if vim.tbl_contains(operators, vim.v.event.operator) then
-                local myMode = vim.api.nvim_get_mode().mode
-                -- Оригинальная проверка режима
-                if (auto_normal and myMode == "no") or (auto_visual and myMode == "n") then
-                    post_yank_motion()
-                end
-            end
-        end,
-    })
-end
-
--- Copy of vim's default yank operator (Оригинал + pcall)
-local function yank_operator(type)
-    local expr
-    if type == "char" then
-        expr = "`[v`]"
-    elseif type == "line" then
-        expr = "'[V']"
-    elseif type == "block" then
-        expr = "`[<C-v>`]"
-    end
-    -- Обернем в pcall для безопасности
-    pcall(vim.cmd, "keepjumps normal! " .. expr .. '"' .. my_register .. "y")
-end
-
--- Move the cursor to the start - default behavior (Оригинал + pcall)
-function M.default_yank_operator(type)
-    yank_operator(type)
-    pcall(vim.cmd, "normal! `[")
-end
-
--- Do not move the cursor to the start (Оригинал + Проверка)
-function M.special_yank_operator(type)
-    -- Важно: Маппинг <Plug>(YANoMove) вызывает pre_yank_motion прямо перед этим
-    yank_operator(type)
-    -- [+] Добавим проверку nvim-tree перед восстановлением
-    if not is_nvim_tree_buffer() then
-       post_yank_motion()
-    else
-       -- На всякий случай очистим, если мы как-то попали сюда в nvim-tree
-       pre_yank_pos = {}
-    end
-end
+local default_opts = {
+  todo_file = vim.fn.expand("~/todo.md"),
+  keymaps = {
+    add  = "<localleader>ta",
+    list = "<localleader>tt",
+  },
+}
 
 function M.setup(opts)
-    opts = opts or {}
-    auto_normal = opts.auto_normal or false
-    auto_visual = opts.auto_visual or false
+  M.opts = vim.tbl_deep_extend("force", default_opts, opts or {})
+  vim.keymap.set("n", M.opts.keymaps.add,  M.add_task,  { desc = "TodoPicker: добавить задачу" })
+  vim.keymap.set("n", M.opts.keymaps.list, M.show_tasks, { desc = "TodoPicker: список задач" })
+end
 
-    -- Устанавливаем автокоманды (Оригинал + Минимальный фикс)
-    setup_autocmds()
+-- собрать задачи --------------------------------------------------------
+local function collect_tasks()
+  local tasks, path = {}, vim.fn.expand(M.opts.todo_file)
+  if vim.fn.filereadable(path) == 1 then
+    for i, line in ipairs(vim.fn.readfile(path)) do
+      if line:match("%- %[[ xX]?%]") then tasks[#tasks+1] = { text = line, lnum = i } end
+    end
+  end
+  return tasks, path
+end
 
-    -- Default behavior mapping (Оригинал)
-    vim.keymap.set("n", "<Plug>(YADefault)", function()
-        save_register()
-        vim.go.operatorfunc = "v:lua.require'YankAssassin'.default_yank_operator"
-        return "g@"
-    end, { expr = true, noremap = true, silent = true })
+-- добавить задачу -------------------------------------------------------
+function M.add_task()
+  vim.ui.input({ prompt = "Новая задача: " }, function(input)
+    if not input or input == "" then return end
+    local ok, err = pcall(function()
+      local fp = assert(io.open(vim.fn.expand(M.opts.todo_file), "a"))
+      fp:write("- [ ] " .. input .. "\n"); fp:close()
+    end)
+    if ok then vim.notify("Добавлена задача: " .. input, vim.log.levels.INFO)
+    else       vim.notify("Ошибка записи TODO: " .. err, vim.log.levels.ERROR) end
+  end)
+end
 
-    vim.keymap.set({ "x", "v" }, "<Plug>(YADefault)", function()
-        save_register()
-        vim.cmd("normal! " .. '"' .. my_register .. "y")
-        vim.cmd("normal! `[")
-    end, { noremap = true, silent = true })
+--------------------------------------------------------------------------
+---@param preselect_lnum number|nil  номер строки, которую выделить после открытия
+function M.show_tasks(preselect_lnum)
+  if not pcall(require, "telescope") then vim.notify("Telescope не установлен", vim.log.levels.ERROR); return end
+  local pickers, finders = require"telescope.pickers", require"telescope.finders"
+  local conf  = require"telescope.config".values
+  local previewers = require"telescope.previewers"
+  local actions, action_state = require"telescope.actions", require"telescope.actions.state"
 
-    -- NoMove behavior mapping (Normal mode - Оригинал + Проверка)
-    vim.keymap.set("n", "<Plug>(YANoMove)", function()
-        save_register()
-        -- [+] Вызываем pre_yank_motion только если НЕ в nvim-tree
-        if not is_nvim_tree_buffer() then
-           pre_yank_motion()
-        else
-           pre_yank_pos = {} -- Очищаем, если в nvim-tree
-        end
-        vim.go.operatorfunc = "v:lua.require'YankAssassin'.special_yank_operator"
-        return "g@"
-    end, { expr = true, noremap = true, silent = true })
+  local tasks, todo_path = collect_tasks()
+  if #tasks == 0 then vim.notify("Файл TODO пуст", vim.log.levels.INFO); return end
 
-    -- NoMove behavior mapping (Visual mode - Оригинал + Проверка)
-     vim.keymap.set({ "x", "v" }, "<Plug>(YANoMove)", function()
-         -- [+] Проверяем nvim-tree в начале
-         if is_nvim_tree_buffer() then
-             -- Стандартное поведение yank в nvim-tree
-             save_register()
-             vim.cmd("normal! " .. '"' .. my_register .. "y")
-             vim.cmd("normal! `[")
-         else
-             -- Оригинальное поведение плагина
-             save_register()
-             pre_yank_motion() -- Сохраняем позицию перед yank
-             vim.cmd("normal! " .. '"' .. my_register .. "y")
-             post_yank_motion() -- Восстанавливаем позицию
-         end
-     end, { noremap = true, silent = true })
+  -- индекс для предварительного выбора
+  local default_idx
+  if preselect_lnum then
+    for i, t in ipairs(tasks) do if t.lnum == preselect_lnum then default_idx = i; break end end
+  end
+
+  local function make_entry(item)
+    return { value=item, display=item.text, ordinal=item.text, filename=todo_path, lnum=item.lnum }
+  end
+
+  pickers.new({}, {
+    prompt_title = "Мои TODO",
+    finder       = finders.new_table{ results=tasks, entry_maker=make_entry },
+    sorter       = conf.generic_sorter({}),
+    previewer    = previewers.vim_buffer_vimgrep.new({}, {}),
+    default_selection_index = default_idx,
+    attach_mappings = function(prompt_bufnr, map)
+      local function write_lines(lines)
+        local ok, err = pcall(vim.fn.writefile, lines, todo_path)
+        if not ok then vim.notify("Запись TODO не удалась: " .. err, vim.log.levels.ERROR) end
+      end
+      local function reopen_at(lnum)
+        actions.close(prompt_bufnr)
+        vim.defer_fn(function() M.show_tasks(lnum) end, 15)
+      end
+
+      -- delete ---------------------------------------------------------
+      map({"i","n"}, "<C-d>", function()
+        local e = action_state.get_selected_entry(); if not e then return end
+        local lines = vim.fn.readfile(todo_path); if e.lnum > #lines then return end
+        table.remove(lines, e.lnum); write_lines(lines); reopen_at(e.lnum)
+      end, { desc="Удалить задачу" })
+
+      -- toggle ---------------------------------------------------------
+      map({"i","n"}, "<C-l>", function()
+        local e = action_state.get_selected_entry(); if not e then return end
+        local lines = vim.fn.readfile(todo_path); local idx=e.lnum; if idx>#lines then return end
+        local txt = lines[idx]
+        if txt:match("%- %[[ ]%]") then lines[idx]=txt:gsub("%[ %]","[x]")
+        elseif txt:match("%- %[[xX]%]") then lines[idx]=txt:gsub("%[x%]","[ ]"):gsub("%[X%]","[ ]")
+        else vim.notify("Строка не выглядит как TODO", vim.log.levels.WARN); return end
+        write_lines(lines); reopen_at(idx)
+      end, { desc="Переключить статус" })
+
+      -- enter ----------------------------------------------------------
+      actions.select_default:replace(function()
+        local e = action_state.get_selected_entry(); actions.close(prompt_bufnr)
+        if not e then return end
+        vim.schedule(function()
+          vim.cmd("edit " .. vim.fn.fnameescape(todo_path))
+          vim.api.nvim_win_set_cursor(0, { e.lnum, 0 }); vim.cmd("normal! zz")
+        end)
+      end)
+      return true
+    end,
+  }):find()
 end
 
 return M
