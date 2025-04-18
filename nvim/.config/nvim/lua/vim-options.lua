@@ -155,6 +155,7 @@ function RunCode()
 end
 
 keymap("n", "<leader>rc", ":lua RunCode()<CR>", { noremap = true, silent = true })
+-- keymap("n", "<leader>rc", ":w<CR>:luafile %<CR>", { noremap = true, silent = true })
 local function olan()
     vim.cmd("write")
     local bufList = vim.api.nvim_list_bufs()

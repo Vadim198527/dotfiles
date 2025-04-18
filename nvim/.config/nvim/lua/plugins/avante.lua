@@ -5,26 +5,26 @@ return {
 	opts = {
 		-- add any opts here
 		-- for example
-		-- provider = "claude",
-		-- claude = {
-		-- 	endpoint = "https://api.anthropic.com",
-		-- 	model = "claude-3-7-sonnet-latest",
-		-- 	temperature = 0,
-		-- 	max_tokens = 4096,
-		-- },
-
-		provider = "openrouter",
-		vendors = {
-		    openrouter = {
-		        __inherited_from = "openai",
-		        endpoint = "https://openrouter.ai/api/v1",
-		        api_key_name = "OPENROUTER_API_KEY",
-		        -- model = "google/gemini-2.5-pro-preview-03-25",
-		        model = "openai/o4-mini-high",
-		        -- model = "openai/o3-mini-high",
-		        -- model = "google/gemini-2.5-pro-exp-03-25:free",
-		    },
+		provider = "claude",
+		claude = {
+			endpoint = "https://api.anthropic.com",
+			model = "claude-3-7-sonnet-latest",
+			temperature = 0,
+			max_tokens = 4096,
 		},
+
+		-- provider = "openrouter",
+		-- vendors = {
+		--     openrouter = {
+		--         __inherited_from = "openai",
+		--         endpoint = "https://openrouter.ai/api/v1",
+		--         api_key_name = "OPENROUTER_API_KEY",
+		--         -- model = "google/gemini-2.5-pro-preview-03-25",
+		--         model = "openai/o4-mini-high",
+		--         -- model = "openai/o3-mini-high",
+		--         -- model = "google/gemini-2.5-pro-exp-03-25:free",
+		--     },
+		-- },
 		windows = {
 			edit = {
 				border = "rounded",

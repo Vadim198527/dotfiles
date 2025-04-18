@@ -1,6 +1,6 @@
 return {
     "Olical/conjure",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    -- dependencies = { "nvim-treesitter/nvim-treesitter" },
     -- ft = { "racket", "scheme" },
     ft = { "scheme" },
     -- config = function()

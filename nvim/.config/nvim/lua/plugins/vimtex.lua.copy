@@ -1,3 +1,4 @@
+-- При активации плагина, маркдаун начнет работать своебразно
 return {
 	"lervag/vimtex",
 	lazy = false, -- we don't want to lazy load VimTeX

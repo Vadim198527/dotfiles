@@ -76,13 +76,13 @@ return {
 				-- ignore_install = { "org" },
 				highlight = {
 					enable = true,
-					disable = { "latex" },
+					disable = { "latex"},
 				},
 				indent = {
 					enable = true,
 					disable = { "html" },
 				},
-				autopairs = { enable = true },
+				-- autopairs = { enable = true },
 				-- autopairs = { enable = false },
 			})
 		end,
