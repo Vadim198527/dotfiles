@@ -1,0 +1,31 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Start"
+ (filename . "~/docs/all/Ch6.md")
+ (front-context-string . "### Создание и д")
+ (rear-context-string . " (RGB), и т.д.\n\n")
+ (position . 21046)
+ (last-modified 26678 4838 243540 0))
+("Olan"
+ (filename . "~/docs/all/Ch5.md")
+ (front-context-string . "### `cond`\n\nСпец")
+ (rear-context-string . "для CONDITION.\n\n")
+ (position . 8265)
+ (last-modified 26671 49688 799814 0))
+("org-refile-last-stored"
+ (filename . "~/Desktop/Org_files/org_lessons/org-mode.org")
+ (front-context-string . "** C-c C-n - пер")
+ (rear-context-string . "ldfkj\nslfdksdj\n\n")
+ (position . 2930)
+ (last-modified 26314 22721 916369 0))
+("last"
+ (front-context-string . "also a workflow ")
+ (rear-context-string . " TODO/DONE, but\n")
+ (position . 160706)
+ (last-modified 26298 2986 639696 0)
+ (filename . "/Applications/Emacs.app/Contents/Resources/info/org")
+ (info-node . "Multiple sets in one file")
+ (handler . Info-bookmark-jump))
+)

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: item
+# key: itm
+# condition : (not (texmathp))
+# --
+\item $0

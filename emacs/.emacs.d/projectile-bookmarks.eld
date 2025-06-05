@@ -1,0 +1,1 @@
+("~/dotfiles/" "~/.emacs.d/" "~/" "~/docs/" "/usr/local/bin/" "/usr/local/lib/node_modules/pyright/" "~/xkbswitch-macosx/" "~/www/" "~/redis-stable/" "~/qmk_firmware/" "~/powerlevel10k/" "~/pdf-tools/" "~/mathjax/" "~/libxkbswitch-macosx/")

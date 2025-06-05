@@ -1,0 +1,16 @@
+
+init.el,393
+(defun other-window-backward 228,7426
+(defun other-window-forward 233,7601
+(defun scroll-n-lines-ahead 241,7837
+(defun scroll-n-lines-behind 252,7971
+(defun point-to-top 257,8102
+(defun point-to-bottom 261,8210
+(defun line-to-top 267,8399
+(defadvice switch-to-buffer 432,12768
+(define-key org-mode-map 510,15838
+(define-key org-mode-map 513,15999
+(define-key org-mode-map 516,16206
+
+jetbrains-darcula-theme.el,32
+(deftheme jetbrains-darcula1,0

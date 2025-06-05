@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: EquivalenceRelationDeterminedByR
+# key: rdet
+# --
+R = \bigcup_{X \in \mathcal{F}} (X \times X)

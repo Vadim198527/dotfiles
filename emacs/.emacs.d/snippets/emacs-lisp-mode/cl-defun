@@ -1,0 +1,4 @@
+# key: cld
+# name: cl-defun
+# --
+(cl-defun $1 ($2) $0)

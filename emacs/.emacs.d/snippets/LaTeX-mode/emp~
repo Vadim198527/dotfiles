@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: emp
+# key: em
+# condition : (not (texmathp))
+# --
+\emph{$1}$0

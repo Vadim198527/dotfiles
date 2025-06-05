@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Simple Function Definition
+# key: def
+# --
+def ${1:funtion_name}($2):
+    """${3:Docstring}"""
+    $0
+    pass

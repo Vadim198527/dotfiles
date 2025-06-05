@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Simple Function Definition
+# key: __rx__
+# condition: (looking-back "\\([0-9]+\\)/\\([0-9]+\\)" (line-beginning-position))
+# --
+\\frac{`(match-string 1)`}{`(match-string 2)`}$0

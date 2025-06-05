@@ -1,0 +1,22 @@
+#theme = GruvboxDark
+theme = catppuccin-mocha
+font-family = JetBrains Mono
+font-size = 15
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+cursor-color = #f1e0dc
+cursor-text =  #1e1d2c
+mouse-hide-while-typing
+keybind = ctrl+'=text:\x1b[27;5;39~
+keybind = super+j=text:\x1bj
+keybind = super+one=text:\x1b1
+keybind = super+two=text:\x1b2
+keybind = super+three=text:\x1b3
+keybind = super+four=text:\x1b4
+keybind = super+five=text:\x1b5
+keybind = super+six=text:\x1b6
+keybind = ctrl+semicolon=csi:15~
+keybind = ctrl+0=csi:48;5u
+keybind = ctrl+9=csi:57;5u
+

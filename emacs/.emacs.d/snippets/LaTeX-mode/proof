@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: proof
+# key: pro
+# condition: (not (texmathp))
+# group: enviroments
+# --
+\begin{proof}
+  $0
+\end{proof}
