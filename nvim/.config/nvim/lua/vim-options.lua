@@ -24,20 +24,20 @@ vim.opt.encoding = "utf-8"
 vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 vim.opt.termguicolors = true
-vim.api.nvim_set_hl(0, "CursorInsert", { bg = "#b3e0a7", fg = "NONE" })
-vim.api.nvim_set_hl(0, "CursorVisual", { bg = "orange", fg = "NONE" })
+-- vim.api.nvim_set_hl(0, "CursorInsert", { bg = "#b3e0a7", fg = "NONE" })
+-- vim.api.nvim_set_hl(0, "CursorVisual", { bg = "orange", fg = "NONE" })
 -- 3) Настраиваем guicursor
-vim.opt.guicursor = {
-    -- normal, visual, command-line
-    "n-v-c:block-CursorNormal",
-    -- insert (block + новая группа)
-    "i:block-CursorInsert",
-    "v-ve:block-CursorVisual",
-    -- replace
-    "r-cr:block-CursorNormal",
-    -- operator-pending (можно оставить block)
-    "o:hor50-CursorNormal",
-}
+-- vim.opt.guicursor = {
+--     -- normal, visual, command-line
+--     "n-v-c:block-CursorNormal",
+--     -- insert (block + новая группа)
+--     "i:block-CursorInsert",
+--     "v-ve:block-CursorVisual",
+--     -- replace
+--     "r-cr:block-CursorNormal",
+--     -- operator-pending (можно оставить block)
+--     "o:hor50-CursorNormal",
+-- }
 vim.opt.compatible = false
 vim.opt.ignorecase = true -- Игнорировать регистр при поиске
 vim.opt.smartcase = true

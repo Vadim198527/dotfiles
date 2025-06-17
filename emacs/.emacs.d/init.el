@@ -6,9 +6,12 @@
       evil-want-C-u-scroll t
       evil-undo-system 'undo-tree
       )
-;; 1. Не вставлять реальные TAB-символы (опционально, но логично)
-;; (setq-default indent-tabs-mode nil)   ;; все отступы → пробелы
-;; (setq tab-width 4)                    ;; ширина «визуального таба»
+; ─── только пробелы, без символа TAB ──────────────────────────────
+(setq-default indent-tabs-mode nil)   ;; никакого \t в файлах
+
+;; ─── шаг отступа ──────────────────────────────────────────────────
+(setq-default tab-width 4)            ;; один «визуальный таб» = 4 пробела
+(setq-default evil-shift-width 4)     ;; ⇐ если пользуетесь evil-shift (>>/<<)
 
 
 (require 'package)
@@ -34,8 +37,17 @@
       native-comp-deferred-compilation nil
       native-comp-async-report-warnings-errors 'silent)
 
-;; Включаем отображение номеров строк
-(global-display-line-numbers-mode 1)
+;; ;; Включаем отображение номеров строк
+;; (global-display-line-numbers-mode 1)
+
+;; Включаем номера строк для всех режимов программирования
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
+;; Включаем номера строк для текстовых режимов
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+
+;; Оставляем вашу настройку типа нумерации (это правильно)
+(setq display-line-numbers-type 'relative)
 
 ;; Оставляем вашу настройку типа нумерации
 (setq display-line-numbers-type 'relative)
@@ -54,11 +66,18 @@
 (require 'bind-key)
 (setq use-package-always-ensure t)
 
-(desktop-save-mode 1)                         ; автосохранение включено
+;; (desktop-save-mode 1)                         ; автосохранение включено
+(require 'desktop)
+(setq desktop-buffers-not-to-save
+      (cons "\\.pdf$" desktop-buffers-not-to-save))
+(desktop-save-mode 1)
 
-
+;; (use-package exec-path-from-shell
+;;   :defer nil ;; ← обязательно nil
+;;   :config
+;;   (exec-path-from-shell-initialize))
 (use-package exec-path-from-shell
-  :defer nil ;; ← обязательно nil
+  :if (memq window-system '(mac ns x))
   :config
   (exec-path-from-shell-initialize))
 
@@ -167,13 +186,13 @@
     ;; убираем обработку апострофа
     (define-key cdlatex-mode-map (kbd "'") nil)))
 
-(use-package pdf-tools
-  :ensure t
-  :hook (pdf-view-mode . (lambda () (display-line-numbers-mode -1))) ; <-- ДОБАВИТЬ ЭТО
-  :config
-  (pdf-tools-install)
-  ;; вот эта строчка и снимет номера строк при входе в pdf-view-mode
-  )
+;; (use-package pdf-tools
+;;   :ensure t
+;;   :hook (pdf-view-mode . (lambda () (display-line-numbers-mode -1))) ; <-- ДОБАВИТЬ ЭТО
+;;   :config
+;;   (pdf-tools-install)
+;;   ;; вот эта строчка и снимет номера строк при входе в pdf-view-mode
+;;   )
 
 (defun my-latex-mode-keybindings ()
   "Custom keybindings for LaTeX mode."
@@ -246,30 +265,117 @@
   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq reftex-plug-into-AUCTeX t))
+  )
 (setq-default TeX-engine 'xetex) ; или 'luatex
+;; (setq-default TeX-engine 'luatex) ; или 'luatex
 
-(defun my-latex-compile-and-view ()
-  "Compile LaTeX document and view PDF without prompting."
-  (interactive)
-  (save-buffer) ;; Сохраняем текущий буфер
-  
-  ;; Запускаем компиляцию
-  (TeX-command "LaTeX" 'TeX-master-file)
-  
-  ;; Устанавливаем таймер для просмотра после компиляции
-  (run-with-timer 1.0 nil
-                  (lambda ()
-                    ;; Напрямую вызываем функцию просмотра без запроса
-                    (TeX-view))))
+;; (use-package tex
+;;   :ensure auctex
+;;   :defer t
+;;   :hook ((LaTeX-mode . (lambda () (TeX-fold-mode 1)))
+;; 	 (LaTeX-mode . my-latex-mode-keybindings)
+;; 	 (LaTeX-mode . (lambda ()
+;; 			 ;; ... ваш код с prettify-symbols-alist ...
+;;                          (dolist (pair
+;;                                   '(("\\blank"      . ?—)
+;;                                     ("\\otimes"     . ?⨂)
+;;                                     ("\\defeq"      . ?≔)
+;;                                     ("\\mathcal{A}" . ?𝓐)
+;;                                     ("\\mathcal{B}" . ?𝓑)
+;;                                     ("\\mathcal{C}" . ?𝓒)
+;;                                     ("\\mathcal{D}" . ?𝓓 )
+;;                                     ("\\mathcal{G}" . ?𝓖 )
+;;                                     ("\\mathcal{F}" . ?𝓕 )
+;;                                     ("\\mathcal{P}" . ?𝓟 )
+;;                                     ("\\mathrm{A}" . ?A )
+;;                                     ("\\mathrm{B}" . ?B )
+;;                                     ("\\mathrm{C}" . ?C )
+;;                                     ("\\mathrm{D}" . ?D )
+;;                                     ("\\mathrm{E}" . ?E )
+;;                                     ("\\mathrm{L}" . ?L )
+;;                                     ("\\mathrm{P}" . ?P )
+;;                                     ("\\mathrm{R}" . ?R )
+;;                                     ("\\mathrm{S}" . ?S )
+;;                                     ("\\mathrm{T}" . ?T )
+;;                                     ("\\mathrm{X}" . ?X )
+;;                                     ("\\mathrm{Y}" . ?Y )
+;;                                     ("\\mathrm{Z}" . ?Z )
+;;                                     ("\\!\\upharpoonright" . ?↾ )
+;;                                     ("\\implies" . ?⇒ )
+;;                                     ("\\land" . ?∧)
+;;                                     ("\\varnothing" . ?∅)
+;;                                     ("\\cat{C}"     . ?𝓒)))
+;;                            (push pair prettify-symbols-alist))
+;;                          (prettify-symbols-mode 1))))
+;;   :config
+;;   ;; --- ОСНОВНЫЕ НАСТРОЙКИ ---
+;;   (setq TeX-auto-save t)
+;;   (setq TeX-parse-self t)
+;;   (setq-default TeX-PDF-mode t)
+
+;;   ;; --- НАСТРОЙКА ПРОСМОТРА PDF ---
+;;   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
+;;   (setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
+;;   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+;;   ;; --- НАСТРОЙКА СИНХРОНИЗАЦИИ ---
+;;   (setq TeX-source-correlate-mode t)
+;;   (setq TeX-source-correlate-start-server t)
+
+;;   ;; --- ЖЕСТКОЕ ПЕРЕОПРЕДЕЛЕНИЕ КОМАНДЫ КОМПИЛЯЦИИ ---
+;;   ;; 1. Добавляем новую команду "LuaLaTeX" в список
+;;   (add-to-list 'TeX-command-list
+;;                '("LuaLaTeX" "lualatex -synctex=1 -interaction=nonstopmode -file-line-error %s"
+;;                  TeX-run-TeX nil (latex-mode) :help "Run LuaLaTeX"))
+
+;;   ;; 2. Устанавливаем эту новую команду как команду по умолчанию
+;;   (setq TeX-command-default "LuaLaTeX"))
+
+(use-package pdf-tools
+  :defer t
+  :magic ("%PDF")
+  :config
+  ;; ШАГ 1: "Обманываем" проверку, чтобы убрать предупреждение.
+  ;; Мы удаляем display-line-numbers-mode из списка несовместимых режимов.
+  (setq pdf-view-incompatible-modes
+        (remove 'display-line-numbers-mode pdf-view-incompatible-modes))
+
+  ;; ШАГ 2: "Наводим порядок", отключая режим, который нам не нужен.
+  ;; Этот хук сработает после проверки и тихо выключит номера строк.
+  (add-hook 'pdf-view-mode-hook #'display-line-numbers-mode-off-in-pdf)
+  (defun display-line-numbers-mode-off-in-pdf ()
+    "Отключает display-line-numbers-mode в буферах PDF."
+    (display-line-numbers-mode -1))
+
+  ;; --- Остальные ваши рабочие настройки ---
+  (pdf-tools-install :no-query)
+  (setq-default pdf-view-display-size 'fit-width)
+  (add-hook 'TeX-after-compilation-finished-functions
+            #'TeX-revert-document-buffer))
 
 
-;; Обеспечиваем автоматическое обновление PDF буферов
-(add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-(setq auto-revert-interval 0.5)
 
-;; Гарантируем, что PDF-буфер обновляется после компиляции
-(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+;; (defun my-latex-compile-and-view ()
+;;   "Compile LaTeX document and view PDF without prompting."
+;;   (interactive)
+;;   (save-buffer) ;; Сохраняем текущий буфер
+
+;;   ;; Запускаем компиляцию
+;;   (TeX-command "LaTeX" 'TeX-master-file)
+
+;;   ;; Устанавливаем таймер для просмотра после компиляции
+;;   (run-with-timer 1.0 nil
+;;                   (lambda ()
+;;                     ;; Напрямую вызываем функцию просмотра без запроса
+;;                     (TeX-view))))
+
+
+;; ;; Обеспечиваем автоматическое обновление PDF буферов
+;; (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
+;; (setq auto-revert-interval 0.5)
+
+;; ;; Гарантируем, что PDF-буфер обновляется после компиляции
+;; (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
 ;; Привязка клавиш в режиме LaTeX
 (with-eval-after-load 'evil
@@ -289,133 +395,144 @@
            (memq (car info)         ; первый элемент описывает «где» мы находимся
 		 '(in-dollar in-paren in-env)))))
   (aas-set-snippets 'text-mode
-		    ";o-" "ō"
-		    ";i-" "ī"
-		    ";a-" "ā"
-		    ";u-" "ū"
-		    ";e-" "ē")
+    ";o-" "ō"
+    ";i-" "ī"
+    ";a-" "ā"
+    ";u-" "ū"
+    ";e-" "ē")
   (aas-set-snippets 'org-mode
-		    ";latex" (lambda ()
-			       (interactive)
-			       (yas-expand-snippet (yas-lookup-snippet "latexCode")))
-		    ;; Добавьте остальные сниппеты здесь
-		    )
+    ";latex" (lambda ()
+	       (interactive)
+	       (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+    ;; Добавьте остальные сниппеты здесь
+    )
   (aas-set-snippets 'LaTeX-mode
-		    "mk" (lambda ()
-			   (interactive)
-			   (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
-		    ";A" "$\\mathrm{A}$"
-		    ";B" "$\\mathrm{B}$"
-		    ";L" "$\\mathrm{L}$"
-		    ";P" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathrm{P}")
-			     (insert "$\\mathrm{P}$")))
-		    ";R" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathrm{R}")
-			     (insert "$\\mathrm{R}$")))
-		    ";S" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathrm{S}")
-			     (insert "$\\mathrm{S}$")))
-		    ";T" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathrm{T}")
-			     (insert "$\\mathrm{T}$")))
+    "mk" (lambda ()
+	   (interactive)
+	   (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
+    "dm" (lambda ()
+	   (interactive)
+	   (yas-expand-snippet (yas-lookup-snippet "makeMathBlockEnv")))
 
-		    ";X" (lambda ()
-			   (interactive)
-			   (if (not (texmathp)) 
-			       (insert "$\\mathrm{X}$")
-			     ))
+    "RR" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathbb{R} ")
+	     (insert "$\\mathbb{R}$ ")))
+    ";A" "$\\mathrm{A}$"
+    ";B" "$\\mathrm{B}$"
+    ";L" "$\\mathrm{L}$"
+    ";P" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathrm{P}")
+	     (insert "$\\mathrm{P}$")))
+    ";R" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathrm{R}")
+	     (insert "$\\mathrm{R}$")))
+    ";S" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathrm{S}")
+	     (insert "$\\mathrm{S}$")))
+    ";T" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathrm{T}")
+	     (insert "$\\mathrm{T}$")))
 
-		    ";Y" "$\\mathrm{Y}$"
-		    ";Z" (lambda ()
-			   (interactive)
-			   (if (not (texmathp)) 
-			       (insert "$\\mathrm{Z}$")
-			     ))
+    ";X" (lambda ()
+	   (interactive)
+	   (if (not (texmathp)) 
+	       (insert "$\\mathrm{X}$")
+	     ))
 
-
-		    ",F" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathcal{F}")
-			     (insert "$\\mathcal{F}$")))
-		    ",G" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathcal{G}")
-			     (insert "$\\mathcal{G}$")))
-		    ",R" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\mathcal{R}")
-			     (insert "$\\mathcal{R}$")))
-		    ",P" "$\\mathcal{P}$"
+    ";Y" "$\\mathrm{Y}$"
+    ";Z" (lambda ()
+	   (interactive)
+	   (if (not (texmathp)) 
+	       (insert "$\\mathrm{Z}$")
+	     ))
 
 
-		    "=>" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\implies ")
-			     (insert "$\\implies$ ")))
+    ",F" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathcal{F}")
+	     (insert "$\\mathcal{F}$")))
+    ",G" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathcal{G}")
+	     (insert "$\\mathcal{G}$")))
+    ",R" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\mathcal{R}")
+	     (insert "$\\mathcal{R}$")))
+    ",P" "$\\mathcal{P}$"
 
-		    "->" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\to ")
-			     (insert "$\\to $ ")))
 
-		    "!=" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\neq ")
-			     (insert "$\\neq$")))
-		    "OO" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\varnothing ")
-			     (insert "$\\varnothing$ ")))
-		    "CC" (lambda ()
-			   (interactive)
-			   (if (texmathp) 
-			       (insert "\\subseteq ")
-			     (insert "$\\subseteq$ ")))
+    "=>" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\implies ")
+	     (insert "$\\implies$ ")))
 
-		    ";CC" (lambda ()
-			    (interactive)
-			    (if (texmathp) 
-				(insert "\\supseteq")
-			      (insert "$\\supseteq$")))
-		    ;; "oo" (lambda ()
-		    ;; 	   (interactive)
-		    ;; 	   (if (texmathp)
-		    ;; 	       (insert "\\circ ")))
+    "->" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\to ")
+	     (insert "$\\to $ ")))
 
-		    :cond #'texmathp
-		    "oo" "\\circ "
-		    "aa" "\\forall "
-		    "ee" "\\exists "
-		    "eu" "\\exists! "
-		    "inn" "\\in "
-		    "iff" "\\iff "
-		    "&&" "\\land "
+    "!=" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\neq ")
+	     (insert "$\\neq$")))
+    "OO" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\varnothing ")
+	     (insert "$\\varnothing$ ")))
+    "CC" (lambda ()
+	   (interactive)
+	   (if (texmathp) 
+	       (insert "\\subseteq ")
+	     (insert "$\\subseteq$ ")))
 
-		    "nn" "\\cap "
+    ";CC" (lambda ()
+	    (interactive)
+	    (if (texmathp) 
+		(insert "\\supseteq")
+	      (insert "$\\supseteq$")))
+    ;; "oo" (lambda ()
+    ;; 	   (interactive)
+    ;; 	   (if (texmathp)
+    ;; 	       (insert "\\circ ")))
 
-		    "xx" "\\times "
+    :cond #'texmathp
+    "oo" "\\circ "
+    "aa" "\\forall "
+    "ee" "\\exists "
+    "eu" "\\exists! "
+    "inn" "\\in "
+    "iff" "\\iff "
+    "&&" "\\land "
+    "==" "&= "
+    "**" "\\cdot "
 
-		    "rct" "\\!\\upharpoonright "
-		    "txt" (lambda ()
-			    (interactive)
-			    (yas-expand-snippet (yas-lookup-snippet "text")))
-		    ))
+    "nn" "\\cap "
+
+    "xx" "\\times "
+
+    "rct" "\\!\\upharpoonright "
+    "txt" (lambda ()
+	    (interactive)
+	    (yas-expand-snippet (yas-lookup-snippet "text")))
+    ))
 
 
 
@@ -474,14 +591,14 @@
   :init
   (setq evil-disable-insert-state-bindings t)
   (setq evil-undo-system 'undo-tree) ; Можно оставить или убрать, т.к. уже задано выше
-  ;; Делаем курсор в insert mode блоком с цветом #b6bff9
-  ;; Set cursor to change only color in insert mode (not shape)
-  (setq evil-normal-state-cursor '(box "black")       ;; Normal mode: box cursor, white color
-	;; evil-insert-state-cursor '(box "#57cc99")     ;; Insert mode: box cursor, blue color
-	;; evil-insert-state-cursor '(box "#2b9348")     ;; Insert mode: box cursor, blue color
-	evil-insert-state-cursor '(box "#8F00FF")     ;; Insert mode: box cursor, blue color
-	evil-visual-state-cursor '(box "red")      ;; Visual mode: box cursor, orange color
-	evil-replace-state-cursor '(box "red"))       ;; Replace mode: box cursor, red color
+  ;; ;; Делаем курсор в inert mode блоком с цветом #b6bff9
+  ;; ;; Set cursor to change only color in insert mode (not shape)
+  ;; (setq evil-normal-state-cursor '(box "black")       ;; Normal mode: box cursor, white color
+  ;; 	;; evil-insert-state-cursor '(box "#57cc99")     ;; Insert mode: box cursor, blue color
+  ;; 	;; evil-insert-state-cursor '(box "#2b9348")     ;; Insert mode: box cursor, blue color
+  ;; 	evil-insert-state-cursor '(box "#8F00FF")     ;; Insert mode: box cursor, blue color
+  ;; 	evil-visual-state-cursor '(box "red")      ;; Visual mode: box cursor, orange color
+  ;; 	evil-replace-state-cursor '(box "red"))       ;; Replace mode: box cursor, red color
   :config
   (evil-mode 1)
   (evil-set-leader nil (kbd "SPC"))
@@ -1093,5 +1210,5 @@
  ;; If there is more than one, they won't work right.
  '(evil-goggles-yank-face ((t (:background "#00afff" :foreground "black")))))
 
-
 (load-file "~/dotfiles/emacs/.emacs.d/config.el")
+
