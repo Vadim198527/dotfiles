@@ -11,7 +11,7 @@ return {
 						border = "single",
 						floating_preview_opts = {},
 						peek_definition_code = {
-							["<leader>df"] = "@function.outer",
+							-- ["<leader>df"] = "@function.outer",
 						},
 					},
 					select = {
@@ -82,6 +82,17 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
+			local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+			-- Add custom parser for Gherkin (Cucumber)
+			parser_configs.gherkin = {
+				install_info = {
+					url = "https://github.com/SamyAB/tree-sitter-gherkin.git",
+					files = { "src/parser.c" },
+					branch = "main",
+				},
+				filetype = "cucumber", -- Associates with Neovim's default filetype for .feature files
+			}
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
@@ -104,6 +115,7 @@ return {
 					"scheme",
 					"clojure",
 					"racket",
+					"gherkin",
 					-- "org",
 				},
 				autoinstall = true,

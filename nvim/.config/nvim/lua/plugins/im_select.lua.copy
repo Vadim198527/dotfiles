@@ -1,0 +1,8 @@
+return {
+	"keaising/im-select.nvim",
+	opts = {
+		default_im_select = "com.apple.keylayout.ABC", -- английская
+		default_command = "macism", -- ставится brew install macism
+	},
+    
+}

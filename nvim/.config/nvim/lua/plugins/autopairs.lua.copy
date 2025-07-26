@@ -1,0 +1,16 @@
+return {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+        check_ts = true,       -- использовать Tree-sitter для контекста
+        html_break_line_filetype = { -- где автоперенос нужен
+            "html",
+            "javascriptreact",
+            "typescriptreact",
+            "vue",
+            "svelte",
+            "tsx",
+            "jsx",
+        },
+    },
+}

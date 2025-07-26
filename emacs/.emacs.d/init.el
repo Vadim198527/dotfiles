@@ -1,12 +1,12 @@
+
 ;; -*- lexical-binding: t; -*-
 
 ;; Установка и настройка package management
 (setq evil-want-keybinding nil      ;; ← ДО обращения к evil
       evil-want-integration t
       evil-want-C-u-scroll t
-      evil-undo-system 'undo-tree
       )
-; ─── только пробелы, без символа TAB ──────────────────────────────
+                                        ; ─── только пробелы, без символа TAB ──────────────────────────────
 (setq-default indent-tabs-mode nil)   ;; никакого \t в файлах
 
 ;; ─── шаг отступа ──────────────────────────────────────────────────
@@ -24,7 +24,7 @@
 
 (setq auto-revert-use-notify t) 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+			             ("gnu" . "https://elpa.gnu.org/packages/")))
 
 ;; Отключаем центрирование при перемещении вниз экрана
 (setq scroll-conservatively 101)
@@ -37,9 +37,6 @@
       native-comp-deferred-compilation nil
       native-comp-async-report-warnings-errors 'silent)
 
-;; ;; Включаем отображение номеров строк
-;; (global-display-line-numbers-mode 1)
-
 ;; Включаем номера строк для всех режимов программирования
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
@@ -47,12 +44,6 @@
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 
 ;; Оставляем вашу настройку типа нумерации (это правильно)
-(setq display-line-numbers-type 'relative)
-
-;; Оставляем вашу настройку типа нумерации
-(setq display-line-numbers-type 'relative)
-;; --- Конец настройки отображения номеров строк ---
-;; Set line number type to relative (current line absolute, others relative)
 (setq display-line-numbers-type 'relative)
 
 ;; Установка use-package, если он не установлен
@@ -66,16 +57,11 @@
 (require 'bind-key)
 (setq use-package-always-ensure t)
 
-;; (desktop-save-mode 1)                         ; автосохранение включено
 (require 'desktop)
 (setq desktop-buffers-not-to-save
       (cons "\\.pdf$" desktop-buffers-not-to-save))
 (desktop-save-mode 1)
 
-;; (use-package exec-path-from-shell
-;;   :defer nil ;; ← обязательно nil
-;;   :config
-;;   (exec-path-from-shell-initialize))
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns x))
   :config
@@ -84,11 +70,8 @@
 (use-package avy
   :config
   (with-eval-after-load 'evil
-    ;; (evil-define-key 'normal 'global (kbd "C-/") 'avy-goto-char-timer)
-    ;; (evil-define-key 'normal 'global (kbd "C-/") 'avy-goto-char-2)
-    ;; Не
     (setq avy-orders-alist
- 	  '((avy-goto-char-2 . avy-order-closest)
+ 	      '((avy-goto-char-2 . avy-order-closest)
             (avy-goto-char-timer . avy-order-closest)))
     ;; (global-set-key (kbd "C-/") #'avy-goto-char-2)   ; глобально
     (global-set-key (kbd "C-/") #'avy-goto-char-timer)   ; глобально
@@ -134,15 +117,6 @@
 (set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 155)
 (set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
 
-;; (use-package catppuccin-theme
-;;   :ensure t
-;;   :config
-;;   (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
-;;   (catppuccin-reload)
-;;   (set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 160)
-;;   ;; (set-face-attribute 'default nil :family "JetBrainsMonoNL Nerd Font Mono" :height 160)
-;;   )
-
 ;; Настройки org-mode
 (use-package org
   :ensure nil
@@ -159,8 +133,8 @@
         org-agenda-tags-column 0
         org-agenda-block-separator ?─
         org-agenda-time-grid '((daily today require-timed)
-			       (800 1000 1200 1400 1600 1800 2000)
-			       " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+			                   (800 1000 1200 1400 1600 1800 2000)
+			                   " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
         org-agenda-current-time-string "◀── now ─────────────────────────────────────────────────"
         org-format-latex-options (plist-put org-format-latex-options :scale 1.9)))
 
@@ -177,22 +151,16 @@
 (use-package cdlatex
   :hook ((LaTeX-mode . turn-on-cdlatex)
          (org-mode . turn-on-org-cdlatex)
-	 (cdlatex-mode . my-cdlatex-disable-keys))
+	     (cdlatex-mode . my-cdlatex-disable-keys))
   :config
   (defun my-cdlatex-disable-keys ()
     ;; убираем автопару для "(" и ")"
     (define-key cdlatex-mode-map (kbd "(") nil)
     (define-key cdlatex-mode-map (kbd ")") nil)
+    (define-key cdlatex-mode-map (kbd "<") nil)
+    (define-key cdlatex-mode-map (kbd "|") nil)
     ;; убираем обработку апострофа
     (define-key cdlatex-mode-map (kbd "'") nil)))
-
-;; (use-package pdf-tools
-;;   :ensure t
-;;   :hook (pdf-view-mode . (lambda () (display-line-numbers-mode -1))) ; <-- ДОБАВИТЬ ЭТО
-;;   :config
-;;   (pdf-tools-install)
-;;   ;; вот эта строчка и снимет номера строк при входе в pdf-view-mode
-;;   )
 
 (defun my-latex-mode-keybindings ()
   "Custom keybindings for LaTeX mode."
@@ -206,19 +174,20 @@
 (use-package tex
   :ensure auctex
   :defer t
-
   :custom
-  ;; общий отступ в LaTeX-окружениях
   (LaTeX-indent-level       4)
   ;; отступ внутри {…}
   (TeX-brace-indent-level   4)
   ;; отступ для \item
   (LaTeX-item-indent        0)
-
   :hook ((LaTeX-mode . (lambda () (TeX-fold-mode 1)))
-	 (LaTeX-mode . my-latex-mode-keybindings)
-	 (LaTeX-mode . (lambda ()
-			 ;;  𝓔 𝓗 𝓘 𝓙 𝓚 𝓛 𝓜 𝓝 𝓞  𝓠 𝓡 𝓢 𝓣 𝓤 𝓥 𝓦 𝓧 𝓨 𝓩
+	     (LaTeX-mode . my-latex-mode-keybindings)
+         (LaTeX-mode . visual-line-mode)
+         (LaTeX-mode . LaTeX-math-mode)
+         (LaTeX-mode . turn-on-reftex)
+         (LaTeX-mode . my-latex-mode-keybindings)
+	     (LaTeX-mode . (lambda ()
+			             ;;  𝓔 𝓗 𝓘 𝓙 𝓚 𝓛 𝓜 𝓝 𝓞  𝓠 𝓡 𝓢 𝓣 𝓤 𝓥 𝓦 𝓧 𝓨 𝓩
                          (dolist (pair
                                   '(("\\blank"      . ?—)
                                     ("\\otimes"     . ?⨂)
@@ -246,6 +215,7 @@
                                     ("\\!\\upharpoonright" . ?↾ )
                                     ("\\implies" . ?⇒ )
                                     ("\\land" . ?∧)
+                                    ("\\lor" . ?∨)
                                     ("\\varnothing" . ?∅)
                                     ("\\cat{C}"     . ?𝓒)))
                            (push pair prettify-symbols-alist))
@@ -256,80 +226,18 @@
   (setq TeX-parse-self t)
   ;; (add-hook 'LaTeX-mode-hook 'TeX-global-PDF-mode)
   (setq-default TeX-PDF-mode t)
-  ;; (setq TeX-engine 'pdflatex)
   ;; (setq TeX-engine 'latexmk)
   (setq TeX-engine 'luatex)
-  (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-        TeX-source-correlate-start-server t)
+
+
+
+  ;; -------------------------
+  (add-hook 'LaTeX-mode-hook #'TeX-source-correlate-mode)
+  (setq TeX-source-correlate-start-server t)
+  (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
   (setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
-  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   )
 (setq-default TeX-engine 'xetex) ; или 'luatex
-;; (setq-default TeX-engine 'luatex) ; или 'luatex
-
-;; (use-package tex
-;;   :ensure auctex
-;;   :defer t
-;;   :hook ((LaTeX-mode . (lambda () (TeX-fold-mode 1)))
-;; 	 (LaTeX-mode . my-latex-mode-keybindings)
-;; 	 (LaTeX-mode . (lambda ()
-;; 			 ;; ... ваш код с prettify-symbols-alist ...
-;;                          (dolist (pair
-;;                                   '(("\\blank"      . ?—)
-;;                                     ("\\otimes"     . ?⨂)
-;;                                     ("\\defeq"      . ?≔)
-;;                                     ("\\mathcal{A}" . ?𝓐)
-;;                                     ("\\mathcal{B}" . ?𝓑)
-;;                                     ("\\mathcal{C}" . ?𝓒)
-;;                                     ("\\mathcal{D}" . ?𝓓 )
-;;                                     ("\\mathcal{G}" . ?𝓖 )
-;;                                     ("\\mathcal{F}" . ?𝓕 )
-;;                                     ("\\mathcal{P}" . ?𝓟 )
-;;                                     ("\\mathrm{A}" . ?A )
-;;                                     ("\\mathrm{B}" . ?B )
-;;                                     ("\\mathrm{C}" . ?C )
-;;                                     ("\\mathrm{D}" . ?D )
-;;                                     ("\\mathrm{E}" . ?E )
-;;                                     ("\\mathrm{L}" . ?L )
-;;                                     ("\\mathrm{P}" . ?P )
-;;                                     ("\\mathrm{R}" . ?R )
-;;                                     ("\\mathrm{S}" . ?S )
-;;                                     ("\\mathrm{T}" . ?T )
-;;                                     ("\\mathrm{X}" . ?X )
-;;                                     ("\\mathrm{Y}" . ?Y )
-;;                                     ("\\mathrm{Z}" . ?Z )
-;;                                     ("\\!\\upharpoonright" . ?↾ )
-;;                                     ("\\implies" . ?⇒ )
-;;                                     ("\\land" . ?∧)
-;;                                     ("\\varnothing" . ?∅)
-;;                                     ("\\cat{C}"     . ?𝓒)))
-;;                            (push pair prettify-symbols-alist))
-;;                          (prettify-symbols-mode 1))))
-;;   :config
-;;   ;; --- ОСНОВНЫЕ НАСТРОЙКИ ---
-;;   (setq TeX-auto-save t)
-;;   (setq TeX-parse-self t)
-;;   (setq-default TeX-PDF-mode t)
-
-;;   ;; --- НАСТРОЙКА ПРОСМОТРА PDF ---
-;;   (setq TeX-view-program-selection '((output-pdf "PDF Tools")))
-;;   (setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
-;;   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-
-;;   ;; --- НАСТРОЙКА СИНХРОНИЗАЦИИ ---
-;;   (setq TeX-source-correlate-mode t)
-;;   (setq TeX-source-correlate-start-server t)
-
-;;   ;; --- ЖЕСТКОЕ ПЕРЕОПРЕДЕЛЕНИЕ КОМАНДЫ КОМПИЛЯЦИИ ---
-;;   ;; 1. Добавляем новую команду "LuaLaTeX" в список
-;;   (add-to-list 'TeX-command-list
-;;                '("LuaLaTeX" "lualatex -synctex=1 -interaction=nonstopmode -file-line-error %s"
-;;                  TeX-run-TeX nil (latex-mode) :help "Run LuaLaTeX"))
-
-;;   ;; 2. Устанавливаем эту новую команду как команду по умолчанию
-;;   (setq TeX-command-default "LuaLaTeX"))
 
 (use-package pdf-tools
   :defer t
@@ -353,30 +261,6 @@
   (add-hook 'TeX-after-compilation-finished-functions
             #'TeX-revert-document-buffer))
 
-
-
-;; (defun my-latex-compile-and-view ()
-;;   "Compile LaTeX document and view PDF without prompting."
-;;   (interactive)
-;;   (save-buffer) ;; Сохраняем текущий буфер
-
-;;   ;; Запускаем компиляцию
-;;   (TeX-command "LaTeX" 'TeX-master-file)
-
-;;   ;; Устанавливаем таймер для просмотра после компиляции
-;;   (run-with-timer 1.0 nil
-;;                   (lambda ()
-;;                     ;; Напрямую вызываем функцию просмотра без запроса
-;;                     (TeX-view))))
-
-
-;; ;; Обеспечиваем автоматическое обновление PDF буферов
-;; (add-hook 'pdf-view-mode-hook 'auto-revert-mode)
-;; (setq auto-revert-interval 0.5)
-
-;; ;; Гарантируем, что PDF-буфер обновляется после компиляции
-;; (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-
 ;; Привязка клавиш в режиме LaTeX
 (with-eval-after-load 'evil
   (evil-define-key 'normal LaTeX-mode-map
@@ -393,7 +277,7 @@
     (let ((info (texmathp)))
       (and info
            (memq (car info)         ; первый элемент описывает «где» мы находимся
-		 '(in-dollar in-paren in-env)))))
+		         '(in-dollar in-paren in-env)))))
   (aas-set-snippets 'text-mode
     ";o-" "ō"
     ";i-" "ī"
@@ -402,112 +286,114 @@
     ";e-" "ē")
   (aas-set-snippets 'org-mode
     ";latex" (lambda ()
-	       (interactive)
-	       (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+	           (interactive)
+	           (yas-expand-snippet (yas-lookup-snippet "latexCode")))
     ;; Добавьте остальные сниппеты здесь
     )
   (aas-set-snippets 'LaTeX-mode
     "mk" (lambda ()
-	   (interactive)
-	   (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
+	       (interactive)
+	       (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
     "dm" (lambda ()
-	   (interactive)
-	   (yas-expand-snippet (yas-lookup-snippet "makeMathBlockEnv")))
+	       (interactive)
+	       (yas-expand-snippet (yas-lookup-snippet "makeMathBlockEnv")))
 
     "RR" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathbb{R} ")
-	     (insert "$\\mathbb{R}$ ")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathbb{R} ")
+	         (insert "$\\mathbb{R}$ ")))
     ";A" "$\\mathrm{A}$"
     ";B" "$\\mathrm{B}$"
     ";L" "$\\mathrm{L}$"
     ";P" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathrm{P}")
-	     (insert "$\\mathrm{P}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathrm{P}")
+	         (insert "$\\mathrm{P}$")))
     ";R" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathrm{R}")
-	     (insert "$\\mathrm{R}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathrm{R}")
+	         (insert "$\\mathrm{R}$")))
     ";S" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathrm{S}")
-	     (insert "$\\mathrm{S}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathrm{S}")
+	         (insert "$\\mathrm{S}$")))
     ";T" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathrm{T}")
-	     (insert "$\\mathrm{T}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathrm{T}")
+	         (insert "$\\mathrm{T}$")))
 
     ";X" (lambda ()
-	   (interactive)
-	   (if (not (texmathp)) 
-	       (insert "$\\mathrm{X}$")
-	     ))
+	       (interactive)
+	       (if (not (texmathp)) 
+	           (insert "$\\mathrm{X}$")
+	         ))
 
     ";Y" "$\\mathrm{Y}$"
     ";Z" (lambda ()
-	   (interactive)
-	   (if (not (texmathp)) 
-	       (insert "$\\mathrm{Z}$")
-	     ))
+	       (interactive)
+	       (if (not (texmathp)) 
+	           (insert "$\\mathrm{Z}$")
+	         ))
 
 
     ",F" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathcal{F}")
-	     (insert "$\\mathcal{F}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathcal{F}")
+	         (insert "$\\mathcal{F}$")))
     ",G" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathcal{G}")
-	     (insert "$\\mathcal{G}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathcal{G}")
+	         (insert "$\\mathcal{G}$")))
     ",R" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\mathcal{R}")
-	     (insert "$\\mathcal{R}$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\mathcal{R}")
+	         (insert "$\\mathcal{R}$")))
     ",P" "$\\mathcal{P}$"
 
 
     "=>" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\implies ")
-	     (insert "$\\implies$ ")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\implies")
+	         (insert "$\\implies$")))
 
     "->" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\to ")
-	     (insert "$\\to $ ")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\to ")
+	         (insert "$\\to $ ")))
 
     "!=" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\neq ")
-	     (insert "$\\neq$")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\neq ")
+	         (insert "$\\neq$")))
     "OO" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\varnothing ")
-	     (insert "$\\varnothing$ ")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\varnothing ")
+	         (insert "$\\varnothing$ ")))
     "CC" (lambda ()
-	   (interactive)
-	   (if (texmathp) 
-	       (insert "\\subseteq ")
-	     (insert "$\\subseteq$ ")))
+	       (interactive)
+	       (if (texmathp) 
+	           (insert "\\subseteq ")
+	         (insert "$\\subseteq$ ")))
 
     ";CC" (lambda ()
-	    (interactive)
-	    (if (texmathp) 
-		(insert "\\supseteq")
-	      (insert "$\\supseteq$")))
+	        (interactive)
+	        (if (texmathp) 
+		        (insert "\\supseteq")
+	          (insert "$\\supseteq$")))
+
+
     ;; "oo" (lambda ()
     ;; 	   (interactive)
     ;; 	   (if (texmathp)
@@ -515,13 +401,17 @@
 
     :cond #'texmathp
     "oo" "\\circ "
-    "aa" "\\forall "
-    "ee" "\\exists "
-    "eu" "\\exists! "
+    "AA" "\\forall "
+    "EE" "\\exists "
+    "EU" "\\exists! "
     "inn" "\\in "
     "iff" "\\iff "
-    "&&" "\\land "
+    "&&" "\\land"
+    "||" "\\lor"
+    "o+" "\\oplus "
     "==" "&= "
+    ">=" "\\ge"
+    "<=" "\\le"
     "**" "\\cdot "
 
     "nn" "\\cap "
@@ -530,8 +420,8 @@
 
     "rct" "\\!\\upharpoonright "
     "txt" (lambda ()
-	    (interactive)
-	    (yas-expand-snippet (yas-lookup-snippet "text")))
+	        (interactive)
+	        (yas-expand-snippet (yas-lookup-snippet "text")))
     ))
 
 
@@ -548,95 +438,156 @@
 
 (use-package vterm)
 
-(use-package undo-tree
+;; (use-package undo-tree
+;;   :ensure t
+;;   :demand t
+;;   :diminish
+;;   ;; -------------------- Параметры ДО включения режима --------------------
+;;   :init
+;;   ;; сохранять историю между сессиями
+;;   (setq undo-tree-auto-save-history t)
+;;   ;; складываем все файлы вида *.~undo-tree~ в одну папку
+;;   (setq undo-tree-history-directory-alist
+;;         `(("." . ,(expand-file-name "undo-tree-history/" user-emacs-directory))))
+;;   (unless (file-directory-p (cdr (assoc "." undo-tree-history-directory-alist)))
+;;     (make-directory (cdr (assoc "." undo-tree-history-directory-alist)) t))
+
+
+;;   ;; сразу показывать diff при навигации (необязательно — уберите, если мешает)
+;;   (setq undo-tree-visualizer-diff t)
+
+;;   ;; желаемые лимиты памяти (опционально)
+;;   (setq undo-limit        400000    ; ~400 KB: когда Emacs начинает выбрасывать undo-записи
+;;         undo-strong-limit 600000    ; ~600 KB: прежде чем удалять связанные редактирования
+;;         undo-outer-limit  800000    ; ~800 KB: жёсткий предел на один шаг
+;;         undo-tree-enable-undo-in-region t)
+
+;;   ;; -------------------- Включаем глобально --------------------
+;;   :config
+;;   ;; показывать для каждого узла, когда он был создан
+;;   (setq undo-tree-visualizer-timestamps t)          ; абсолютное «2025-05-08 19:23»
+;;   ;; (setq undo-tree-visualizer-timestamp-format 'absolute)
+;;   (setq undo-tree-visualizer-timestamp-format
+;;         (lambda (time) (format-time-string " [%Y-%m-%d %H:%M]" time)))
+;;   ;; можно добавить прямо после (use-package undo-tree …)
+;;   (with-eval-after-load 'undo-tree
+;;     ;; убираем лишние клавиши
+;;     (define-key undo-tree-map (kbd "C-/") nil)
+;;     (define-key undo-tree-map (kbd "C-_") nil))   ; ← опционально
+
+;;   (global-undo-tree-mode 1))
+
+(setq evil-undo-system 'undo-fu)  ; Move this up top for global consistency, before evil loads.
+
+;; базовое Ctrl-Z / Ctrl-Shift-Z без изменения алгоритма Emacs
+(use-package undo-fu
   :ensure t
-  :demand t
-  :diminish
-  ;; -------------------- Параметры ДО включения режима --------------------
+  :bind (("C-z"   . undo-fu-only-undo)
+         ("C-S-z" . undo-fu-only-redo)))
+
+;; Пишем историю между сессиями
+(use-package undo-fu-session
+  :after undo-fu
+  :ensure t
   :init
-  ;; сохранять историю между сессиями
-  (setq undo-tree-auto-save-history t)
-  ;; складываем все файлы вида *.~undo-tree~ в одну папку
-  (setq undo-tree-history-directory-alist
-        `(("." . ,(expand-file-name "undo-tree-history/" user-emacs-directory))))
-  (unless (file-directory-p (cdr (assoc "." undo-tree-history-directory-alist)))
-    (make-directory (cdr (assoc "." undo-tree-history-directory-alist)) t))
-
-  ;; показывать для каждого узла, когда он был создан
-  (setq undo-tree-visualizer-timestamps t)          ; абсолютное «2025-05-08 19:23»
-
-  ;; сразу показывать diff при навигации (необязательно — уберите, если мешает)
-  (setq undo-tree-visualizer-diff t)
-
-  ;; желаемые лимиты памяти (опционально)
-  (setq undo-limit        400000    ; ~400 KB: когда Emacs начинает выбрасывать undo-записи
-        undo-strong-limit 600000    ; ~600 KB: прежде чем удалять связанные редактирования
-        undo-outer-limit  800000    ; ~800 KB: жёсткий предел на один шаг
-        undo-tree-enable-undo-in-region t)
-
-  ;; -------------------- Включаем глобально --------------------
+  ;; Директория для хранения undo-файлов (сессий). Если не существует, создастся автоматически.
+  (setq undo-fu-session-directory
+        (expand-file-name "undo-fu-history/" user-emacs-directory))
+  ;; Исключения: не сохранять сессии для этих типов файлов (добавили .el для config-файлов).
+  (setq undo-fu-session-incompatible-files
+        '("/COMMIT_EDITMSG\\'" "/git-rebase-todo\\'" "\\.gpg\\'" "\\.png\\'" "\\.jpg\\'" "\\.el\\'"))
+  ;; Сжатие файлов сессий для экономии места (zstd — быстро и эффективно; можно сменить на 'xz или nil).
+  (setq undo-fu-session-compression 'zstd)
+  ;; Увеличиваем лимиты дальше, чтобы реже урезать историю.
+  (setq undo-limit 16000000         ; 16 MB: мягкий лимит
+        undo-strong-limit 24000000  ; 24 MB: сильный лимит
+        undo-outer-limit 128000000  ; 128 MB: жёсткий лимит — основной виновник предупреждений
+        undo-ask-before-discard t)  ; Спрашивать перед discard крупного undo (даёт шанс сохранить).
   :config
-  ;; можно добавить прямо после (use-package undo-tree …)
-  (with-eval-after-load 'undo-tree
-    ;; убираем лишние клавиши
-    (define-key undo-tree-map (kbd "C-/") nil)
-    (define-key undo-tree-map (kbd "C-_") nil))   ; ← опционально
+  ;; Включаем глобально: сессии будут сохраняться/восстанавливаться для всех буферов.
+  (undo-fu-session-global-mode 1)
+  ;; Опционально: автоматическое удаление старых сессий (старше 7 дней) при выходе из Emacs, чтобы не захламлять диск.
+  (add-hook 'kill-emacs-hook
+            (lambda ()
+              (let ((days 7))
+                (dolist (file (directory-files undo-fu-session-directory t))
+                  (when (and (file-regular-p file)
+                             (> (float-time (time-subtract (current-time) (nth 5 (file-attributes file))))
+                                (* days 86400)))  ; 86400 сек = 1 день
+                    (delete-file file)))))))
 
-  (global-undo-tree-mode 1))
+;; сам визуализатор (без изменений)
+(use-package vundo
+  :ensure t
+  :bind (("C-x u" . vundo))  ; Стандартная привязка для запуска визуализатора.
+  :init
+  ;; Базовые настройки.
+  (setq vundo-roll-back-on-quit t       ; Откат к выбранному состоянию при выходе.
+        vundo-glyph-alist vundo-unicode-symbols  ; Unicode-символы для дерева.
+        vundo-compact-display t         ; Компактный вид дерева (меньше места).
+        vundo-window-max-height 10)     ; Лимит высоты окна vundo.
+  :config
+  ;; Интеграция с Evil: в normal-state vundo используем vim-подобные клавиши.
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal vundo-mode-map
+      (kbd "h") #'vundo-backward
+      (kbd "l") #'vundo-forward
+      (kbd "j") #'vundo-next
+      (kbd "k") #'vundo-previous
+      (kbd "RET") #'vundo-confirm
+      (kbd "q") #'vundo-quit))
+  ;; Опционально: показывать diff для выбранного узла автоматически.
+  )
 
-;; Настройка evil-mode
+;; Настройка evil-mode (убрали undo-tree ссылки, стандартизировали на undo-fu)
 (use-package evil
   :ensure t
-  :after undo-tree  ;; Загружать только после undo-tree
   :init
   (setq evil-disable-insert-state-bindings t)
-  (setq evil-undo-system 'undo-tree) ; Можно оставить или убрать, т.к. уже задано выше
-  ;; ;; Делаем курсор в inert mode блоком с цветом #b6bff9
-  ;; ;; Set cursor to change only color in insert mode (not shape)
-  ;; (setq evil-normal-state-cursor '(box "black")       ;; Normal mode: box cursor, white color
-  ;; 	;; evil-insert-state-cursor '(box "#57cc99")     ;; Insert mode: box cursor, blue color
-  ;; 	;; evil-insert-state-cursor '(box "#2b9348")     ;; Insert mode: box cursor, blue color
-  ;; 	evil-insert-state-cursor '(box "#8F00FF")     ;; Insert mode: box cursor, blue color
-  ;; 	evil-visual-state-cursor '(box "red")      ;; Visual mode: box cursor, orange color
-  ;; 	evil-replace-state-cursor '(box "red"))       ;; Replace mode: box cursor, red color
+  (setq evil-undo-system 'undo-fu)  ; Явно undo-fu здесь.
+  ;; ... (остальные настройки курсора без изменений)
   :config
   (evil-mode 1)
+  (evil-select-search-module 'evil-search 'evil-search)
+  (setq evil-ex-search-persistent-highlight nil)
   (evil-set-leader nil (kbd "SPC"))
   (defun my/lisp-symbol-words ()
     ;; локально в буфере paredit'а
-    ;; (setq-local evil-symbol-word-search t)
     (defalias #'forward-evil-word #'forward-evil-symbol))
-
   (add-hook 'paredit-mode-hook #'my/lisp-symbol-words)
+  ;; Привязка для vundo вместо undo-tree (измените, если хотите undo-tree-visualize).
+  (evil-define-key 'normal 'global (kbd "<leader>ut") 'vundo)
+  ;; ─── полноценные vi$ / va$ ────────────────────────────────────────────
+  (evil-define-text-object my/evil-dollar-inner (count &optional beg end type)
+    "Взять текст между ближайшими $ … $."
+    (evil-select-quote ?$ beg end type count))
+  (evil-define-text-object my/evil-dollar-outer (count &optional beg end type)
+    "Взять вместе с долларами."
+    (evil-select-quote ?$ beg end type count t))
+  (define-key evil-inner-text-objects-map "$" #'my/evil-dollar-inner)
+  (define-key evil-outer-text-objects-map "$" #'my/evil-dollar-outer))
 
-  ;; Добавляем привязку leader ut для undo-tree-visualize
-  (evil-define-key 'normal 'global (kbd "<leader>ut") 'undo-tree-visualize))
 
 
-;;; ─── полноценные vi$ / va$ ────────────────────────────────────────────
-;; положите *после* (evil-mode 1)
-
-(evil-define-text-object my/evil-dollar-inner (count &optional beg end type)
-  "Взять текст между ближайшими $ … $."
-  (evil-select-quote ?$ beg end type count))      ; ← здесь quote, а не paren
-
-(evil-define-text-object my/evil-dollar-outer (count &optional beg end type)
-  "Взять вместе с долларами."
-  (evil-select-quote ?$ beg end type count t))
-
-(define-key evil-inner-text-objects-map "$" #'my/evil-dollar-inner)
-(define-key evil-outer-text-objects-map "$" #'my/evil-dollar-outer)
-
+;; (use-package evil-collection
+;;   :after evil
+;;   :ensure t
+;;   :init
+;;   (evil-collection-init)
+;;   (evil-collection-org-setup)
+;;   ;; :config
+;;   ;; (add-hook 'org-agenda-mode-hook 'evil-normal-state)
+;;   )
 
 (use-package evil-collection
   :after evil
   :ensure t
   :init
-  (evil-collection-init)
-  (evil-collection-org-setup)
-  ;; :config
-  ;; (add-hook 'org-agenda-mode-hook 'evil-normal-state)
-  )
+  ;; включаем Evil в minibuffer’е и во всех «вспомогательных» буферах
+  (setq evil-collection-setup-minibuffer t)
+  (evil-collection-init)          ;; ← должен идти после set-q
+  (evil-collection-org-setup))
+
 
 ;; Настройка vertico
 (use-package vertico
@@ -644,8 +595,8 @@
   :init
   (vertico-mode)  ;; Активировать сразу при загрузке
   :bind (:map minibuffer-local-map
-	      ("C-n" . vertico-next)
-	      ("C-p" . vertico-previous)))
+	          ("C-n" . vertico-next)
+	          ("C-p" . vertico-previous)))
 
 ;; Настройка consult
 (use-package consult
@@ -723,7 +674,7 @@
   :ensure t
   :commands lsp
   :hook ((python-mode . lsp)
-	 (c-mode . lsp)) ; запуск lsp при открытии python-файлов
+	     (c-mode . lsp)) ; запуск lsp при открытии python-файлов
   :init
   ;; Настройки, опционально
   (setq lsp-keymap-prefix "C-c l") ; быстрый доступ к командам lsp
@@ -765,54 +716,8 @@
 (use-package clang-format
   :ensure t
   :bind (:map c-mode-map
-	      ("C-c f" . clang-format-region)))
+	          ("C-c f" . clang-format-region)))
 
-
-;; (use-package corfu
-;;   ;; ---------- ПЕРЕМЕННЫЕ ----------
-;;   :custom
-;;   (corfu-cycle          t)
-;;   (corfu-auto           t)
-;;   (corfu-auto-prefix    2)
-;;   (corfu-auto-delay     0.0)
-;;   (corfu-preselect      'prompt)
-
-;;   ;; ---------- НАСТРОЙКА ДО ЗАПУСКА ----------
-;;   :init
-;;   ;; Добавляем LaTeX‑режимы в список исключений
-;;   (setq corfu-excluded-modes '(latex-mode LaTeX-mode))
-
-;;   ;; Теперь можно включать глобально
-;;   (global-corfu-mode)
-
-;;   ;; Дополнительные мини‑моды
-;;   (corfu-popupinfo-mode)
-;;   (corfu-history-mode)
-
-;;   ;; ---------- ПОСЛЕ ЗАГРУЗКИ ----------
-;;   :config
-;;   ;; убираем TAB из keymap, если нужно
-;;   (keymap-unset corfu-map "TAB")
-;;   ;; (global-set-key (kbd "TAB") nil)
-;;   )
-
-
-;; (use-package cape
-;;   ;; Bind prefix keymap providing all Cape commands under a mnemonic key.
-;;   ;; Press C-c p ? to for help.
-;;   :bind ("C-c p" . cape-prefix-map) ;; Alternative key: M-<tab>, M-p, M-+
-;;   :init
-;;   (add-hook 'completion-at-point-functions #'cape-dabbrev)
-;;   (add-hook 'completion-at-point-functions #'cape-file)
-;;   (add-hook 'completion-at-point-functions #'cape-elisp-block))
-;; ;; ;; ── Отключить штатный elisp-CAPF во всех .el-буферах ────────────────
-;; ;; (defun my/elisp-disable-default-capf ()
-;; ;;   "Убрать `elisp-completion-at-point' из списка CAPF'ов в текущем буфере."
-;; ;;   (remove-hook 'completion-at-point-functions
-;; ;;                #'elisp-completion-at-point
-;; ;;                t))                ;; «t» ⇒ правим *локальную* копию списка
-
-;; ;; (add-hook 'emacs-lisp-mode-hook #'my/elisp-disable-default-capf)
 
 ;;; --- Corfu --------------------------------------------------------------
 (use-package corfu
@@ -826,67 +731,15 @@
   (corfu-popupinfo-mode) (corfu-history-mode)
   :config (keymap-unset corfu-map "TAB"))
 
-;;; --- Cape ---------------------------------------------------------------
-;; (use-package cape
-;;   :bind ("C-c p" . cape-prefix-map)
-;;   :init
-;;   ;;------------------------------------------------------------
-;;   ;; 1. Elisp-символы + dabbrev → один Capf
-;;   ;;------------------------------------------------------------
-;;   (defun my/elisp+dabbrev-capf ()
-;;     "Show Elisp symbols **and** words from buffers at the same time."
-;;     (let* (;; вызов штатного Capf без флага :exclusive
-;;            (elisp-res (funcall (cape-wrap-nonexclusive
-;;                                 #'elisp-completion-at-point)))
-;;            (dabbrev-res (funcall #'cape-dabbrev)))
-;;       (when (and elisp-res dabbrev-res)
-;;         ;; обе функции вернули список (beg end table . props)
-;;         (pcase-let* ((`(,beg ,end ,table1 . ,plist1) elisp-res)
-;;                      (`(,_   ,_   ,table2)           dabbrev-res))
-;;           (list
-;;            beg end
-;;            ;; объединяем две таблицы кандидатов
-;;            (completion-table-merge table1 table2)
-;;            ;; передаём полезные метаданные Elisp-Capf,
-;;            ;; плюс своя функция сортировки
-;;            :annotation-function  (plist-get plist1 :annotation-function)
-;;            :company-docsig       (plist-get plist1 :company-docsig)
-;;            :category             (plist-get plist1 :category)
-;;            :display-sort-function
-;;            (lambda (cands)
-;;              ;; сначала более точные/короткие, потом по алфавиту
-;;              (sort cands
-;;                    (lambda (a b)
-;;                      (if (= (length a) (length b))
-;;                          (string-lessp a b)
-;;                        (< (length a) (length b)))))))))))
-
-;;   (defun my/setup-elisp-capfs ()
-;;     ;; NB: `cape-file` оставляем отдельным: это «многошаговый» Capf
-;;     (setq-local completion-at-point-functions
-;;                 (list #'my/elisp+dabbrev-capf
-;;                       #'cape-file)))
-
-;;   (add-hook 'emacs-lisp-mode-hook        #'my/setup-elisp-capfs)
-;;   (add-hook 'lisp-interaction-mode-hook  #'my/setup-elisp-capfs)
-
-;;   ;;------------------------------------------------------------
-;;   ;; 2. В остальных режимах — просто добавляем dabbrev в конец
-;;   ;;------------------------------------------------------------
-;;   (defun my/append-dabbrev ()
-;;     (add-hook 'completion-at-point-functions #'cape-dabbrev -1 t))
-;;   (add-hook 'after-change-major-mode-hook #'my/append-dabbrev))
-
-
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles . (partial-completion)))
-					(command (styles orderless basic))
-					(variable (styles orderless basic))
-					(symbol (styles orderless basic)))
+					                    (command (styles orderless basic))
+					                    (variable (styles orderless basic))
+					                    (symbol (styles orderless basic)))
         orderless-component-separator "[ -]"))
 
 ;; https://www.racket-mode.com/#Install-Update-and-Uninstall 
@@ -895,15 +748,15 @@
   :hook (racket-mode . racket-xp-mode)
   :config
   (evil-define-key 'normal racket-mode-map (kbd "<leader>de") '(lambda () (interactive)
-								 (racket-xp-mode t)))
+								                                 (racket-xp-mode t)))
   (evil-define-key 'normal racket-mode-map (kbd "<leader>dd") '(lambda () (interactive) 
-								 (racket-xp-mode -1))))
+								                                 (racket-xp-mode -1))))
 ;; Удобное редактирование Lisp-кода (структурное редактирование)
 (use-package paredit
   :config
   (dolist (m '(emacs-lisp-mode-hook
-	       racket-mode-hook
-	       racket-repl-mode-hook))
+	           racket-mode-hook
+	           racket-repl-mode-hook))
     (add-hook m #'paredit-mode)) 
   (evil-define-key 'normal paredit-mode-map (kbd "<)") 'paredit-forward-slurp-sexp)
   (evil-define-key 'normal paredit-mode-map (kbd ">)") 'paredit-forward-barf-sexp)
@@ -986,9 +839,6 @@
   
   (advice-add 'evil-yank-lines :around #'my/evil-visual-yank-with-cursor-stay))
 
-;; if you don’t already have use-package installed:
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
 
@@ -1008,9 +858,9 @@
     (with-eval-after-load 'evil
       ;; <leader> t внутри treemacs-state
       (evil-define-key 'treemacs treemacs-mode-map
-	(kbd "<leader>t") #'treemacs)             ; ← добавили!
+	    (kbd "<leader>t") #'treemacs)             ; ← добавили!
       (dolist (state '(treemacs normal))    ; дублируем в оба
-	(evil-define-key state treemacs-mode-map
+	    (evil-define-key state treemacs-mode-map
           (kbd "C-h") #'evil-window-left
           (kbd "C-l") #'evil-window-right
           (kbd "C-j") #'evil-window-down
@@ -1064,27 +914,6 @@
   :config 
   (evil-define-key 'normal 'global (kbd "<leader>;") #'harpoon-quick-menu-hydra)
   (evil-define-key 'normal 'global (kbd "<leader>a h") #'harpoon-add-file))
-
-;; ;; === chrome emacs ===
-;; (use-package atomic-chrome
-;;   :ensure t                       ;; автоматическая установка из melpa
-;;   :hook (after-init . atomic-chrome-start-server) ;; старт сервера после загрузки emacs
-;;   :custom
-;;   ;; синхронизация «на лету» — правки сразу уходят обратно в браузер
-;;   (atomic-chrome-enable-auto-update t)   ; отключите, если хотите отправлять c-c c-s :contentreference[oaicite:0]{index=0}
-;;   ;; какой major-mode включать, если сайт не распознан
-;;   (atomic-chrome-default-major-mode 'markdown-mode)
-;;   ;; куда открывать буфер (frame | split | full)
-;;   (atomic-chrome-buffer-open-style 'frame)
-;;   ;; разные режимы для разных сайтов
-;;   (atomic-chrome-url-major-mode-alist
-;;    '(("github\\.com"       . gfm-mode)
-;;      ("stackoverflow\\.com". markdown-mode)))
-;;   ;; если стандартный порт 4001 занят, поменяйте так:
-;;   (atomic-chrome-server-port 4001)
-;;   :config
-;;   ;; сообщение для уверенности, что всё запустилось
-;;   (message "✅ atomic-chrome server is running"))
 
 ;; === Atomic-Chrome + Brave =============================================
 (use-package atomic-chrome
@@ -1147,59 +976,60 @@
      default))
  '(evil-emacs-state-modes
    '(5x5-mode bbdb-mode biblio-selection-mode blackbox-mode
-	      bookmark-edit-annotation-mode browse-kill-ring-mode
-	      bs-mode bubbles-mode bzr-annotate-mode calc-mode
-	      cfw:calendar-mode completion-list-mode
-	      custom-theme-choose-mode delicious-search-mode
-	      desktop-menu-blist-mode desktop-menu-mode dun-mode
-	      dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode
-	      dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode
-	      dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode
-	      efs-mode Electric-buffer-menu-mode emms-browser-mode
-	      emms-mark-mode emms-metaplaylist-mode emms-playlist-mode
-	      ess-help-mode etags-select-mode fj-mode gc-issues-mode
-	      gdb-breakpoints-mode gdb-disassembly-mode
-	      gdb-frames-mode gdb-locals-mode gdb-memory-mode
-	      gdb-registers-mode gdb-threads-mode gist-list-mode
-	      git-rebase-mode gomoku-mode google-maps-static-mode
-	      jde-javadoc-checker-report-mode magit-cherry-mode
-	      magit-diff-mode magit-log-mode magit-log-select-mode
-	      magit-popup-mode magit-popup-sequence-mode
-	      magit-process-mode magit-reflog-mode magit-refs-mode
-	      magit-revision-mode magit-stash-mode magit-stashes-mode
-	      magit-status-mode mh-folder-mode monky-mode mpuz-mode
-	      mu4e-main-mode mu4e-headers-mode mu4e-view-mode
-	      notmuch-hello-mode notmuch-search-mode notmuch-show-mode
-	      notmuch-tree-mode org-agenda-mode proced-mode rcirc-mode
-	      rebase-mode recentf-dialog-mode sldb-mode
-	      slime-inspector-mode slime-thread-control-mode
-	      slime-xref-mode snake-mode solitaire-mode
-	      sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode
-	      tetris-mode tla-annotate-mode tla-archive-list-mode
-	      tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode
-	      tla-browse-mode tla-category-list-mode
-	      tla-changelog-mode tla-follow-symlinks-mode
-	      tla-inventory-file-mode tla-inventory-mode tla-lint-mode
-	      tla-logs-mode tla-revision-list-mode tla-revlog-mode
-	      tla-tree-lint-mode tla-version-list-mode twittering-mode
-	      urlview-mode vc-annotate-mode vc-dir-mode vm-mode
-	      vm-summary-mode w3m-mode wab-compilation-mode
-	      xgit-annotate-mode xgit-changelog-mode xgit-diff-mode
-	      xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode
-	      xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
+              bookmark-edit-annotation-mode browse-kill-ring-mode
+              bs-mode bubbles-mode bzr-annotate-mode calc-mode
+              cfw:calendar-mode completion-list-mode
+              custom-theme-choose-mode delicious-search-mode
+              desktop-menu-blist-mode desktop-menu-mode dun-mode
+              dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode
+              dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode
+              dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode
+              efs-mode Electric-buffer-menu-mode emms-browser-mode
+              emms-mark-mode emms-metaplaylist-mode emms-playlist-mode
+              ess-help-mode etags-select-mode fj-mode gc-issues-mode
+              gdb-breakpoints-mode gdb-disassembly-mode
+              gdb-frames-mode gdb-locals-mode gdb-memory-mode
+              gdb-registers-mode gdb-threads-mode gist-list-mode
+              git-rebase-mode gomoku-mode google-maps-static-mode
+              jde-javadoc-checker-report-mode magit-cherry-mode
+              magit-diff-mode magit-log-mode magit-log-select-mode
+              magit-popup-mode magit-popup-sequence-mode
+              magit-process-mode magit-reflog-mode magit-refs-mode
+              magit-revision-mode magit-stash-mode magit-stashes-mode
+              magit-status-mode mh-folder-mode monky-mode mpuz-mode
+              mu4e-main-mode mu4e-headers-mode mu4e-view-mode
+              notmuch-hello-mode notmuch-search-mode notmuch-show-mode
+              notmuch-tree-mode org-agenda-mode proced-mode rcirc-mode
+              rebase-mode recentf-dialog-mode sldb-mode
+              slime-inspector-mode slime-thread-control-mode
+              slime-xref-mode snake-mode solitaire-mode
+              sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode
+              tetris-mode tla-annotate-mode tla-archive-list-mode
+              tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode
+              tla-browse-mode tla-category-list-mode
+              tla-changelog-mode tla-follow-symlinks-mode
+              tla-inventory-file-mode tla-inventory-mode tla-lint-mode
+              tla-logs-mode tla-revision-list-mode tla-revlog-mode
+              tla-tree-lint-mode tla-version-list-mode twittering-mode
+              urlview-mode vc-annotate-mode vc-dir-mode vm-mode
+              vm-summary-mode w3m-mode wab-compilation-mode
+              xgit-annotate-mode xgit-changelog-mode xgit-diff-mode
+              xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode
+              xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
    '(0x0 aas atomic-chrome auctex cape catppuccin-theme cdlatex
-	 clang-format doom-themes embark-consult evil-cleverparens
-	 evil-collection evil-goggles evil-leader evil-mc
-	 evil-surround exec-path-from-shell expand-region
-	 gruvbox-theme harpoon hop iedit lsp-pyright lsp-ui marginalia
-	 modus-themes orderless org-roam paredit pdf-tools racket-mode
-	 treemacs-evil treemacs-icons-dired treemacs-projectile
-	 treesit-auto undo-tree vertico vterm yasnippet))
+         clang-format corfu doom-themes embark-consult
+         evil-cleverparens evil-collection evil-goggles evil-leader
+         evil-mc evil-surround exec-path-from-shell expand-region
+         gruvbox-theme harpoon hop iedit lsp-pyright lsp-ui marginalia
+         modus-themes orderless org-roam paredit pdf-tools pos-tip
+         racket-mode treemacs-evil treemacs-icons-dired
+         treemacs-projectile treesit-auto undo-fu undo-fu-session
+         vertico vterm vundo yasnippet))
  '(package-vc-selected-packages
    '((pcre :url "https://github.com/syohex/emacs-pcre.git" :branch
-	   "master")
+           "master")
      (hop :url "https://github.com/Animeshz/hop.el.git" :branch "main")))
  '(warning-suppress-types '((use-package))))
 

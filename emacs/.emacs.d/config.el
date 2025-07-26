@@ -56,6 +56,15 @@
   (define-key evil-insert-state-map (kbd "C-;") #'my-recenter-above-center-4)
   )
 
+(defun my-evil-select-whole-buffer ()
+  "Выделяет весь буфер в visual state и запоминает исходную позицию в jumplist Evil."
+  (interactive)
+  (evil-set-jump)  ; Добавляем текущую позицию в jumplist
+  (evil-visual-select (point-min) (point-max) 'char))
+
+;; Привязываем к <leader>sa
+(evil-define-key 'normal 'global (kbd "<leader>sa") #'my-evil-select-whole-buffer)
+
 ;;(evil-define-key 'normal LaTeX-mode-map (kbd "<leader> p s t") 'prettify-symbols-mode)
 (evil-define-key 'normal 'global (kbd "<leader>km") 'describe-bindings) 
 (evil-define-key 'normal 'global (kbd "C-e") 'move-end-of-line) 
@@ -283,8 +292,8 @@ Place the cursor after the opening parenthesis of the new list."
         (insert ")")
         (goto-char start)
         (insert "( ")
-	(backward-char 1)
-	(evil-insert-state)
+	    (backward-char 1)
+	    (evil-insert-state)
         (save-excursion
           (backward-char 1)
           (indent-sexp)))))
@@ -300,8 +309,8 @@ Place the cursor after the opening parenthesis of the new list."
               (insert ")")
               (goto-char start)
               (insert "( ")
-	      (backward-char 1)
-	      (evil-insert-state)
+	          (backward-char 1)
+	          (evil-insert-state)
               (save-excursion
                 (backward-char 1)
                 (indent-sexp)))))
@@ -336,7 +345,7 @@ Place the cursor after the closing parenthesis of the new list."
         (goto-char start)
         (insert "(")
         (goto-char (+ end 1))  ; Move to after closing paren
-	(evil-insert-state)
+	    (evil-insert-state)
         (save-excursion
           (backward-sexp)
           (indent-sexp)))))
@@ -352,7 +361,7 @@ Place the cursor after the closing parenthesis of the new list."
               (goto-char start)
               (insert "(")
               (goto-char (+ end 1))  ; Move to after closing paren
-	      (evil-insert-state)
+	          (evil-insert-state)
               (save-excursion
                 (backward-sexp)
                 (indent-sexp)))))
@@ -387,8 +396,8 @@ Example: ab|d -> (| abd)"
             (insert ")")
             (goto-char start)
             (insert "( ")
-	    ;; (forward-char 1)
-	    (backward-char 1)
+	        ;; (forward-char 1)
+	        (backward-char 1)
             (evil-insert-state))
         (error "No symbol at point"))))))
 
@@ -460,6 +469,7 @@ Example: ab|d -> (abd|)"
 (evil-define-key 'normal 'paredit-mode-map (kbd "<f") 'paredit-backward-move-form)
 (evil-define-key 'normal 'paredit-mode-map (kbd "<leader>(") 'paredit-wrap-around-sexp)
 (evil-define-key 'normal 'paredit-mode-map (kbd "<leader>)") 'paredit-wrap-around-sexp-end)
+(evil-define-key 'normal 'paredit-mode-map (kbd "<leader>]") 'paredit-wrap-square)
 (evil-define-key 'normal 'paredit-mode-map (kbd "<leader>e(") 'paredit-wrap-around-symbol)
 (evil-define-key 'normal 'paredit-mode-map (kbd "<leader>e)") 'paredit-wrap-around-symbol-end)
 
@@ -503,11 +513,11 @@ Example: ab|d -> (abd|)"
 
 ;; Открлючаем и включаем обратно подсветку Lsp
 (evil-define-key 'normal 'global (kbd "<leader>dd") (lambda ()
-						      (interactive)
-						      (flymake-mode -1)))  
+						                              (interactive)
+						                              (flymake-mode -1)))  
 (evil-define-key 'normal 'global (kbd "<leader>de") (lambda ()
-						      (interactive)
-						      (flymake-mode 1)))  
+						                              (interactive)
+						                              (flymake-mode 1)))  
 
 (defun my/run-current-python-file ()
   "Compile the current buffer's Python file using 'python file.py'."
@@ -516,7 +526,7 @@ Example: ab|d -> (abd|)"
       ;; Проверяем (необязательно), что это .py файл
       (if (string= (file-name-extension buffer-file-name) "py")
           (compile (concat "python3 " (shell-quote-argument buffer-file-name)))
-	(message "Current buffer is not a Python (.py) file"))
+	    (message "Current buffer is not a Python (.py) file"))
     (message "Current buffer is not visiting a file")))
 
 ;; Назначаем <leader>rc в normal state для запуска функции
@@ -551,7 +561,7 @@ Example: ab|d -> (abd|)"
 
 (dolist (state '(normal insert visual emacs))       ; где хотим?
   (define-key (symbol-value (intern (format "evil-%s-state-map" state)))
-	      (kbd "C-s") #'my/save-buffer))
+	          (kbd "C-s") #'my/save-buffer))
 
 ;; Оператор для копирования в системный буфер (например, <leader>yiw)
 (evil-define-operator my/clipboard-yank (beg end type \_ \_)
@@ -564,16 +574,16 @@ Example: ab|d -> (abd|)"
 
 ;; Назначаем <leader>p на вставку из системного буфера
 (define-key evil-normal-state-map (kbd "<leader>p")
-	    (lambda () 
-	      (interactive) 
-	      (evil-paste-after 1 ?+))) ; 1 - count, ?+ - регистр системного буфера
+	        (lambda () 
+	          (interactive) 
+	          (evil-paste-after 1 ?+))) ; 1 - count, ?+ - регистр системного буфера
 
 
 ;; (evil-define-key 'insert 'global (kbd "C-h") 'backward-delete-char-untabify)
 (define-key evil-normal-state-map (kbd "C-p")
             (lambda ()
-	      (interactive)
-	      (save-excursion
+	          (interactive)
+	          (save-excursion
                 (end-of-line)
                 (newline))))
 
@@ -604,8 +614,8 @@ Example: ab|d -> (abd|)"
   (run-with-timer 0.050 nil
                   (lambda ()
                     (when (overlayp my/yank-overlay)
-		      (delete-overlay my/yank-overlay)
-		      (setq my/yank-overlay nil)))))
+		              (delete-overlay my/yank-overlay)
+		              (setq my/yank-overlay nil)))))
 (evil-define-operator my/clipboard-yank (beg end type _ _)
   "Копирует текст из редактора в системный буфер обмена с подсветкой."
   :move-point nil ;; Курсор останется на исходной позиции
@@ -689,7 +699,7 @@ Example: ab|d -> (abd|)"
 (global-set-key (kbd "C-п") 'keyboard-quit)
 (global-set-key (kbd "C-м") 'scroll-up-command)
 
-					;scroll one window up
+                                        ;scroll one window up
 (global-set-key (kbd "M-м") 'scroll-down-command)
 
 (global-set-key "\C-x\C-p" 'other-window-backward)

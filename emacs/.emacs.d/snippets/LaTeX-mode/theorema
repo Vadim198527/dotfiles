@@ -4,6 +4,6 @@
 # condition: (not (texmathp))
 # group: enviroments
 # --
-\begin{theorem}
+\begin{theorem*}[$1]
   $0
-\end{theorem}
+\end{theorem*}

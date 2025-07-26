@@ -69,19 +69,19 @@ Under X, many functions will be available also in a menu on the menu bar.
 
 Entering `cdlatex-mode' calls the hook cdlatex-mode-hook.
 
-This is a minor mode.  If called interactively, toggle the
-`CDLatex mode' mode.  If the prefix argument is positive, enable
-the mode, and if it is zero or negative, disable the mode.
+This is a minor mode.  If called interactively, toggle the `CDLatex
+mode' mode.  If the prefix argument is positive, enable the mode, and if
+it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
-evaluate `cdlatex-mode'.
+evaluate the variable `cdlatex-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (autoload 'turn-on-cdlatex-electricindex "cdlatex" "\
@@ -109,19 +109,18 @@ Entering `cdlatex-electricindex-mode' calls the hook
 `cdlatex-electricindex-mode-hook'.
 
 This is a minor mode.  If called interactively, toggle the
-`Cdlatex-Electricindex mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable
-the mode.
+`Cdlatex-Electricindex mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
+mode if ARG is nil, omitted, or is a positive number.  Disable the mode
+if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
-evaluate `cdlatex-electricindex-mode'.
+evaluate the variable `cdlatex-electricindex-mode'.
 
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 (fn &optional ARG)" t)
 (register-definition-prefixes "cdlatex" '("cdlatex-"))

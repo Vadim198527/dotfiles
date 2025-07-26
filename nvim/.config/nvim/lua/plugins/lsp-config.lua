@@ -1,55 +1,46 @@
+-- ~/.config/nvim/lua/plugins/lsp-config.lua
+
 return {
 	{
 		"williamboman/mason.nvim",
-		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-		},
-		-- config = function()
-		--     local mason = require("mason").setup({})
-		-- end,
+		opts = {},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			local mason = require("mason").setup({})
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"pyright",
-					-- "ruff",
-					"ts_ls",
-					-- "tsserver",
-					"texlab",
-					-- "ltex",
-					"vimls",
-					"eslint",
-					"html",
-					"emmet_ls",
-					"bashls",
-					"jsonls",
-					"cssls",
-				}, -- "ltex", "texlab"
-				handlers = {
-					-- общий обработчик для всего, кроме LTeX
-					function(server)
-						if server == "ltex" then
-							return
-						end -- <-- пропускаем
-						require("lspconfig")[server].setup({})
-					end,
-				},
-			})
-		end,
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"pyright",
+				"ruff",
+				"ts_ls",
+				"texlab",
+				"vimls",
+				"eslint",
+				"html",
+				"emmet_ls",
+				"bashls",
+				"jsonls",
+				"cssls",
+				-- "cucumber_language_server",
+			},
+			handlers = {
+				function(server)
+					require("lspconfig")[server].setup({})
+				end,
+			},
+		},
 	},
-
 	{
 		"neovim/nvim-lspconfig",
 		-- dependencies = { "saghen/blink.cmp" },
-
 		-- example using `opts` for defining servers
 		opts = {
 			servers = {
-				-- lua_ls = {},
+				lua_ls = {},
 			},
 		},
 		config = function()
