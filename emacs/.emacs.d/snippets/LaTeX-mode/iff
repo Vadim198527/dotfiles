@@ -1,0 +1,5 @@
+# key: iff
+# name: iff
+# condition: (not (texmathp))
+# --
+$\iff$ $0

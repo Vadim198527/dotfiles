@@ -1,0 +1,8 @@
+# key: def
+# name: definition
+# group: enviroments
+# condition : (not (texmathp))
+# --
+\begin{definition}
+  $0
+\end{definition}

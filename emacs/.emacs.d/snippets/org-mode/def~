@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# key:def
+# name:DefFrame
+# --
+** Definition-$1 :def:
+*** Term: $2
+*** Notation: $3
+*** Def: $4

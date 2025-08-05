@@ -1,0 +1,85 @@
+return {
+    {
+        "ryanoasis/vim-devicons",
+    },
+    {
+        "nvim-tree/nvim-tree.lua",
+        version = "*",
+        lazy = false,
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
+        config = function()
+            -- disable netrw at the very start of your init.lua
+            require("nvim-tree").setup({
+                hijack_cursor = true,
+                -- Заставляет nvim-tree учитывать директорию текущего буфера
+                respect_buf_cwd = true,
+
+                view = {
+                    centralize_selection = true,
+                },
+
+                renderer = {
+                    root_folder_label = false,
+                    indent_width = 1,
+                },
+                actions = {
+                    change_dir = {
+                        enable = false, -- ★ дерево больше НЕ вызывает :lcd / :cd
+                        global = false,
+                    },
+                },
+                update_focused_file = {
+                    enable = true,       -- подсвечивать активный файл
+                    update_root = false, -- корень меняем только вручную (см. ниже)
+                },
+                view = {
+                    width = 25, -- фикс-ширина вместо «полэкрана»
+                    -- side здесь не важен, т.к. ниже мы двигаем окно командой wincmd
+                },
+            })
+
+            -- vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
+            -- vim.keymap.del('n', '<C-W>d')
+            -- vim.keymap.del('n', '<C-W><C-d>')
+            -- vim.api.nvim_set_keymap("n", "<C-W>", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
+
+            local api = require("nvim-tree.api")
+
+            -- вспомогалка: открыт ли сейчас nvim-tree?
+            local function tree_is_open()
+                return api.tree.is_visible()
+            end -- :contentReference[oaicite:0]{index=0}
+
+            -- ────────────────────────────────────────────────────────────────
+            -- <leader>e ─ дерево слева, корень = глобальная :pwd
+            -- ────────────────────────────────────────────────────────────────
+            vim.keymap.set("n", "<leader>e", function()
+                local was_open = tree_is_open()
+                api.tree.toggle({          -- :contentReference[oaicite:1]{index=1}
+                    path = vim.loop.cwd(), -- корень = текущая CWD
+                    focus = true,
+                })
+                if not was_open and tree_is_open() then
+                    vim.cmd("wincmd H") -- перекидываем окно влево
+                end
+            end, { silent = true, noremap = true, desc = "Nvim-tree @ CWD (left)" })
+
+            -- ────────────────────────────────────────────────────────────────
+            -- <leader>t ─ дерево справа, корень = каталог текущего файла
+            -- ────────────────────────────────────────────────────────────────
+            vim.keymap.set("n", "<leader>t", function()
+                local was_open = tree_is_open()
+                api.tree.toggle({
+                    find_file = true,   -- подсветить файл
+                    update_root = true, -- и сделать его каталог корнем
+                    focus = true,
+                })
+                if not was_open and tree_is_open() then
+                    vim.cmd("wincmd L") -- перекидываем окно вправо
+                end
+            end, { silent = true, noremap = true, desc = "Nvim-tree @ file dir (right)" })
+        end,
+    },
+}

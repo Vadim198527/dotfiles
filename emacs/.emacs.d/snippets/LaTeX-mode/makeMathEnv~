@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: makeMathEnv
+# key: makeMathEnv
+# condition : (not (texmathp))
+# --
+$ $1 $ $0

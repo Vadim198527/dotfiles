@@ -1,0 +1,91 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Aug  4 18:24:07 2025
+;; Desktop file format version 208
+;; Emacs version 30.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (26768 53399 411546 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-16-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#ffffff") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground . "#9f9f9f") (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "#000000") (font-parameter) (environment) (last-focus-update . t) (frameset--id . "0D48-963C-FEE2-A3C2") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (tabs (current-tab (name . "init.el") (explicit-name))) (visibility . t) (height . 52) (width . 207) (left . 2) (top . 3)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 80) (min-pixel-width . 80) (min-pixel-height-ignore . 60) (min-pixel-width-ignore . 32) (min-pixel-height-safe . 20) (min-pixel-width-safe . 16)) leaf (pixel-width . 1672) (pixel-height . 1020) (total-width . 209) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 39720) (start . 37062)) (prev-buffers ("config.el" 4998 7005) ("init.el" 34816 34816) (".zshenv" 3711 4550) (".zshrc" 1 1) ("gemini.md" 925 996) ("grok.md" 1 1) ("*scratch*" 1 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '(#("kk" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("cdlatex" 0 7 (isearch-case-fold-search t isearch-regexp-function nil)) #("lambda" 0 6 (isearch-case-fold-search t isearch-regexp-function nil)) #("cdla" 0 4 (isearch-case-fold-search t isearch-regexp-function nil)) #("la" 0 2 (isearch-case-fold-search t isearch-regexp-function nil)) #("\"" 0 1 (isearch-case-fold-search t isearch-regexp-function nil))))
+(setq regexp-search-ring '(#("desktop" 0 7 (isearch-case-fold-search t)) #("save" 0 4 (isearch-case-fold-search t)) #("rct" 0 3 (isearch-case-fold-search t)) #("aas" 0 3 (isearch-case-fold-search t)) #("tab" 0 3 (isearch-case-fold-search t)) #("indent-tab" 0 10 (isearch-case-fold-search t)) #("lamkkkkkkkkkk" 0 13 (isearch-case-fold-search t)) #("corfu" 0 5 (isearch-case-fold-search t)) #("co" 0 2 (isearch-case-fold-search t)) #("u" 0 1 (isearch-case-fold-search t)) #("hop" 0 3 (isearch-case-fold-search t)) #("avy" 0 3 (isearch-case-fold-search t)) #("un" 0 2 (isearch-case-fold-search t)) #("undo-tr" 0 7 (isearch-case-fold-search t)) #("<leader>p" 0 9 (isearch-case-fold-search t)) #("pret" 0 4 (isearch-case-fold-search t))))
+(setq register-alist '((48 . #("input-ru-p" 0 10 (fontified t))) (97 . [120 120 106])))
+(setq file-name-history '("~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/Desktop/gemini.md" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/grok.md" "~/Desktop/gemini.md" "~/Desktop/Emacs_sessions/" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/Org_files/test.tex" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/test.tex" "~/docs/Org_files/How_to_prove.pdf" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/textbf" "~/.emacs.d/snippets/LaTeX-mode/iff" "~/.emacs.d/snippets/LaTeX-mode/textbf" "~/.emacs.d/snippets/LaTeX-mode/set" "~/.emacs.d/snippets/LaTeX-mode/cdot" "~/.emacs.d/snippets/LaTeX-mode/proof" "~/.emacs.d/snippets/LaTeX-mode/item" "~/docs/Org_files/How_to_prove.pdf" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/mk" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/emp" "~/.emacs.d/snippets/LaTeX-mode/\\mathrmA" "~/.emacs.d/snippets/python-mode/Simple Function Definition" "~/.emacs.d/snippets/text-mode/link" "~/.emacs.d/snippets/text-mode/Simple Hello" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/docs/Org_files/How_to_prove.pdf" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/enumerate" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/begin.yasnippet" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/definition" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/begin.yasnippet" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/theorema" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/config.el" "~/" "~/docs/sicp/LuaCourse/Functions.md" "~/Desktop/Ege/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/sicp/test.rkt" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/sicp/test.scm" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jedi/third_party/typeshed/stdlib/3/os/" "~/dotfiles/emacs/.emacs.d/init.el" "~/Desktop/Ege/main.py" "~/.emacs.d/snippets/python-mode/./" "~/dotfiles/emacs/.emacs.d/snippets/org-mode/" "~/.emacs.d/snippets/" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/gemini_image_analysis_results.txt" "~/PycharmProjects/klllll/langImg_openrouter.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/main.py" "~/.emacs.d/init.el" "~/PycharmProjects/klllll/" "~/PycharmProjects/klllll/langImg.txt" "~/.emacs.d/init.el" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Numbers.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Computing_conditionaly.rkt" "~/Desktop/Ege/main.py" "~/Project/main.c" "~/"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/chestnykh/dotfiles/emacs/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(display-line-numbers-mode paredit-mode evil-local-mode eldoc-mode font-lock-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  39720
+  '(39771 nil)
+  nil
+  nil
+  '((buffer-display-time 26768 53398 975772 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (34838 34816 29908 29732 29686 2880 2841 34816 29908 29732 29686 2880 2841 464 394 34816))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/dotfiles/emacs/.emacs.d/config.el"
+  "config.el"
+  'emacs-lisp-mode
+  '(eldoc-mode font-lock-mode evil-local-mode display-line-numbers-mode undo-fu-session-mode paredit-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  7005
+  '(1176 nil)
+  nil
+  nil
+  '((buffer-display-time 26768 53233 385566 834000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (163 1715 821 802 486 354 163 1715 821 802 486 354 163 1715 821 802))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/.zshenv"
+  ".zshenv"
+  'sh-mode
+  '(font-lock-mode evil-local-mode sh-electric-here-document-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  4550
+  '(5002 nil)
+  nil
+  nil
+  '((buffer-display-time 26807 55431 483815 303000) (buffer-file-coding-system . undecided-unix) (overwrite-mode))
+  '((mark-ring (4989 4949 3797 3772 3361 534 526 478 463 6604 6599 6562 6180 6142 6093 5009))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/.zshrc"
+  ".zshrc"
+  'sh-mode
+  '(font-lock-mode evil-local-mode sh-electric-here-document-mode display-line-numbers-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-display-time 26810 23440 36185 32000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 6613))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/gemini.md"
+  "gemini.md"
+  'markdown-mode
+  '(display-line-numbers-mode evil-local-mode eldoc-mode font-lock-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  996
+  '(903 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26822 54930 380343 677000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/grok.md"
+  "grok.md"
+  'markdown-mode
+  '(undo-fu-session-mode display-line-numbers-mode evil-leader-mode evil-local-mode eldoc-mode font-lock-mode yas-minor-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
+  1090
+  '(1404 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26768 53238 805242 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1))))
+

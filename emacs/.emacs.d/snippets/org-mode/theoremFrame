@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key:theor
+# name:theoremFrame
+# --
+** Theorem-$1 :theorem:
+*** Formulation: $2
+*** Proof: $3

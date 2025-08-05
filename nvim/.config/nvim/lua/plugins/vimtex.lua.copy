@@ -1,0 +1,45 @@
+-- lua/plugins/vimtex.lua (или где у вас хранится конфигурация VimTeX)
+return {
+	{
+		"lervag/vimtex",
+		ft = { "tex", "bib" },
+		init = function()
+			-- ==== ОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ ====
+			vim.g.vimtex_view_method = "zathura_simple"
+			vim.g.vimtex_compiler_method = "latexmk"
+			vim.g.tex_flavor = "latex"
+
+			-- ==== НАСТРОЙКИ CONCEAL (РАСКОММЕНТИРОВАНО И НАСТРОЕНО) ====
+			-- vim.g.vimtex_syntax_conceal_disable = 0 -- Убедитесь, что не равно 1 (по умолчанию 0)
+
+			vim.g.vimtex_syntax_conceal = {
+				accents = 1, -- `\^o` -> ô
+				ligatures = 1, -- `` -> “ (требует поддержки шрифтом)
+				cites = 1, -- `\cite{...}` -> [...]
+				fancy = 1, -- разные украшения, например \LaTeX -> LᴬTᴇX
+				spacing = 1, -- скрывать команды пробелов (\quad и т.п.) - можно 1, если хотите
+				greek = 1, -- `\alpha` -> α (ОЧЕНЬ РЕКОМЕНДУЕТСЯ)
+				math_bounds = 1, -- скрывать $...$, \(...\) - не рекомендуется, мешает редактированию
+				math_delimiters = 1, -- `\left(` -> ( (скрывает модификаторы)
+				math_fracs = 1, -- `\frac{1}{2}` -> ½ (только простые дроби)
+				math_super_sub = 1, -- `x^2` -> x² (только простые)
+				math_symbols = 1, -- `\sum` -> ∑, `\in` -> ∈ (ОЧЕНЬ РЕКОМЕНДУЕТСЯ)
+				sections = 0, -- `\section{}` -> # (стиль Markdown)
+				styles = 1, -- `\emph{text}` -> text (скрывает сами команды стиля)
+			}
+
+			-- --- Опционально: Настройки автодополнения для цитат ---
+			-- Чтобы лучше работало с nvim-cmp, часто рекомендуют:
+			vim.g.vimtex_complete_bib = {
+				simple = 1,
+			}
+
+			-- Остальные ваши опциональные настройки (оставил закомментированными для примера)
+			-- vim.g.vimtex_fold_enabled = 1
+			-- vim.g.vimtex_indent_enabled = 1
+			-- vim.g.vimtex_mappings_enabled = 0
+			vim.g.vimtex_view_automatic = 1
+		end,
+		-- config = function() ... end -- Не нужен для этих настроек
+	},
+}

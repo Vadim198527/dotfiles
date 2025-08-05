@@ -1,0 +1,6 @@
+# key: makeMathBlockEnv
+# name: makeMathBlockEnv
+# --
+\[
+    $1
+\]$0

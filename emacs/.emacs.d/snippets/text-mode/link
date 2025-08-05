@@ -1,0 +1,4 @@
+# name: HTML Link
+# key: link
+# --
+<a id="${1:vadim}">${2:pavlov}</a>$0

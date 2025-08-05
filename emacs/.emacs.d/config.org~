@@ -1,0 +1,67 @@
+* Configuration
+** Keymaps
+*** Evil mode  
+#+begin_src emacs-lisp
+  (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-ex-nohighlight)  
+  (evil-define-key 'normal 'global (kbd "<leader>chk") 'describe-key)  
+  (evil-define-key 'normal 'global (kbd "<leader>fs") 'save-buffer)
+  (evil-define-key '(normal insert) org-mode-map (kbd "TAB") 'org-cycle)
+  (evil-define-key 'normal 'global (kbd "C-/") 'comment-line)
+  (evil-define-key 'normal 'global (kbd "<leader><") 'switch-to-buffer) 
+  (evil-define-key 'normal 'global (kbd "<leader>,") 'switch-to-buffer) 
+  (evil-define-key 'normal 'global (kbd "<leader>`") 'evil-switch-to-windows-last-buffer) 
+  (evil-define-key 'normal 'global (kbd "<leader><escape>") 'evil-switch-to-windows-last-buffer) 
+  (evil-define-key 'normal 'global (kbd "<leader>ff") 'find-file)
+  (evil-define-key 'normal 'global (kbd "<leader>.") 'find-file)
+  (evil-define-key 'normal 'global (kbd "<leader>:") 'execute-extended-command) 
+  (evil-define-key 'normal 'global (kbd "C-i") 'recenter-top-bottom)
+  (evil-define-key 'insert 'global (kbd "C-i") 'recenter-top-bottom)
+  (evil-define-key 'insert global-map (kbd "C-SPC") 'toggle-input-method)
+
+  ;; вертикальное разделение экрана
+  (evil-define-key 'normal 'global (kbd "<leader>w/") 'split-window-right)
+  (evil-define-key 'normal 'global (kbd "<leader>wv") 'split-window-right)
+
+  ;; горизонтальное разделение экрана
+  (evil-define-key 'normal 'global (kbd "<leader>w-") 'split-window-below)
+  (evil-define-key 'normal 'global (kbd "<leader>ws") 'split-window-below)
+
+  ;; закрытие текущего окна
+  (evil-define-key 'normal 'global (kbd "<leader>wd") 'delete-window)
+  (evil-define-key 'normal 'global (kbd "<leader>x") 'delete-window)
+  ;; закрытие всех окон, кроме текущего
+  (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows) 
+
+  ;; переход к другому окну
+  (evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)  
+
+  ;; Перемещение между окнами
+  (evil-define-key 'normal 'global (kbd "C-h") 'evil-window-left)  
+  (evil-define-key 'normal 'global (kbd "C-l") 'evil-window-right)  
+  (evil-define-key 'normal 'global (kbd "C-j") 'evil-window-down)  
+  (evil-define-key 'normal 'global (kbd "C-k") 'evil-window-up)  
+
+  ;; comment or uncomment line
+  (evil-define-key 'normal 'global (kbd "<leader>cl") 'comment-line)
+  ;; закрытие всех окон, кроме текущего
+  (evil-define-key 'normal 'global (kbd "<leader>w1") 'delete-other-windows) 
+
+  ;; переход к другому окну
+  (evil-define-key 'normal 'global (kbd "<leader>ww") 'other-window)  
+
+  ;; Перемещение между окнами
+  (evil-define-key 'normal 'global (kbd "C-h") 'evil-window-left)  
+  (evil-define-key 'normal 'global (kbd "C-l") 'evil-window-right)  
+  (evil-define-key 'normal 'global (kbd "C-j") 'evil-window-down)  
+  (evil-define-key 'normal 'global (kbd "C-k") 'evil-window-up)  
+
+  ;; comment or uncomment line
+  (evil-define-key 'normal 'global (kbd "<leader>cl") 'comment-line)
+
+  
+    ;; toggle trancate lines
+    (evil-define-key 'normal 'global (kbd "<leader>tl") 'toggle-truncate-lines) 
+
+    (evil-define-key 'insert 'global (kbd "C-w") 'backward-kill-word)
+    (evil-define-key 'insert 'global (kbd "C-h") 'backward-delete-char-untabify)
+#+end_src

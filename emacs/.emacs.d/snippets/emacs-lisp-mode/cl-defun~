@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cl-defun
+# key: cld
+# --
+(cl-defun $1 ($2) $0)

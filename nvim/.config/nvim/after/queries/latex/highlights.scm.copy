@@ -1,0 +1,438 @@
+;; extends
+
+;; — Греческие буквы (строчные)
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\alpha")
+ (#set!   conceal "α"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\beta")
+ (#set!   conceal "β"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\gamma")
+ (#set!   conceal "γ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\delta")
+ (#set!   conceal "δ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\epsilon")
+ (#set!   conceal "ε"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\zeta")
+ (#set!   conceal "ζ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\eta")
+ (#set!   conceal "η"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\theta")
+ (#set!   conceal "θ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\iota")
+ (#set!   conceal "ι"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\kappa")
+ (#set!   conceal "κ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\lambda")
+ (#set!   conceal "λ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\mu")
+ (#set!   conceal "μ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\nu")
+ (#set!   conceal "ν"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\xi")
+ (#set!   conceal "ξ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\pi")
+ (#set!   conceal "π"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\rho")
+ (#set!   conceal "ρ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\sigma")
+ (#set!   conceal "σ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\tau")
+ (#set!   conceal "τ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\upsilon")
+ (#set!   conceal "υ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\phi")
+ (#set!   conceal "φ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\chi")
+ (#set!   conceal "χ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\psi")
+ (#set!   conceal "ψ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\omega")
+ (#set!   conceal "ω"))
+
+;; — Греческие буквы (прописные)
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Gamma")
+ (#set!   conceal "Γ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Delta")
+ (#set!   conceal "Δ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Theta")
+ (#set!   conceal "Θ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Lambda")
+ (#set!   conceal "Λ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Xi")
+ (#set!   conceal "Ξ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Pi")
+ (#set!   conceal "Π"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Sigma")
+ (#set!   conceal "Σ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Upsilon")
+ (#set!   conceal "Υ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Phi")
+ (#set!   conceal "Φ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Psi")
+ (#set!   conceal "Ψ"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Omega")
+ (#set!   conceal "Ω"))
+
+;; — Арифметические и бинарные операторы
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\pm")
+ (#set!   conceal "±"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\mp")
+ (#set!   conceal "∓"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\times")
+ (#set!   conceal "×"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\div")
+ (#set!   conceal "÷"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\cdot")
+ (#set!   conceal "·"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\ast")
+ (#set!   conceal "∗"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\star")
+ (#set!   conceal "⋆"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\circ")
+ (#set!   conceal "∘"))
+
+;; — Логические операторы
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\land")
+ (#set!   conceal "∧"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\lor")
+ (#set!   conceal "∨"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\neg")
+ (#set!   conceal "¬"))
+
+;; — Отношения и кванторы
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\leq")
+ (#set!   conceal "≤"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\geq")
+ (#set!   conceal "≥"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\neq")
+ (#set!   conceal "≠"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\ne")
+ (#set!   conceal "≠"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\approx")
+ (#set!   conceal "≈"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\forall")
+ (#set!   conceal "∀"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\exists")
+ (#set!   conceal "∃"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\nabla")
+ (#set!   conceal "∇"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\partial")
+ (#set!   conceal "∂"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\ni")
+ (#set!   conceal "∋"))
+
+;; — Операции над множествами
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\cup")
+ (#set!   conceal "∪"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\cap")
+ (#set!   conceal "∩"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\subset")
+ (#set!   conceal "⊂"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\subseteq")
+ (#set!   conceal "⊆"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\supset")
+ (#set!   conceal "⊃"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\supseteq")
+ (#set!   conceal "⊇"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\in")
+ (#set!   conceal "∈"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\notin")
+ (#set!   conceal "∉"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\setminus")
+ (#set!   conceal "∖"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\emptyset")
+ (#set!   conceal "∅"))
+
+;; — Суммы, произведения и интегралы
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\sum")
+ (#set!   conceal "∑"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\prod")
+ (#set!   conceal "∏"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\int")
+ (#set!   conceal "∫"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\iint")
+ (#set!   conceal "∬"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\iiint")
+ (#set!   conceal "∭"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\oint")
+ (#set!   conceal "∮"))
+
+;; — Стрелки
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\leftarrow")
+ (#set!   conceal "←"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\rightarrow")
+ (#set!   conceal "→"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\leftrightarrow")
+ (#set!   conceal "↔"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Leftarrow")
+ (#set!   conceal "⇐"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Rightarrow")
+ (#set!   conceal "⇒"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\Leftrightarrow")
+ (#set!   conceal "⇔"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\mapsto")
+ (#set!   conceal "↦"))
+((generic_command
+   command: (command_name) @conceal)
+ (#eq?    @conceal "\\to")
+ (#set!   conceal "→"))
+
+;; — \mathcal (математический курсив A–Z)
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{A\\}$")
+  (#set!   conceal "𝐴"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{B\\}$")
+  (#set!   conceal "𝐵"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{C\\}$")
+  (#set!   conceal "𝐶"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{D\\}$")
+  (#set!   conceal "𝐷"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{E\\}$")
+  (#set!   conceal "𝐸"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{F\\}$")
+  (#set!   conceal "𝐹"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{G\\}$")
+  (#set!   conceal "𝐺"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{H\\}$")
+  (#set!   conceal "𝐻"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{I\\}$")
+  (#set!   conceal "𝐼"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{J\\}$")
+  (#set!   conceal "𝐽"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{K\\}$")
+  (#set!   conceal "𝐾"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{L\\}$")
+  (#set!   conceal "𝐿"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{M\\}$")
+  (#set!   conceal "𝑀"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{N\\}$")
+  (#set!   conceal "𝑁"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{O\\}$")
+  (#set!   conceal "𝑂"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{P\\}$")
+  (#set!   conceal "𝑃"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{Q\\}$")
+  (#set!   conceal "𝑄"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{R\\}$")
+  (#set!   conceal "𝑅"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{S\\}$")
+  (#set!   conceal "𝑆"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{T\\}$")
+  (#set!   conceal "𝑇"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{U\\}$")
+  (#set!   conceal "𝑈"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{V\\}$")
+  (#set!   conceal "𝑉"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{W\\}$")
+  (#set!   conceal "𝑊"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{X\\}$")
+  (#set!   conceal "𝑋"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{Y\\}$")
+  (#set!   conceal "𝑌"))
+
+((generic_command) @node
+  (#match? @node "^\\\\mathcal\\{Z\\}$")
+  (#set!   conceal "𝑍"))

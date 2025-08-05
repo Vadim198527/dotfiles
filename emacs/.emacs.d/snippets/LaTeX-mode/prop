@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prop
+# key: prop
+# --
+\begin{prop}
+    $0
+\end{prop}

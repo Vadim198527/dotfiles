@@ -1,0 +1,130 @@
+return {
+	{
+		"hrsh7th/cmp-nvim-lsp",
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		event = { "InsertEnter" },
+		-- event = { "InsertEnter", "CmdlineEnter" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer", -- source for text in buffer
+			"hrsh7th/cmp-path", -- source for file system paths
+			"hrsh7th/cmp-cmdline",
+			"f3fora/cmp-spell",
+			"micangl/cmp-vimtex",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/nvim-cmp",
+			"octaltree/cmp-look",
+		},
+
+		opts = function(_, opts)
+			opts.sources = opts.sources or {}
+			table.insert(opts.sources, {
+				name = "lazydev",
+				group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+			})
+		end,
+		-- Borlander
+		config = function()
+			local cmp = require("cmp")
+			-- Инициализация nvim-cmp и nvim-autopairs
+			-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+			-- Интеграция nvim-autopairs с nvim-cmp
+			-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			-- cmp.event:off("confirm_done", cmp_autopairs.on_confirm_done())
+			cmp.setup({
+				collectgarbage,
+				matching = {
+					disallow_fuzzy_matching = false, -- включает fuzzy matching
+					disallow_fullfuzzy_matching = false, -- включает полный fuzzy matching
+					disallow_partial_fuzzy_matching = false, -- включает частичный fuzzy matching
+					disallow_prefix_unmatching = false, -- разрешает matches без совпадения префикса
+				},
+				window = {
+					completion = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:None,CursorLine:Pmenu,Search:None",
+					}),
+					documentation = cmp.config.window.bordered({
+						winhighlight = "Normal:Normal,FloatBorder:None,CursorLine:Pmenu,Search:None",
+					}),
+				},
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
+				},
+				completion = {
+					keyword_length = 2,
+				},
+
+				performance = {
+					trigger_debounce_time = 400,
+					throttle = 450,
+					fetching_timeout = 80,
+				},
+				mapping = cmp.mapping.preset.insert({
+					-- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					-- ["<C-f>"] = cmp.mapping.scroll_docs(4),
+					-- ["<C-CR>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<C-CR>"] = cmp.mapping.confirm({
+						select = true,
+					}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				}),
+
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					-- { name = "luasnip" }, -- For luasnip users.
+					-- { name = "ultisnips" }, -- For ultisnips users.
+					{ name = "vimtex" },
+					{ name = "path" },
+					{ name = "buffer" },
+					-- { name = "conjure" },
+				}),
+			})
+			-- -- `/` cmdline setup.
+			-- cmp.setup.cmdline("/", {
+			--     -- mapping = cmp.mapping.preset.cmdline(),
+			--     sources = {
+			--         { name = "buffer" },
+			--     },
+			--     snippet = {
+			--         expand = function() end,
+			--     },
+			-- })
+
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 		{ name = "buffer" },
+			-- 	}, {
+			-- 		{ name = "cmdline" },
+			-- 	}),
+			-- 	matching = { disallow_symbol_nonprefix_matching = false },
+			-- })
+			-- Отключаем автодополнение для файлов с расширением .txt
+			cmp.setup.filetype("txt", {
+				enabled = false, -- Отключаем nvim-cmp для файлов .txt
+			})
+			cmp.setup.filetype("text", {
+				enabled = false, -- Отключаем nvim-cmp для файлов .txt
+			})
+
+			cmp.setup.filetype("tex", {
+				enabled = false, -- Отключаем nvim-cmp для файлов .tex
+			})
+			-- require("cmp").setup.filetype({ "lisp" }, {
+			-- 	sources = {
+			-- 		{ name = "nvlime" },
+			-- 		-- other sources like path or buffer, etc.
+			-- 		-- .
+			-- 		-- .
+			-- 	},
+			-- })
+		end,
+	},
+}

@@ -1,0 +1,4 @@
+Яндекс — быстрый поиск в интернетеᛝhttps://ya.ru/ᛡ25.5
+Googleᛝhttps://www.google.com/ᛡ3.25
+~ngraves/ibrowse.el - Interact with your browser from emacs. - sourcehut gitᛝhttps://git.sr.ht/~ngraves/ibrowse.elᛡ1.75
+Яндекс — быстрый поиск в интернетеᛝhttps://ya.ru/?nr=1&redirect_ts=1713112696.00000ᛡ1.5

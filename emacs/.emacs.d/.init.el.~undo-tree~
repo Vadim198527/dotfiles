@@ -1,0 +1,88 @@
+(undo-tree-save-format-version . 1)
+"941c2f9d792c8c9a953cfc943f5cfa2c622a55c6"
+[nil nil nil nil (26750 42738 905871 0) 0 nil]
+([nil current ((39293 . 39607) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-goggles-yank-face ((t (:background \"#00afff\" :foreground \"black\")))))" 0 314 (fontified nil)) . -39293) (undo-tree-id0 . -237) (39245 . 39291) (#("
+" 0 1 (fontified nil)) . -39245) (39245 . 39246) (39173 . 39178) (#(" " 0 1 (fontified nil)) . 39173) (39172 . 39173) (39152 . 39163) (#(" " 0 1 (fontified nil)) . 39152) (39151 . 39152) (39084 . 39229) (#(" " 0 1 (fontified nil)) . 39084) (39051 . 39085) (#("
+" 0 1 (fontified nil)) . -39051) (39051 . 39052) (39012 . 39021) (#(" " 0 1 (fontified nil)) . 39012) (39011 . 39012) (38946 . 38955) (#(" " 0 1 (fontified nil)) . 38946) (38945 . 38946) (38890 . 38899) (#(" " 0 1 (fontified nil)) . 38890) (38889 . 38890) (38823 . 38832) (#(" " 0 1 (fontified nil)) . 38823) (38822 . 38823) (38752 . 38761) (#(" " 0 1 (fontified nil)) . 38752) (38751 . 38752) (38686 . 38695) (#(" " 0 1 (fontified nil)) . 38686) (38685 . 38686) (38618 . 38627) (#(" " 0 1 (fontified nil)) . 38618) (38617 . 38618) (38563 . 38572) (#(" " 0 1 (fontified nil)) . 38563) (38562 . 38563) (38498 . 38979) (#(" " 0 1 (fontified nil)) . 38498) (38430 . 38499) (#("
+" 0 1 (fontified nil)) . -38430) (38430 . 38431) (38366 . 38380) (#(" " 0 1 (fontified nil)) . 38366) (38365 . 38366) (38295 . 38309) (#(" " 0 1 (fontified nil)) . 38295) (38294 . 38295) (38227 . 38241) (#(" " 0 1 (fontified nil)) . 38227) (38226 . 38227) (38167 . 38181) (#(" " 0 1 (fontified nil)) . 38167) (38166 . 38167) (38103 . 38117) (#(" " 0 1 (fontified nil)) . 38103) (38102 . 38103) (38032 . 38046) (#(" " 0 1 (fontified nil)) . 38032) (38031 . 38032) (37965 . 37979) (#(" " 0 1 (fontified nil)) . 37965) (37964 . 37965) (37894 . 37908) (#(" " 0 1 (fontified nil)) . 37894) (37893 . 37894) (37836 . 37850) (#(" " 0 1 (fontified nil)) . 37836) (37835 . 37836) (37783 . 37797) (#(" " 0 1 (fontified nil)) . 37783) (37782 . 37783) (37712 . 37726) (#(" " 0 1 (fontified nil)) . 37712) (37711 . 37712) (37646 . 37660) (#(" " 0 1 (fontified nil)) . 37646) (37645 . 37646) (37579 . 37593) (#(" " 0 1 (fontified nil)) . 37579) (37578 . 37579) (37523 . 37537) (#(" " 0 1 (fontified nil)) . 37523) (37522 . 37523) (37462 . 37476) (#(" " 0 1 (fontified nil)) . 37462) (37461 . 37462) (37406 . 37420) (#(" " 0 1 (fontified nil)) . 37406) (37405 . 37406) (37335 . 37349) (#(" " 0 1 (fontified nil)) . 37335) (37334 . 37335) (37264 . 37278) (#(" " 0 1 (fontified nil)) . 37264) (37263 . 37264) (37202 . 37216) (#(" " 0 1 (fontified nil)) . 37202) (37201 . 37202) (37134 . 37148) (#(" " 0 1 (fontified nil)) . 37134) (37133 . 37134) (37064 . 37078) (#(" " 0 1 (fontified nil)) . 37064) (37063 . 37064) (36997 . 37011) (#(" " 0 1 (fontified nil)) . 36997) (36996 . 36997) (36940 . 36954) (#(" " 0 1 (fontified nil)) . 36940) (36939 . 36940) (36873 . 36887) (#(" " 0 1 (fontified nil)) . 36873) (36872 . 36873) (36809 . 36823) (#(" " 0 1 (fontified nil)) . 36809) (36808 . 36809) (36743 . 36757) (#(" " 0 1 (fontified nil)) . 36743) (36742 . 36743) (36678 . 36692) (#(" " 0 1 (fontified nil)) . 36678) (36677 . 36678) (36616 . 36630) (#(" " 0 1 (fontified nil)) . 36616) (36615 . 36616) (36560 . 36574) (#(" " 0 1 (fontified nil)) . 36560) (36559 . 36560) (36491 . 36505) (#(" " 0 1 (fontified nil)) . 36491) (36490 . 36491) (36420 . 36434) (#(" " 0 1 (fontified nil)) . 36420) (36419 . 36420) (36353 . 36367) (#(" " 0 1 (fontified nil)) . 36353) (36352 . 36353) (36282 . 36296) (#(" " 0 1 (fontified nil)) . 36282) (36281 . 36282) (36215 . 36229) (#(" " 0 1 (fontified nil)) . 36215) (36214 . 36215) (36147 . 36161) (#(" " 0 1 (fontified nil)) . 36147) (36146 . 36147) (36082 . 36096) (#(" " 0 1 (fontified nil)) . 36082) (36081 . 36082) (36021 . 36035) (#(" " 0 1 (fontified nil)) . 36021) (36020 . 36021) (35968 . 35982) (#(" " 0 1 (fontified nil)) . 35968) (35967 . 35968) (35905 . 35919) (#(" " 0 1 (fontified nil)) . 35905) (35904 . 35905) (35839 . 35853) (#(" " 0 1 (fontified nil)) . 35839) (35838 . 35839) (35778 . 37870) (#(" " 0 1 (fontified nil)) . 35778) (35751 . 35779) (#("
+" 0 1 (fontified nil)) . -35751) (35751 . 35752) (35738 . 35743) (#(" " 0 1 (fontified nil)) . 35738) (35737 . 35738) (35666 . 35671) (#(" " 0 1 (fontified nil)) . 35666) (35665 . 35666) (35594 . 35599) (#(" " 0 1 (fontified nil)) . 35594) (35593 . 35594) (35522 . 35527) (#(" " 0 1 (fontified nil)) . 35522) (35521 . 35522) (35450 . 35455) (#(" " 0 1 (fontified nil)) . 35450) (35449 . 35450) (35378 . 35383) (#(" " 0 1 (fontified nil)) . 35378) (35377 . 35378) (35306 . 35311) (#(" " 0 1 (fontified nil)) . 35306) (35305 . 35306) (35234 . 35239) (#(" " 0 1 (fontified nil)) . 35234) (35233 . 35234) (35162 . 35167) (#(" " 0 1 (fontified nil)) . 35162) (35161 . 35162) (35090 . 35095) (#(" " 0 1 (fontified nil)) . 35090) (35089 . 35090) (35017 . 35701) (#(" " 0 1 (fontified nil)) . 35017) (34751 . 35018) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '(\"0a2168af143fb09b67e4ea2a7cef857e8a7dad0ba3726b500c6a579775129635\"
+     \"4594d6b9753691142f02e67b8eb0fda7d12f6cc9f1299a49b819312d6addad1d\"
+     \"51fa6edfd6c8a4defc2681e4c438caf24908854c12ea12a1fbfd4d055a9647a3\"
+     \"99d1e29934b9e712651d29735dd8dcd431a651dfbe039df158aa973461af003e\"
+     \"0517759e6b71f4ad76d8d38b69c51a5c2f7196675d202e3c2507124980c3c2a3\"
+     \"9a977ddae55e0e91c09952e96d614ae0be69727ea78ca145beea1aae01ac78d2\"
+     \"e410458d3e769c33e0865971deb6e8422457fad02bf51f7862fa180ccc42c032\"
+     \"48042425e84cd92184837e01d0b4fe9f912d875c43021c3bcb7eeb51f1be5710\"
+     \"3f1dcd824a683e0ab194b3a1daac18a923eed4dba5269eecb050c718ab4d5a26\"
+     \"8ccbbbf5c197f80c9dce116408a248fde1ac4fedd9b5b7883e729eba83c9c64e\"
+     default))
+ '(evil-emacs-state-modes
+   '(5x5-mode bbdb-mode biblio-selection-mode blackbox-mode
+              bookmark-edit-annotation-mode browse-kill-ring-mode
+              bs-mode bubbles-mode bzr-annotate-mode calc-mode
+              cfw:calendar-mode completion-list-mode
+              custom-theme-choose-mode delicious-search-mode
+              desktop-menu-blist-mode desktop-menu-mode dun-mode
+              dvc-bookmarks-mode dvc-diff-mode dvc-info-buffer-mode
+              dvc-log-buffer-mode dvc-revlist-mode dvc-revlog-mode
+              dvc-status-mode dvc-tips-mode ediff-mode ediff-meta-mode
+              efs-mode Electric-buffer-menu-mode emms-browser-mode
+              emms-mark-mode emms-metaplaylist-mode emms-playlist-mode
+              ess-help-mode etags-select-mode fj-mode gc-issues-mode
+              gdb-breakpoints-mode gdb-disassembly-mode
+              gdb-frames-mode gdb-locals-mode gdb-memory-mode
+              gdb-registers-mode gdb-threads-mode gist-list-mode
+              git-rebase-mode gomoku-mode google-maps-static-mode
+              jde-javadoc-checker-report-mode magit-cherry-mode
+              magit-diff-mode magit-log-mode magit-log-select-mode
+              magit-popup-mode magit-popup-sequence-mode
+              magit-process-mode magit-reflog-mode magit-refs-mode
+              magit-revision-mode magit-stash-mode magit-stashes-mode
+              magit-status-mode mh-folder-mode monky-mode mpuz-mode
+              mu4e-main-mode mu4e-headers-mode mu4e-view-mode
+              notmuch-hello-mode notmuch-search-mode notmuch-show-mode
+              notmuch-tree-mode org-agenda-mode proced-mode rcirc-mode
+              rebase-mode recentf-dialog-mode sldb-mode
+              slime-inspector-mode slime-thread-control-mode
+              slime-xref-mode snake-mode solitaire-mode
+              sr-buttons-mode sr-mode sr-tree-mode sr-virtual-mode
+              tetris-mode tla-annotate-mode tla-archive-list-mode
+              tla-bconfig-mode tla-bookmarks-mode tla-branch-list-mode
+              tla-browse-mode tla-category-list-mode
+              tla-changelog-mode tla-follow-symlinks-mode
+              tla-inventory-file-mode tla-inventory-mode tla-lint-mode
+              tla-logs-mode tla-revision-list-mode tla-revlog-mode
+              tla-tree-lint-mode tla-version-list-mode twittering-mode
+              urlview-mode vc-annotate-mode vc-dir-mode vm-mode
+              vm-summary-mode w3m-mode wab-compilation-mode
+              xgit-annotate-mode xgit-changelog-mode xgit-diff-mode
+              xgit-revlog-mode xhg-annotate-mode xhg-log-mode xhg-mode
+              xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
+ '(helm-minibuffer-history-key \"M-p\")
+ '(package-selected-packages
+   '(0x0 aas atomic-chrome auctex cape catppuccin-theme cdlatex
+         clang-format corfu doom-themes embark-consult
+         evil-cleverparens evil-collection evil-goggles evil-leader
+         evil-mc evil-surround exec-path-from-shell expand-region
+         gruvbox-theme harpoon hop iedit lsp-pyright lsp-ui marginalia
+         modus-themes orderless org-roam paredit pdf-tools pos-tip
+         racket-mode treemacs-evil treemacs-icons-dired
+         treemacs-projectile treesit-auto undo-fu undo-fu-session
+         undo-tree vertico vterm vundo yasnippet))
+ '(package-vc-selected-packages
+   '((pcre :url \"https://github.com/syohex/emacs-pcre.git\" :branch
+           \"master\")
+     (hop :url \"https://github.com/Animeshz/hop.el.git\" :branch \"main\")))
+ '(warning-suppress-types '((use-package))))" 0 4550 (fontified nil)) . -34751)) nil (26750 42738 905857 0) 0 nil])
+nil

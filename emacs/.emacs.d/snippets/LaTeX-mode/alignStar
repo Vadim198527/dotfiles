@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# key : ali*
+# group: environments
+# name : alignStar
+# --
+\begin{align*}
+  $0
+\end{align*}
