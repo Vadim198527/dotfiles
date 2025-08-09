@@ -184,3 +184,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 --   callback = function() require('pretty_math').attach() end,
 -- })
 
+-- где-нибудь после остальных require:
+require("mdlist").setup()
+
+

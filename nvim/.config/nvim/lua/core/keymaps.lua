@@ -186,32 +186,37 @@ function! QuickFixToggle()
     endif
 endfunction
 ]])
-local accents = {
-	["a"] = "á",
-	["A"] = "Á",
-	["e"] = "é",
-	["E"] = "É",
-	["i"] = "í",
-	["I"] = "Í",
-	["o"] = "ó",
-	["O"] = "Ó",
-	["u"] = "ú",
-	["U"] = "Ú",
-	["n"] = "ñ",
-	["N"] = "Ñ",
+
+-- базовые пары
+local base = {
+  a = "á", A = "Á",
+  e = "é", E = "É",
+  i = "í", I = "Í",
+  o = "ó", O = "Ó",
+  u = "ú", U = "Ú",
+  n = "ñ", N = "Ñ",
 }
 
+-- таблица для переключения в обе стороны
+local toggle = vim.deepcopy(base)
+for k, v in pairs(base) do
+  toggle[v] = k
+end
+
 vim.keymap.set("i", "<C-'>", function()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	if col == 0 then
-		return ""
-	end
-	local line = vim.api.nvim_get_current_line()
-	local char = line:sub(col, col)
-	local new_char = accents[char]
-	if new_char then
-		return "<BS>" .. new_char
-	else
-		return ""
-	end
+  -- позиция курсора в символах (а не байтах)
+  local cc = vim.fn.charcol(".")  -- 1-based
+  if cc <= 1 then
+    return ""
+  end
+
+  local line = vim.api.nvim_get_current_line()
+  -- предыдущий символ (0-based индекс для strcharpart)
+  local prev = vim.fn.strcharpart(line, cc - 2, 1)
+
+  local new_char = toggle[prev]
+  if new_char then
+    return "<BS>" .. new_char
+  end
+  return ""
 end, { expr = true })
