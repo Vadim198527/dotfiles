@@ -1,0 +1,372 @@
+((buffer-size . 12662) (buffer-checksum . "d75830767b24087d9044904f931e09022fb9f235"))
+((emacs-buffer-undo-list nil (8411 . 11062) ("    vim.keymap.set(
+  \"i\",
+  \"<C-'>\",
+  function()
+    local line = vim.api.nvim_get_current_line()
+    local total = vim.fn.strchars(line)
+    local cc = vim.fn.charcol(\".\")
+
+    local function char_at(i)
+      if i < 0 or i >= total then return nil end
+      return vim.fn.strcharpart(line, i, 1)
+    end
+
+    -- ===== Блок ?/! с toggle =====
+    local left_ch  = char_at(cc - 2)
+    local under_ch = char_at(cc - 1)
+    local punct, punct_idx
+    if left_ch == \"?\" or left_ch == \"!\" then
+      punct, punct_idx = left_ch, cc - 2
+    elseif under_ch == \"?\" or under_ch == \"!\" then
+      punct, punct_idx = under_ch, cc - 1
+    end
+
+    if punct then
+      -- ищем начало предложения
+      local i = punct_idx - 1
+      while i >= 0 do
+        local ch = char_at(i)
+        if ch == \".\" or ch == \"?\" or ch == \"!\" then
+          i = i + 1
+          break
+        end
+        i = i - 1
+      end
+      local start = math.max(i, 0)
+
+      local function is_skip(ch)
+        return ch == \" \" or ch == \"«\" or ch == \"“\" or ch == '\"' or
+               ch == \"‘\" or ch == \"(\" or ch == \"[\" or ch == \"—\" or
+               ch == \"–\" or ch == \"„\"
+      end
+      while start < total and char_at(start) and is_skip(char_at(start)) do
+        start = start + 1
+      end
+
+      local inv = (punct == \"?\") and \"¿\" or \"¡\"
+
+      if char_at(start) == inv then
+        -- TOGGLE OFF: удалить перевёрнутый знак и вернуть курсор
+        local left_after = cc - (start + 2)       -- встать сразу ПОСЛЕ знака
+        if left_after < 0 then left_after = 0 end
+        return string.rep(\"<Left>\", left_after) .. \"<BS>\" .. string.rep(\"<Right>\", left_after + 1)
+      else
+        -- TOGGLE ON: вставить перевёрнутый знак и вернуть курсор
+        local left_moves = cc - (start + 1)       -- встать ПЕРЕД первым символом
+        if left_moves < 0 then left_moves = 0 end
+        return string.rep(\"<Left>\", left_moves) .. inv .. string.rep(\"<Right>\", left_moves + 1)
+      end
+    end
+    -- ===== конец блока ?/! =====
+
+    -- Базовый режим: переключение акцента у ближайшего слева символа
+    if cc <= 1 then return \"\" end
+
+    local target_idx, new_ch
+    for idx = math.min(cc - 2, total - 1), 0, -1 do
+      local ch = vim.fn.strcharpart(line, idx, 1)
+      local t = toggle[ch]
+      if t then target_idx, new_ch = idx, t; break end
+    end
+    if not target_idx then return \"\" end
+
+    local left_moves = cc - (target_idx + 2)
+    if left_moves < 0 then left_moves = 0 end
+    return string.rep(\"<Left>
+" . 8411) ((marker . 8411) . -2485) ((marker . 8411) . -4) ((marker . 11061) . -2459) ((marker . 11061) . -2484) ((marker . 8411) . -140) ((marker . 8411) . -140) ((marker . 11060) . -140) ((marker . 11060) . -2459) ((marker . 9226) . -931) 10896 nil (8411 . 8415) (t 26798 44590 62161 838000) nil (8429 . 10891) ("  \"i\",
+    \"<C-'>\",
+    function()
+        -- Текущая строка и позиция курсора (в СИМВОЛАХ, 1-based)
+        local line = vim.api.nvim_get_current_line()
+        local total = vim.fn.strchars(line)
+        local cc = vim.fn.charcol(\".\")
+
+        local function char_at(i) -- i: 0-based индекс символа
+            if i < 0 or i >= total then
+                return nil
+            end
+            return vim.fn.strcharpart(line, i, 1)
+        end
+
+        -- ===== Особый случай: дублируем ?/! в начало предложения =====
+        local left_ch = char_at(cc - 2) -- символ слева от курсора
+        local under_ch = char_at(cc - 1) -- символ под курсором
+        local punct, punct_idx
+        if left_ch == \"?\" or left_ch == \"!\" then
+            punct, punct_idx = left_ch, cc - 2
+        elseif under_ch == \"?\" or under_ch == \"!\" then
+            punct, punct_idx = under_ch, cc - 1
+        end
+
+        if punct then
+            -- Ищем начало предложения: после последнего . ? ! слева от знака
+            local i = punct_idx - 1
+            while i >= 0 do
+                local ch = char_at(i)
+                if ch == \".\" or ch == \"?\" or ch == \"!\" then
+                    i = i + 1
+                    break
+                end
+                i = i - 1
+            end
+            local start = math.max(i, 0)
+
+            -- Пропускаем пробелы и типичные открывающие кавычки/скобки/тире
+            local function is_skip(ch)
+                return ch == \" \"
+                    or ch == \"«\"
+                    or ch == \"“\"
+                    or ch == '\"'
+                    or ch == \"‘\"
+                    or ch == \"(\"
+                    or ch == \"[\"
+                    or ch == \"—\"
+                    or ch == \"–\"
+                    or ch == \"„\"
+            end
+            while start < total and char_at(start) and is_skip(char_at(start)) do
+                start = start + 1
+            end
+
+            -- Если уже стоит перевёрнутый знак — ничего не делаем
+            local inv = (punct == \"?\") and \"¿\" or \"¡\"
+            if char_at(start) == inv then
+                return \"\"
+            end
+
+            -- Двигаемся влево до позиции вставки, вставляем, возвращаемся правее на +1
+            local left_moves = cc - (start + 1)
+            if left_moves < 0 then
+                left_moves = 0
+            end
+            return string.rep(\"<Left>\", left_moves) .. inv .. string.rep(\"<Right>\", left_moves + 1)
+        end
+        -- ===== Конец особого случая =====
+
+        -- Базовый режим: переключение акцента у ближайшего слева конвертируемого символа
+        if cc <= 1 then
+            return \"\"
+        end
+
+        local target_idx, new_ch
+        for idx = math.min(cc - 2, total - 1), 0, -1 do
+            local ch = vim.fn.strcharpart(line, idx, 1)
+            local t = toggle[ch]
+            if t then
+                target_idx, new_ch = idx, t
+                break
+            end
+        end
+        if not target_idx then
+            return \"\"
+        end
+
+        local left_moves = cc - (target_idx + 2)
+        if left_moves < 0 then
+            left_moves = 0
+        end
+        return string.rep(\"<Left>\", left_moves) .. \"<BS>\" .. new_ch .. string.rep(\"<Right>\", left_moves)
+    end,
+    { expr = true, silent = true, desc = \"Toggle accent / добавить ¿¡ в начало предложения\" }
+)" . 8429) ((marker . 9226) . -2674) 12648 (t 26798 44218 195925 11000) nil ("
+" . 12648) ((marker* . 11951) . 1) nil (11761 . 12648) nil (11759 . 11761) (11758 . 11759) (t 26798 44183 958986 791000) 11757 nil (11760 . 11957) (t 26798 44129 362586 773000) nil ("-- Привязка в insert-режиме
+vim.keymap.set(\"i\", \"<C-q>\", toggle_prev_word_initial_case_insert_pure, {
+    silent = true,
+    desc = \"Toggle case of first letter of previous word (insert mode)\",
+})
+" . 11760) ((marker . 8411) . -194) ((marker . 11060) . -194) ((marker . 11061) . -194) ((marker . 11061) . -196) 11954 (t 26798 43953 728843 437000) nil (8411 . 11759) (t 26798 43897 829948 365000) nil ("vim.keymap.set(
+    \"i\",
+    \"<C-'>\",
+    function()
+        -- Текущая строка и позиция курсора (в СИМВОЛАХ, 1-based)
+        local line = vim.api.nvim_get_current_line()
+        local total = vim.fn.strchars(line)
+        local cc = vim.fn.charcol(\".\")
+
+        local function char_at(i) -- i: 0-based индекс символа
+            if i < 0 or i >= total then
+                return nil
+            end
+            return vim.fn.strcharpart(line, i, 1)
+        end
+
+        -- ===== Особый случай: дублируем ?/! в начало предложения =====
+        local left_ch = char_at(cc - 2) -- символ слева от курсора
+        local under_ch = char_at(cc - 1) -- символ под курсором
+        local punct, punct_idx
+        if left_ch == \"?\" or left_ch == \"!\" then
+            punct, punct_idx = left_ch, cc - 2
+        elseif under_ch == \"?\" or under_ch == \"!\" then
+            punct, punct_idx = under_ch, cc - 1
+        end
+
+        if punct then
+            -- Ищем начало предложения: после последнего . ? ! слева от знака
+            local i = punct_idx - 1
+            while i >= 0 do
+                local ch = char_at(i)
+                if ch == \".\" or ch == \"?\" or ch == \"!\" then
+                    i = i + 1
+                    break
+                end
+                i = i - 1
+            end
+            local start = math.max(i, 0)
+
+            -- Пропускаем пробелы и типичные открывающие кавычки/скобки/тире
+            local function is_skip(ch)
+                return ch == \" \"
+                    or ch == \"«\"
+                    or ch == \"“\"
+                    or ch == '\"'
+                    or ch == \"‘\"
+                    or ch == \"(\"
+                    or ch == \"[\"
+                    or ch == \"—\"
+                    or ch == \"–\"
+                    or ch == \"„\"
+            end
+            while start < total and char_at(start) and is_skip(char_at(start)) do
+                start = start + 1
+            end
+
+            -- Если уже стоит перевёрнутый знак — ничего не делаем
+            local inv = (punct == \"?\") and \"¿\" or \"¡\"
+            if char_at(start) == inv then
+                return \"\"
+            end
+
+            -- Двигаемся влево до позиции вставки, вставляем, возвращаемся правее на +1
+            local left_moves = cc - (start + 1)
+            if left_moves < 0 then
+                left_moves = 0
+            end
+            return string.rep(\"<Left>\", left_moves) .. inv .. string.rep(\"<Right>\", left_moves + 1)
+        end
+        -- ===== Конец особого случая =====
+
+        -- Базовый режим: переключение акцента у ближайшего слева конвертируемого символа
+        if cc <= 1 then
+            return \"\"
+        end
+
+        local target_idx, new_ch
+        for idx = math.min(cc - 2, total - 1), 0, -1 do
+            local ch = vim.fn.strcharpart(line, idx, 1)
+            local t = toggle[ch]
+            if t then
+                target_idx, new_ch = idx, t
+                break
+            end
+        end
+        if not target_idx then
+            return \"\"
+        end
+
+        local left_moves = cc - (target_idx + 2)
+        if left_moves < 0 then
+            left_moves = 0
+        end
+        return string.rep(\"<Left>\", left_moves) .. \"<BS>\" .. new_ch .. string.rep(\"<Right>\", left_moves)
+    end,
+    { expr = true, silent = true, desc = \"Toggle accent / добавить ¿¡ в начало предложения\" }
+)
+" . 8411) ((marker . 8411) . -3347) ((marker . 9226) . -2465) ((marker . 11060) . -3347) ((marker . 8411) . -14) ((marker . 11061) . -3347) ((marker . 11061) . -3347) 11758 (t 26798 43776 70249 529000)) (emacs-pending-undo-list (8411 . 11759) (t 26798 43897 829948 365000) nil ("vim.keymap.set(
+    \"i\",
+    \"<C-'>\",
+    function()
+        -- Текущая строка и позиция курсора (в СИМВОЛАХ, 1-based)
+        local line = vim.api.nvim_get_current_line()
+        local total = vim.fn.strchars(line)
+        local cc = vim.fn.charcol(\".\")
+
+        local function char_at(i) -- i: 0-based индекс символа
+            if i < 0 or i >= total then
+                return nil
+            end
+            return vim.fn.strcharpart(line, i, 1)
+        end
+
+        -- ===== Особый случай: дублируем ?/! в начало предложения =====
+        local left_ch = char_at(cc - 2) -- символ слева от курсора
+        local under_ch = char_at(cc - 1) -- символ под курсором
+        local punct, punct_idx
+        if left_ch == \"?\" or left_ch == \"!\" then
+            punct, punct_idx = left_ch, cc - 2
+        elseif under_ch == \"?\" or under_ch == \"!\" then
+            punct, punct_idx = under_ch, cc - 1
+        end
+
+        if punct then
+            -- Ищем начало предложения: после последнего . ? ! слева от знака
+            local i = punct_idx - 1
+            while i >= 0 do
+                local ch = char_at(i)
+                if ch == \".\" or ch == \"?\" or ch == \"!\" then
+                    i = i + 1
+                    break
+                end
+                i = i - 1
+            end
+            local start = math.max(i, 0)
+
+            -- Пропускаем пробелы и типичные открывающие кавычки/скобки/тире
+            local function is_skip(ch)
+                return ch == \" \"
+                    or ch == \"«\"
+                    or ch == \"“\"
+                    or ch == '\"'
+                    or ch == \"‘\"
+                    or ch == \"(\"
+                    or ch == \"[\"
+                    or ch == \"—\"
+                    or ch == \"–\"
+                    or ch == \"„\"
+            end
+            while start < total and char_at(start) and is_skip(char_at(start)) do
+                start = start + 1
+            end
+
+            -- Если уже стоит перевёрнутый знак — ничего не делаем
+            local inv = (punct == \"?\") and \"¿\" or \"¡\"
+            if char_at(start) == inv then
+                return \"\"
+            end
+
+            -- Двигаемся влево до позиции вставки, вставляем, возвращаемся правее на +1
+            local left_moves = cc - (start + 1)
+            if left_moves < 0 then
+                left_moves = 0
+            end
+            return string.rep(\"<Left>\", left_moves) .. inv .. string.rep(\"<Right>\", left_moves + 1)
+        end
+        -- ===== Конец особого случая =====
+
+        -- Базовый режим: переключение акцента у ближайшего слева конвертируемого символа
+        if cc <= 1 then
+            return \"\"
+        end
+
+        local target_idx, new_ch
+        for idx = math.min(cc - 2, total - 1), 0, -1 do
+            local ch = vim.fn.strcharpart(line, idx, 1)
+            local t = toggle[ch]
+            if t then
+                target_idx, new_ch = idx, t
+                break
+            end
+        end
+        if not target_idx then
+            return \"\"
+        end
+
+        local left_moves = cc - (target_idx + 2)
+        if left_moves < 0 then
+            left_moves = 0
+        end
+        return string.rep(\"<Left>\", left_moves) .. \"<BS>\" .. new_ch .. string.rep(\"<Right>\", left_moves)
+    end,
+    { expr = true, silent = true, desc = \"Toggle accent / добавить ¿¡ в начало предложения\" }
+)
+" . 8411) ((marker . 8411) . -3347) ((marker . 9226) . -2465) ((marker . 11060) . -3347) ((marker . 8411) . -14) ((marker . 11061) . -3347) ((marker . 11061) . -3347) 11758 (t 26798 43776 70249 529000)) (emacs-undo-equiv-table (7 . -1) (-1 . t)))

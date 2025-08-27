@@ -4554,3 +4554,2369 @@ return -- Lua
   }
 }
 
+Файл: arrow.lua
+Содержимое:
+return {
+	"otavioschwanck/arrow.nvim",
+	dependencies = {
+		{ "nvim-tree/nvim-web-devicons" },
+		-- or if using `mini.icons`
+		-- { "echasnovski/mini.icons" },
+	},
+	opts = {
+		-- ► главное: глобальный кэш, не зависящий от cwd/git
+		global_bookmarks = true, -- один JSON «global»
+		save_key = "global", -- явное имя файла-кэша (можно опустить)
+
+		-- ► чтобы в меню сразу видеть, где лежит файл
+		always_show_path = true, -- показывает полный путь
+		full_path_list = {}, -- список исключений больше не нужен
+
+		-- прочие настройки по вкусу
+		leader_key = "<leader>;",
+		buffer_leader_key = "<leader>.",
+		show_icons = true,
+		per_buffer_config = {
+			lines = 4, -- Number of lines showed on preview.
+			sort_automatically = true, -- Auto sort buffer marks.
+			satellite = { -- default to nil, display arrow index in scrollbar at every update
+				enable = false,
+				overlap = true,
+				priority = 1000,
+			},
+			zindex = 10, --default 50
+			treesitter_context = nil, -- it can be { line_shift_down = 2 }, currently not usable, for detail see https://github.com/otavioschwanck/arrow.nvim/pull/43#issue-2236320268
+		},
+	},
+}
+
+Файл: auto-tag.lua
+Содержимое:
+return {
+    "windwp/nvim-ts-autotag",
+    config = function()
+        require("nvim-ts-autotag").setup({
+            opts = {
+                -- Defaults
+                enable_close = true,          -- Auto close tags
+                enable_rename = true,         -- Auto rename pairs of tags
+                enable_close_on_slash = true, -- Auto close on trailing </
+            },
+
+            per_filetype = {
+                ["html"] = {
+                    enable_close = true,
+                },
+                ["jsx"] = {
+                    enable_close = true,
+                },
+                ["tsx"] = {
+                    enable_close = true,
+                },
+            },
+        })
+    end,
+}
+
+Файл: blink.lua
+Содержимое:
+return {
+	"Saghen/blink.cmp",
+	-- optional: provides snippets for the snippet source
+	dependencies = {
+		"nvim-tree/nvim-web-devicons", -- Опционально, но часто используется с lspkind
+		"onsails/lspkind.nvim",
+		-- ... ваши другие зависимости ...
+	},
+
+	-- use a release tag to download pre-built binaries
+	version = "1.*",
+	-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+	-- build = 'cargo build --release',
+	-- If you use nix, you can build from source using latest nightly rust with:
+	-- build = 'nix run .#build-plugin',
+
+	---@module 'blink.cmp'
+	---@type blink.cmp.Config
+	opts = {
+		-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+		-- 'super-tab' for mappings similar to vscode (tab to accept)
+		-- 'enter' for enter to accept
+		-- 'none' for no mappings
+		--
+		-- All presets have the following mappings:
+		-- C-space: Open menu or open docs if already open
+		-- C-n/C-p or Up/Down: Select next/previous item
+		-- C-e: Hide menu
+		-- C-k: Toggle signature help (if signature.enabled = true)
+		--
+		-- See :h blink-cmp-config-keymap for defining your own keymap
+		snippets = {
+			-- preset = "luasnip",
+			-- Function to use when expanding LSP provided snippets
+			expand = function(snippet)
+				vim.snippet.expand(snippet)
+			end,
+			-- Function to use when checking if a snippet is active
+			active = function(filter)
+				return vim.snippet.active(filter)
+			end,
+			-- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
+			jump = function(direction)
+				vim.snippet.jump(direction)
+			end,
+		},
+
+		keymap = {
+			-- preset = "super-tab", -- Начнем с чистого листа для ясности
+			preset = "none", -- Убираем любые дефолтные пресеты
+			["<Tab>"] = {
+				function(cmp)
+					cmp.hide()
+				end,
+				"fallback",
+			},
+			-- ["<CR>"] = { "accept", "fallback" },
+			-- ["<C-Space>"] = {},
+			["<C-space>"] = {},
+			["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
+			["<C-n>"] = { "select_next", "fallback" },
+			["<C-p>"] = { "select_prev", "fallback" },
+
+		},
+
+		appearance = {
+			-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+			-- Adjusts spacing to ensure icons are aligned
+			nerd_font_variant = "mono",
+		},
+
+		-- (Default) Only show the documentation popup when manually triggered
+		completion = {
+			documentation = {
+				auto_show = true,
+				window = {
+					border = "rounded",
+					winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder",
+				},
+			},
+			list = { selection = { preselect = false, auto_insert = true } },
+			menu = {
+				border = "rounded",
+				scrollbar = false,
+				-- Don't automatically show the completion menu
+				auto_show = true,
+
+				-- nvim-cmp style menu
+				draw = {
+					columns = {
+						{ "label", gap = 1 },
+						{ "kind" },
+					},
+				},
+			},
+		},
+        signature = {enabled = false},
+
+		-- Default list of enabled providers defined so that you can extend it
+		-- elsewhere in your config, without redefining it, due to `opts_extend`
+		sources = {
+			default = { "lsp", "path", "buffer" },
+			-- Добавляем эту функцию для фильтрации
+			-- transform_items = function(_, items)
+			--     -- Загружаем типы, если еще не загружены
+			--     local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+			--     -- Возвращаем только те элементы, у которых kind НЕ Snippet
+			--     return vim.tbl_filter(function(item)
+			--         return item.kind ~= CompletionItemKind.Snippet
+			--     end, items)
+			-- end,
+			providers = {
+				-- главное изменение ↓↓↓
+				lsp = {
+					async = true, -- не блокировать меню, пока lua_ls думает
+                    fallbacks = {},
+					-- debounce = 40, -- (опц.) задержка между запросами, мс
+					-- fetching_timeout = 40, -- (опц.) сколько ждать первого пакета
+					-- min_keyword_length = 2, -- у вас уже так
+				},
+			},
+			min_keyword_length = function(ctx)
+				-- ctx - это объект контекста, который передает blink.cmp
+				-- Он содержит информацию о текущем состоянии, включая режим
+				-- Стандартные режимы: 'insert', 'cmdline', 'term'
+				if ctx.mode == "cmdline" then
+					-- В командной строке запускать сразу (после 1 символа)
+					return 0
+				else
+					-- В других режимах (например, 'insert') запускать после 3 символов
+					return 2
+				end
+			end,
+		},
+
+		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+		-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+		-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+		--
+		-- See the fuzzy documentation for more information:
+		fuzzy = { implementation = "prefer_rust_with_warning" },
+		cmdline = {
+			enabled = true,
+			-- use 'inherit' to inherit mappings from top level `keymap` config
+			sources = function()
+				local type = vim.fn.getcmdtype()
+				-- Search forward and backward
+				if type == "/" or type == "?" then
+					return { "buffer" }
+				end
+				-- Commands
+				if type == ":" or type == "@" then
+					return { "cmdline" }
+				end
+				return {}
+			end,
+			completion = {
+				trigger = {
+					show_on_blocked_trigger_characters = {},
+					show_on_x_blocked_trigger_characters = {},
+				},
+				list = {
+					selection = {
+						-- When `true`, will automatically select the first item in the completion list
+						preselect = false,
+						-- When `true`, inserts the completion item automatically when selecting it
+						auto_insert = true,
+					},
+				},
+				-- Whether to automatically show the window when new completion items are available
+				menu = { auto_show = true },
+				-- Displays a preview of the selected item on the current line
+				ghost_text = { enabled = true },
+			},
+			keymap = {
+				["<tab>"] = { "select_and_accept" },
+			},
+		},
+		-- cmdline = {
+		--     -- Модифицируем функцию sources
+		--     completion = {
+		--         menu = {
+		--             auto_show = true,
+		--         },
+		--         list = {
+		--             selection = {
+		--                 preselect = false,
+		--                 -- Также рекомендуется отключить auto_insert, раз preselect отключен
+		--                 auto_insert = true,
+		--             },
+		--         },
+		--     },
+		--     keymap = {
+		--         ["<tab>"] = { "select_and_accept" },
+		--     },
+		-- },
+	},
+	-- opts_extend = { "sources.default" },
+}
+
+Файл: bookmark.lua
+Содержимое:
+return {
+	"LintaoAmons/bookmarks.nvim",
+	dependencies = {
+		{ "kkharji/sqlite.lua" },
+		{ "nvim-telescope/telescope.nvim" },
+		{ "stevearc/dressing.nvim" }, -- optional: better UI
+	},
+	config = function()
+		local opts = {} -- check the "./lua/bookmarks/default-config.lua" file for all the options
+		require("bookmarks").setup(opts) -- you must call setup to init sqlite db
+		vim.keymap.set(
+			{ "n", "v" },
+			"mm",
+			"<cmd>BookmarksMark<cr>",
+			{ desc = "Mark current line into active BookmarkList." }
+		)
+		vim.keymap.set(
+			{ "n", "v" },
+			"mo",
+			"<cmd>BookmarksGoto<cr>",
+			{ desc = "Go to bookmark at current active BookmarkList" }
+		)
+		vim.keymap.set(
+			{ "n", "v" },
+			"ma",
+			"<cmd>BookmarksCommands<cr>",
+			{ desc = "Find and trigger a bookmark command." }
+		)
+	end,
+}
+
+-- run :BookmarksInfo to see the running status of the plugin
+
+Файл: code-companion.lua
+Содержимое:
+return {
+	"olimorris/codecompanion.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-treesitter/nvim-treesitter",
+	},
+	opts = {
+		-- какой адаптер где
+		strategies = {
+			chat = { adapter = "openai" },
+			inline = { adapter = "openai" },
+			cmd = { adapter = "openai" },
+		},
+
+		-- настройка адаптера (пример: модель по умолчанию)
+		adapters = {
+			openai = function()
+				return require("codecompanion.adapters").extend("openai", {
+					schema = {
+						model = { default = "gpt-5" }, -- замените на вашу
+					},
+				})
+			end,
+			-- Показывать только свои адаптеры и не дёргать выбор модели
+			opts = {
+				show_defaults = false,
+				show_model_choices = false,
+			},
+		},
+
+		-- лог, удобно при дебаге
+		opts = {
+			log_level = "INFO", -- DEBUG/TRACE для разбора проблем
+		},
+
+		-- UI-палитра действий (можно подключить telescope/mini.pick/snacks)
+		display = {
+			action_palette = { provider = "native" },
+		},
+	},
+}
+
+Файл: color-themes.lua
+Содержимое:
+return {
+    {
+        "catppuccin/nvim",
+        lazy = false,
+        name = "catppuccin",
+        priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    notify = false,
+                    mini = {
+                        enabled = true,
+                        indentscope_color = "",
+                    },
+                },
+            })
+            vim.cmd.colorscheme("catppuccin-mocha")
+            -- vim.cmd.colorscheme("catppuccin-latte")
+        end,
+    },
+    {
+        "sainnhe/gruvbox-material",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.g.gruvbox_material_better_performance = 1
+            -- vim.g.gruvbox_material_visual = "blue background"
+            vim.g.gruvbox_material_foreground = "material"
+            -- vim.g.gruvbox_material_enable_italic = true
+            vim.g.gruvbox_gruvbox_material_enable_bold = true
+            vim.g.gruvbox_material_visual = "green background"
+            -- vim.g.gruvbox_material_visual = "reverse"
+            -- vim.cmd.colorscheme("gruvbox-material")
+        end,
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        lazy = false,
+        name = "gruvbox",
+        priority = 1000,
+        config = function()
+            -- Default options:
+            require("gruvbox").setup({
+                terminal_colors = true, -- add neovim terminal colors
+                undercurl = true,
+                underline = true,
+                bold = true,
+                italic = {
+                    strings = true,
+                    emphasis = true,
+                    comments = true,
+                    operators = false,
+                    folds = true,
+                },
+                strikethrough = true,
+                invert_selection = false,
+                invert_signs = false,
+                invert_tabline = false,
+                invert_intend_guides = false,
+                inverse = true, -- invert background for search, diffs, statuslines and errors
+                contrast = "hard", -- can be "hard", "soft" or empty string
+                palette_overrides = {},
+                overrides = {},
+                dim_inactive = false,
+                transparent_mode = false,
+            })
+            -- vim.cmd("colorscheme gruvbox")
+            -- vim.cmd.colorscheme "gruvbox"
+            -- vim.cmd.colorscheme("gruvbox-latte")
+        end,
+    },
+    {
+        "folke/tokyonight.nvim",
+        priority = 1000,
+        config = function()
+            local transparent = false -- set to true if you would like to enable transparency
+
+            local bg = "#011628"
+            local bg_dark = "#011423"
+            local bg_highlight = "#143652"
+            local bg_search = "#0A64AC"
+            local bg_visual = "#275378"
+            local fg = "#CBE0F0"
+            local fg_dark = "#B4D0E9"
+            local fg_gutter = "#627E97"
+            local border = "#547998"
+
+            require("tokyonight").setup({
+                style = "night",
+                transparent = transparent,
+                styles = {
+                    sidebars = transparent and "transparent" or "dark",
+                    floats = transparent and "transparent" or "dark",
+                },
+                on_colors = function(colors)
+                    colors.bg = bg
+                    colors.bg_dark = transparent and colors.none or bg_dark
+                    colors.bg_float = transparent and colors.none or bg_dark
+                    colors.bg_highlight = bg_highlight
+                    colors.bg_popup = bg_dark
+                    colors.bg_search = bg_search
+                    colors.bg_sidebar = transparent and colors.none or bg_dark
+                    colors.bg_statusline = transparent and colors.none or bg_dark
+                    colors.bg_visual = bg_visual
+                    colors.border = border
+                    colors.fg = fg
+                    colors.fg_dark = fg_dark
+                    colors.fg_float = fg
+                    colors.fg_gutter = fg_gutter
+                    colors.fg_sidebar = fg_dark
+                end,
+            })
+
+            -- vim.cmd("colorscheme tokyonight")
+        end,
+    },
+    {
+        "sainnhe/everforest",
+    },
+    { "EdenEast/nightfox.nvim" },
+    {
+        "maxmx03/solarized.nvim",
+        lazy = false,
+        priority = 1000,
+        ---@type solarized.config
+        opts = {},
+        config = function(_, opts)
+            require("solarized").setup(opts)
+        end,
+    },
+    { "rose-pine/neovim",             name = "rose-pine" },
+    { "miikanissi/modus-themes.nvim", priority = 1000 },
+    {
+        "morhetz/gruvbox",
+        config = function()
+            vim.g.gruvbox_contrast_dark = "soft"
+        end,
+    },
+    {
+        "rebelot/kanagawa.nvim",
+    },
+    {
+        "uloco/bluloco.nvim",
+        lazy = false,
+        priority = 1000,
+        dependencies = { "rktjmp/lush.nvim" },
+        config = function()
+            -- your optional config goes here, see below.
+        end,
+    },
+}
+
+Файл: comment-nvim.lua
+Содержимое:
+return {
+    "numToStr/Comment.nvim",
+    config = function()
+        require("Comment").setup({
+            sticky = true,
+        })
+        -- Настройка для <leader>lc, чтобы она выполняла ту же функцию, что и gcc
+        vim.keymap.set("n", "<leader>lc", "<Plug>(comment_toggle_linewise_current)")
+        -- Настройка для Ctrl-/ (C-/), чтобы она выполняла ту же функцию, что и gcc
+        vim.keymap.set("n", "<C-'>", "<Plug>(comment_toggle_linewise_current)<CR>")
+        -- vim.keymap.set("n", "<esc>[39;5u", "<Plug>(comment_toggle_linewise_current)<CR>")
+        -- vim.keymap.set("n", "<C-_>", "<Plug>(comment_toggle_linewise_current)<CR>")
+        -- Настройка для Ctrl-/ (C-/) в VISUAL режиме для комментирования выделенной области
+        vim.keymap.set("x", "<C-'>", "<Plug>(comment_toggle_linewise_visual)")
+        -- vim.keymap.set("n", "\27[27;5;39~", "<Plug>(comment_toggle_linewise_visual)")
+        vim.keymap.set("n", "\27[27;5;39~", "<Plug>(comment_toggle_linewise_current)<CR>")
+        -- vim.keymap.set("x", "<C-_>", "<Plug>(comment_toggle_linewise_visual)")
+    end,
+    opts = {},
+}
+
+Файл: conjure.lua
+Содержимое:
+return {
+	"Olical/conjure",
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	ft = { "scheme", "racket" },
+	config = function()
+	    -- Создаем автокоманду для Racket файлов
+	    vim.api.nvim_create_autocmd("FileType", {
+	        pattern = "racket",
+	        callback = function()
+	            -- Создаем маппинг <leader>rs для остановки Conjure REPL
+	            vim.keymap.set("n", "<leader>rs", ":ConjureRktStop<CR>", {
+	                buffer = true, -- Маппинг только для текущего буфера
+	                silent = true, -- Не показывать команду в командной строке
+	                noremap = true, -- Не использовать рекурсивный маппинг
+	                desc = "Stop Racket REPL", -- Описание команды для which-key
+	            })
+	            vim.keymap.set("n", "<leader>rr", ":ConjureRktStart<CR>", {
+	                buffer = true, -- Маппинг только для текущего буфера
+	                silent = true, -- Не показывать команду в командной строке
+	                noremap = true, -- Не использовать рекурсивный маппинг
+	                desc = "Start Racket REPL", -- Описание команды для which-key
+	            })
+	            vim.keymap.set("n", "<leader>rc", ":ConjureEvalBuf<CR>", {
+	                buffer = true, -- Маппинг только для текущего буфера
+	                silent = true, -- Не показывать команду в командной строке
+	                noremap = true, -- Не использовать рекурсивный маппинг
+	                desc = "Eval Buffer", -- Описание команды для which-key
+	            })
+	        end,
+	    })
+	end,
+}
+
+Файл: dashboard.lua
+Содержимое:
+return {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+        require("dashboard").setup({
+            -- config
+            config = {
+                week_header = {
+                    enable = true,
+                },
+                shortcut = {
+                    { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
+                },
+            },
+        })
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+}
+
+Файл: devicons.lua
+Содержимое:
+return {
+    {"ryanoasis/vim-devicons"},
+    {"nvim-tree/nvim-web-devicons"}
+}
+
+Файл: diffview.lua
+Содержимое:
+return {
+	"sindrets/diffview.nvim",
+	dependencies = { "nvim-lua/plenary.nvim" }, -- Required dependency
+	cmd = { "DiffviewOpen", "DiffviewClose" }, -- Lazy-load on command
+}
+
+Файл: flash.lua
+Содержимое:
+return {
+	"folke/flash.nvim",
+	event = "VeryLazy",
+	---@type Flash.Config
+	opts = {
+		-- mofes = {
+		--     search = {
+		--         enabled = true
+		--     }
+		-- }
+		highlight = { backdrop = false },
+		modes = {
+			search = {
+				enabled = false,
+			},
+			char = {
+				-- enabled = false,
+				enabled = false,
+				jump_labels = true,
+				highlight = { backdrop = false },
+			},
+		},
+		jump = {
+			autojump = true,
+			pos = "start",
+		},
+		label = {
+			rainbow = {
+				enabled = true,
+				shade = 2,
+			},
+			style = "inline", ---@type "eol" | "overlay" | "right_align" | "inline",
+		},
+	},
+    -- stylua: ignore
+    keys = {
+        { "<C-/>",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+        { "<C-_>",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+        { "<leader>S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+        { "r",         mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+        { "R",         mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+}
+
+Файл: follow_md_link.lua
+Содержимое:
+return {
+	"jghauser/follow-md-links.nvim",
+	config = function()
+		vim.keymap.set("n", "<bs>", ":edit #<cr>", { silent = true })
+	end,
+}
+
+Файл: grug_far.lua
+Содержимое:
+return {
+    "MagicDuck/grug-far.nvim",
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
+    keys = {
+        {
+            "<leader>f*",
+            function()
+                require("grug-far").open({
+                    prefills = { search = vim.fn.expand("<cword>") },
+                })
+            end,
+            mode = { "n" },
+            desc = "Grug-Far: Search for word under cursor",
+        },
+        -- {
+        --     "<leader>f*",
+        --     function()
+        --         require('grug-far').open({
+        --             prefills = { search = vim.fn.expand("<cword>") }
+        --         })
+        --     end
+        --     mode = { "n" },
+        --     desc = "Grug-Far: Search for word under cursor",
+        -- },
+    },
+    config = function()
+        -- optional setup call to override plugin options
+        -- alternatively you can set options with vim.g.grug_far = { ... }
+        require("grug-far").setup({
+            windowCreationCommand = "botright vsplit",
+            enabledEngines = { "ripgrep", "astgrep" },
+            -- options, see Configuration section below
+            -- there are no required options atm
+        })
+    end,
+}
+
+Файл: lazy-nvim.lua
+Содержимое:
+return {
+    "kdheepak/lazygit.nvim",
+    lazy = true,
+    cmd = {
+        "LazyGit",
+        "LazyGitConfig",
+        "LazyGitCurrentFile",
+        "LazyGitFilter",
+        "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+        { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
+}
+
+Файл: lazydev.lua
+Содержимое:
+return {
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    -- { -- optional blink completion source for require statements and module annotations
+    --     "saghen/blink.cmp",
+    --     opts = {
+    --         sources = {
+    --             -- add lazydev to your completion providers
+    --             default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+    --             providers = {
+    --                 lazydev = {
+    --                     name = "LazyDev",
+    --                     module = "lazydev.integrations.blink",
+    --                     -- make lazydev completions top priority (see `:h blink.cmp`)
+    --                     score_offset = 100,
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- },
+    -- { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
+}
+
+Файл: lsp-config.lua
+Содержимое:
+-- ~/.config/nvim/lua/plugins/lsp-config.lua
+
+return {
+	{
+		"williamboman/mason.nvim",
+		opts = {},
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"pyright",
+				"ruff",
+				"ts_ls",
+				"texlab",
+				"vimls",
+				"eslint",
+				"html",
+				"emmet_ls",
+				"bashls",
+				"jsonls",
+				"cssls",
+				-- "cucumber_language_server",
+			},
+			handlers = {
+				function(server)
+					require("lspconfig")[server].setup({})
+				end,
+			},
+		},
+	},
+	{
+		"neovim/nvim-lspconfig",
+		-- dependencies = { "saghen/blink.cmp" },
+		-- example using `opts` for defining servers
+		opts = {
+			servers = {
+				lua_ls = {},
+			},
+		},
+		config = function()
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>si", vim.lsp.buf.implementation, {})
+
+			-- Отключаем диагностику по умолчанию
+
+			vim.api.nvim_create_user_command("DisableDiagnostics", function()
+				vim.diagnostic.config({
+					virtual_text = false,
+					signs = false,
+					underline = false,
+				})
+			end, {})
+			vim.api.nvim_create_user_command("EnableDiagnostics", function()
+				vim.diagnostic.config({
+					virtual_text = true, -- Отключаем виртуальный текст справа
+					signs = true, -- Оставляем значки слева
+					underline = true, -- Подчёркивание проблемного кода
+					-- update_in_insert = false, -- Обновление только в нормальном режиме
+					severity_sort = true, -- Сортировка по важности
+					float = {
+						source = true, -- Показывать источник ошибки
+						header = "", -- Без заголовка
+						-- prefix = "", -- Без префикса
+					},
+				})
+			end, {})
+			vim.cmd("DisableDiagnostics")
+
+			-- Привязка клавиши для отключения диагностик
+			vim.api.nvim_set_keymap("n", "<leader>dd", ":DisableDiagnostics<CR>", { noremap = true })
+			-- Привязка клавиши для включения диагностик
+			vim.api.nvim_set_keymap("n", "<leader>de", ":EnableDiagnostics<CR>", { noremap = true })
+			vim.keymap.set("n", "<leader>di", function()
+				vim.diagnostic.open_float(nil, { focus = true })
+			end, { noremap = true })
+		end,
+	},
+}
+
+Файл: lualine.lua
+Содержимое:
+return {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+        require("lualine").setup({
+            options = {
+                -- theme = 'dracula',
+                theme = "auto",
+                component_separators = "",
+                section_separators = "",
+            },
+            sections = {
+                lualine_a = {
+                    "mode",
+                },
+                lualine_c = {
+                    "filename",
+                },
+                lualine_x = {
+                    {
+                        function()
+                            -- Возвращаем 'РУС' если is_russian true, иначе 'ENG'
+                            return _G.is_russian and "РУС" or "ENG"
+                        end,
+                        -- Можно добавить иконку
+                        icon = "⌨ ", -- Опционально
+                        -- Можно добавить цвет
+                        color = { fg = "#98c379" }, -- Опционально
+                    },
+                    "encoding",
+                    "fileformat",
+                    "filetype",
+                },
+            },
+        })
+    end,
+}
+
+Файл: luaSnip.lua
+Содержимое:
+return {
+    -- { "rafamadriz/friendly-snippets" },
+    -- { "saadparwaiz1/cmp_luasnip" },
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+            -- "saadparwaiz1/cmp_luasnip",
+        },
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+        config = function()
+            -- Подключаем LuaSnip и загружаем сниппеты
+            require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/config/snippets" })
+            require("luasnip").config.setup({
+                enable_autosnippets = true,
+                update_events = "TextChanged,TextChangedI",
+            })
+            require("luasnip").config.set_config({ -- Setting LuaSnip config
+                -- Use <Tab> (or some other key if you prefer) to trigger visual selection
+                store_selection_keys = "<Tab>",
+                update_events = "TextChanged,TextChangedI",
+                enable_autosnippets = true,
+            })
+
+            vim.cmd([[
+			" Use Tab to expand and jump through snippets
+			imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+			" imap <silent><expr> <C-f> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+			smap <silent><expr> <Tab> luasnip#jumpable(1) ? '<Plug>luasnip-jump-next' : '<Tab>'
+
+			" Use Shift-Tab to jump backwards through snippets
+			imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+			smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
+			]])
+
+            -- vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>luasnip-next-choice", {})
+            -- vim.api.nvim_set_keymap("s", "<C-n>", "<Plug>luasnip-next-choice", {})
+            -- vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>luasnip-prev-choice", {})
+            -- vim.api.nvim_set_keymap("s", "<C-p>", "<Plug>luasnip-prev-choice", {})
+        end,
+    },
+}
+
+Файл: mini-nvim.lua
+Содержимое:
+return {
+	{
+		"echasnovski/mini.nvim",
+		version = false,
+		lazy = false,
+		config = function()
+			require("mini.operators").setup({})
+			require("mini.pairs").setup()
+			local map_bs = function(lhs, rhs)
+				vim.keymap.set("i", lhs, rhs, { expr = true, replace_keycodes = false })
+			end
+			map_bs("<C-h>", "v:lua.MiniPairs.bs()")
+			map_bs("<C-w>", 'v:lua.MiniPairs.bs("\23")')
+			map_bs("<C-u>", 'v:lua.MiniPairs.bs("\21")')
+			map_bs("<CR>", "v:lua.MiniPairs.cr()")
+			require("mini.icons").setup()
+			require("mini.files").setup()
+			require("mini.sessions").setup({
+
+				-- Whether to read default session if Neovim opened without file arguments
+				autoread = true,
+
+				-- Whether to write currently read session before quitting Neovim
+				autowrite = true,
+
+				-- Directory where global sessions are stored (use `''` to disable)
+				directory = "~/Desktop/Sessions/", --<"session" subdir of user data directory from |stdpath()|>,
+
+				-- File for local session (use `''` to disable)
+				file = "",
+
+				-- Whether to force possibly harmful actions (meaning depends on function)
+				force = { read = false, write = true, delete = false },
+
+				-- Hook functions for actions. Default `nil` means 'do nothing'.
+				hooks = {
+					-- Before successful action
+					pre = {
+						write = function()
+							-- pcall = на случай, если плагин ещё не загружен
+							pcall(require("neo-tree.command").execute, { action = "close" })
+						end,
+					},
+					-- After successful action
+					post = { read = nil, write = nil, delete = nil },
+				},
+
+				-- Whether to print session path after action
+				verbose = { read = false, write = true, delete = true },
+			})
+            
+			require("mini.ai").setup()
+
+			vim.keymap.set(
+				"n",
+				"<leader>sw",
+				':lua MiniSessions.select("write")<cr>',
+				{ noremap = true, silent = true }
+			)
+			vim.keymap.set("n", "<leader>sl", ':lua MiniSessions.select("read")<cr>', { noremap = true, silent = true })
+			vim.keymap.set(
+				"n",
+				"<leader>sd",
+				':lua MiniSessions.select("delete")<cr>',
+				{ noremap = true, silent = true }
+			)
+		end,
+	},
+}
+
+Файл: multicursors.lua
+Содержимое:
+return {
+	"mg979/vim-visual-multi",
+	init = function()
+		-- enable the mouse mappings
+		vim.g.VM_mouse_mappings = 1
+
+		-- define all your overrides in one Lua table
+		vim.g.VM_maps = {
+			-- ["Add Cursor At Position"] = ",qq",
+
+			-- you can put other overrides here too, for example:
+			["Select All"] = "<leader>ma",
+			["Start Regex Search"] = "<leader>mr",
+			-- ["Add Cursor Down"]     = "<M-j>",
+			-- ["Add Cursor Up"]       = "<M-k>",
+		}
+	end,
+	config = function()
+	end,
+}
+
+Файл: neo-tree.lua
+Содержимое:
+return {
+	"nvim-neo-tree/neo-tree.nvim",
+	branch = "v3.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons",
+		"MunifTanjim/nui.nvim",
+	},
+	lazy = false,
+	config = function()
+		----------------------------------------------------------------------------
+		-- ░ 1.  базовая настройка
+		----------------------------------------------------------------------------
+		require("neo-tree").setup({
+			window = {
+				width = 28,
+				mappings = {
+					["Y"] = function(state)
+						local node = state.tree:get_node()
+						local filepath = node.path
+						vim.fn.setreg("+", filepath)
+						vim.notify("Copied absolute path: " .. filepath)
+					end,
+					["y"] = function(state)
+						local node = state.tree:get_node()
+						local relpath = vim.fn.fnamemodify(node.path, ":.")
+						vim.fn.setreg("+", relpath)
+						vim.notify("Copied relative path: " .. relpath)
+					end,
+				},
+			}, -- узкие панели
+			filesystem = {
+				bind_to_cwd = false, -- дерево ≠ cwd  (cwd в покое)
+				-- follow_current_file = { enabled = false },
+				follow_current_file = { enabled = true },
+			},
+			enable_git_status = true, -- Включает Git-статус в дереве файлов
+			default_component_configs = {
+				git_status = {
+					symbols = {
+						-- Настройте символы для разных статусов (по умолчанию они пустые или простые)
+						added = "✚", -- Добавленный файл
+						modified = "", -- Измененный
+						deleted = "✖", -- Удаленный
+						renamed = "󰁕", -- Переименованный
+						untracked = "", -- Неотслеживаемый
+						ignored = "", -- Игнорируемый
+						unstaged = "󰄱", -- Не заステージенный
+						staged = "", -- Заステージенный
+						conflict = "", -- Конфликт
+					},
+				},
+				name = {
+					use_git_status_colors = true, -- Включает окрашивание имен файлов по Git-статусу (например, измененные — другим цветом)
+					highlight = "NeoTreeFileName", -- Группа подсветки (можно кастомизировать в colorscheme)
+				},
+			},
+		})
+
+		vim.keymap.set("n", "<leader>t", function()
+			vim.cmd("Neotree toggle filesystem position=left dir=" .. vim.fn.fnameescape(vim.loop.cwd()))
+		end, { silent = true, desc = "Neo-tree @ cwd (left)" }) -- встроенный toggle закроет панель, если она уже открыта
+
+		vim.keymap.set("n", "<leader>T", function()
+			vim.cmd("Neotree toggle filesystem position=left dir=" .. vim.fn.fnameescape(vim.fn.expand("%:p:h")))
+		end, { silent = true, desc = "Neo-tree @ cwd (left)" }) -- встроенный toggle закроет панель, если она уже открыта
+	end,
+}
+
+Файл: neoclip.lua
+Содержимое:
+return {
+	"AckslD/nvim-neoclip.lua",
+	dependencies = {
+		{ "nvim-telescope/telescope.nvim" },
+	},
+	config = function()
+		require("neoclip").setup({
+			history = 1000,
+			enable_persistent_history = false,
+			length_limit = 1048576,
+			continuous_sync = false,
+			db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+			filter = nil,
+			preview = true,
+			prompt = nil,
+			default_register = '"',
+			default_register_macros = "q",
+			enable_macro_history = true,
+			content_spec_column = false,
+			disable_keycodes_parsing = false,
+			on_select = {
+				move_to_front = false,
+				close_telescope = true,
+			},
+			on_paste = {
+				set_reg = false,
+				move_to_front = false,
+				close_telescope = true,
+			},
+			on_replay = {
+				set_reg = false,
+				move_to_front = false,
+				close_telescope = true,
+			},
+			on_custom_action = {
+				close_telescope = true,
+			},
+			keys = {
+                telescope = {
+					i = {
+						-- select = "<cr>",
+						paste = "<c-k>",
+						paste_behind = "<cr>",
+						-- paste_behind = "<c-k>",
+						replay = "<c-q>", -- replay a macro
+						delete = "<c-d>", -- delete an entry
+						edit = "<c-e>", -- edit an entry
+						custom = {},
+					},
+					n = {
+						select = "<cr>",
+						paste = "p",
+						--- It is possible to map to more than one key.
+						-- paste = { 'p', '<c-p>' },
+						paste_behind = "P",
+						replay = "q",
+						delete = "d",
+						edit = "e",
+						custom = {},
+					},
+				},
+				fzf = {
+					select = "default",
+					-- paste = "ctrl-p",
+					-- paste_behind = "ctrl-k",
+					custom = {},
+				},
+			},
+		})
+        vim.keymap.set("n", "<leader>nc", "<cmd>Telescope neoclip<CR>", { desc = "Telescope Neoclip" })
+	end,
+}
+
+
+Файл: neogit.lua
+Содержимое:
+return {
+    "NeogitOrg/neogit",
+    dependencies = {
+        "nvim-lua/plenary.nvim", -- required
+        "sindrets/diffview.nvim", -- optional - Diff integration
+
+        -- Only one of these is needed.
+        "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function()
+        require("neogit").setup({
+            -- Core behavior
+            disable_hint = false,        -- Show hints at top of status buffer
+            disable_context_highlighting = false, -- Highlight based on cursor position
+            disable_signs = false,       -- Show signs for sections/items/hunks
+            prompt_force_push = true,    -- Ask before force-pushing divergent branches
+            disable_insert_on_commit = "auto", -- "auto": Insert mode if commit message empty, else normal
+            auto_refresh = true,         -- Auto-refresh after Git events
+            sort_branches = "-committerdate", -- Sort branches by recent commits
+            initial_branch_name = "",    -- Default name prompt for new branches
+            kind = "floating",           -- Open as floating window (modern feel; alternatives: "tab", "split", "replace")
+            use_per_project_settings = true, -- Persist settings per repo
+            remember_settings = true,    -- Save toggles/options across sessions
+            ignored_settings = {},       -- Settings to never persist (e.g., {"Status--show-untracked-files"})
+
+            -- File watching for auto-updates
+            filewatcher = {
+                interval = 1000, -- Check .git/ every 1 second (ms)
+                enabled = true,
+            },
+
+            -- UI customizations
+            graph_style = "unicode", -- Nicer commit graph ("ascii" or "kitty" alternatives)
+            process_spinner = false, -- Hide spinning animation during Git commands
+            highlight = {
+                italic = true,
+                bold = true,
+                underline = true,
+            },
+            floating = {
+                relative = "editor", -- Position relative to editor
+                width = 0.8, -- 80% of editor width
+                height = 0.7, -- 70% of editor height
+                border = "rounded", -- Border style (options: "single", "double", etc.)
+            },
+
+            -- Commit editor settings
+            commit_editor = {
+                kind = "auto",        -- Window type ("tab", "split", etc.)
+                show_staged_diff = true, -- Show staged changes diff in commit view
+                staged_diff_split_kind = "split", -- How to split the staged diff ("vsplit", "auto")
+                spell_check = true,   -- Enable spell-checking in commit message
+            },
+
+            -- Status view customizations
+            status = {
+                show_head_commit_hash = true, -- Display HEAD commit hash
+                recent_commit_count = 10, -- Show last 10 commits in recent section
+                HEAD_folded = false, -- Expand HEAD section by default
+                -- Mode text icons (customize for clarity)
+                mode_padding = 3,
+                mode_text = {
+                    M = "modified",
+                    N = "new file",
+                    A = "added",
+                    D = "deleted",
+                    C = "copied",
+                    U = "updated",
+                    R = "renamed",
+                    DD = "unmerged",
+                    AU = "unmerged",
+                    UD = "unmerged",
+                    UA = "unmerged",
+                    DU = "unmerged",
+                    AA = "unmerged",
+                    UU = "unmerged",
+                    ["?"] = "",
+                },
+            },
+
+            -- Integrations (enable what you have installed)
+            integrations = {
+                telescope = nil, -- Set to true if telescope.nvim is installed for fuzzy menus
+                diffview = true, -- Enable for VSCode-like diff panels (requires diffview.nvim)
+                fzf_lua = nil, -- Alternative fuzzy finder
+                mini_pick = nil, -- Another finder option
+            },
+
+            -- Keymaps (use defaults, but you can override)
+            use_default_keymaps = true, -- Enable built-in mappings (disable to customize fully)
+            mappings = {
+                -- Customize if needed; defaults are intuitive (e.g., 's' to stage, 'c' to commit)
+                -- Example override: finder = { ["<cr>"] = "Select" },
+            },
+
+            -- Other advanced options (defaults are fine for most)
+            telescope_sorter = function()
+                return nil
+            end,    -- Custom sorter if using telescope
+            git_services = { -- Templates for PRs on GitHub, etc. (defaults work)
+                ["github.com"] = "https://github.com/${owner}/${repository}/compare/${branch_name}?expand=1",
+                -- Add more for GitLab, Bitbucket, etc.
+            },
+        })
+    end,
+}
+
+Файл: non-ls.lua
+Содержимое:
+return {
+	{
+		"jay-babu/mason-null-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" }, -- Загружать чуть раньше, чтобы инструменты были доступны
+		dependencies = { "nvimtools/none-ls.nvim", "mason.nvim" }, -- Явная зависимость
+		config = function()
+			require("mason-null-ls").setup({
+				ensure_installed = { "prettier", "clang_format" },
+				automatic_installation = true,
+			})
+		end,
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		event = { "BufReadPre", "BufNewFile" }, -- Загружать чуть раньше
+		dependencies = { "mason.nvim" }, -- Если mason-null-ls не управляет им
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.formatting.black,
+					null_ls.builtins.formatting.isort,
+					null_ls.builtins.formatting.prettier.with({
+						-- extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" },
+						-- extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" },
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"typescript",
+							"typescriptreact",
+							"vue",
+							"css",
+							"scss",
+							"less",
+							"html",
+							"json",
+							"jsonc", -- для package.json с комментариями
+							"yaml",
+							"markdown",
+							"graphql",
+						},
+						prefer_local = "node_modules/.bin", -- Предпочитать локально установленный Prettier
+					}),
+					-- null_ls.builtins.diagnostics.mypy,
+					null_ls.builtins.formatting.clang_format.with({
+						-- extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" },
+						extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" },
+					}),
+				},
+			})
+			-- vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format, {})
+			vim.keymap.set("n", "<leader>bf", function()
+				vim.lsp.buf.format({ async = true })
+			end, {})
+		end,
+	},
+}
+
+Файл: nvim-surround.lua
+Содержимое:
+return {
+	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty tousedefaults
+			})
+		end,
+	},
+}
+
+Файл: nvim-tmux-navigator.lua
+Содержимое:
+return {
+  "christoomey/vim-tmux-navigator",
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+  },
+  keys = {
+    { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+    { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+    { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+  },
+}
+
+Файл: nvim-yati.lua
+Содержимое:
+return {
+	"yioneko/nvim-yati",
+	dependencies = "nvim-treesitter/nvim-treesitter",
+	event = "VeryLazy", -- загружать, когда нужен indent
+	config = function()
+		require("nvim-treesitter.configs").setup({
+			-- оставляем хайлайт, текст-объекты и т.д.
+			highlight = { enable = true },
+			indent = { -- штатный модуль
+				enable = true,
+				disable = { "python", "lua" }, -- <-- отключаем ТОЛЬКО python
+			},
+			-- включаем Yati (работает для всех языков или выборочно)
+			yati = {
+				enable = true, -- ② Yati активен
+				default_lazy = true,
+				suppress_conflict_warning = true, -- ③ убираем всплывашку
+			},
+		})
+	end,
+}
+
+Файл: nvlime.lua
+Содержимое:
+return {
+	"monkoose/nvlime",
+    dependencies = "monkoose/parsley",
+    config = function ()
+        -- vim.g.nvlime_config = {
+        --     cmp = {
+        --         enabled = true
+        --     }
+        -- }
+    end
+}
+-- sbcl --load ~/.local/share/nvim/lazy/nvlime/lisp/start-nvlime.lisp
+
+Файл: orgmode.lua
+Содержимое:
+return {
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
+    ft = { "org" },
+    config = function()
+        -- Setup orgmode
+        require("orgmode").setup({
+            org_agenda_files = "~/docs/**/*",
+            -- org_default_notes_file = "~/orgfiles/refile.org",
+            -- mappings = {
+            --     org = {
+            --         org_meta_return = 'zx'
+            --     }
+            -- }
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'org',
+                callback = function()
+                    vim.keymap.set('i', '<C-y>', '<C-o>:lua require("orgmode").action("org_mappings.meta_return")<CR>', {
+                        -- silent = true,
+                        buffer = true,
+                    })
+                end,
+            })
+        })
+        -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+        -- add ~org~ to ignore_install
+        -- require('nvim-treesitter.configs').setup({
+        --   ensure_installed = 'all',
+        -- })
+    end,
+}
+
+Файл: render-markdown.lua
+Содержимое:
+return {
+	"MeanderingProgrammer/render-markdown.nvim",
+	ft = { "markdown" },
+	dependencies = { "nvim-treesitter/nvim-treesitter" },
+
+	opts = {
+		render_modes = { "n", "i", "c", "t" },
+
+		anti_conceal = {
+			enabled = true,
+			disabled_modes = { "n" },
+			above = 0,
+			below = 0,
+		},
+
+		-- ВЫКЛ (toggle off) -> raw markdown: conceallevel=0, concealcursor=''
+		-- ВКЛ (render)     -> красивый рендер: conceallevel=3, concealcursor='n'
+		win_options = {
+			conceallevel = { default = 0, rendered = 3 },
+			concealcursor = { default = "", rendered = "n" },
+		},
+
+		-- -- <<< ДОБАВЛЕНО: LaTeX >>>
+		latex = {
+			enabled = false, -- включить рендер
+			converter = "latex2text", -- нужен пакет pylatexenc
+			position = "above", -- где показывать (можно "below")
+			virtual = true, -- если true — всегда через виртуальные строки
+			highlight = "RenderMarkdownMath",
+		},
+	},
+
+	config = function(_, opts)
+		require("render-markdown").setup(opts)
+	end,
+
+	keys = {
+		{ ",mt", "<Cmd>RenderMarkdown toggle<CR>", desc = "Toggle render-markdown", silent = true },
+	},
+}
+
+Файл: scratch.lua
+Содержимое:
+return {
+	"LintaoAmons/scratch.nvim",
+	event = "VeryLazy",
+	dependencies = {
+		{ "ibhagwan/fzf-lua" }, --optional: if you want to use fzf-lua to pick scratch file. Recommanded, since it will order the files by modification datetime desc. (require rg)
+		{ "nvim-telescope/telescope.nvim" }, -- optional: if you want to pick scratch file by telescope
+		{ "stevearc/dressing.nvim" }, -- optional: to have the same UI shown in the GIF
+	},
+	config = function()
+		require("scratch").setup({
+			scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim", -- where your scratch files will be put
+			window_cmd = "rightbelow vsplit", -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
+			use_telescope = true,
+			-- fzf-lua is recommanded, since it will order the files by modification datetime desc. (require rg)
+			file_picker = "fzflua", -- "fzflua" | "telescope" | nil
+			filetypes = { "lua", "js", "sh", "ts", "txt", "py" }, -- you can simply put filetype here
+			filetype_details = { -- or, you can have more control here
+				json = {}, -- empty table is fine
+				["project-name.md"] = {
+					subdir = "project-name", -- group scratch files under specific sub folder
+				},
+				["yaml"] = {},
+				go = {
+					requireDir = true, -- true if each scratch file requires a new directory
+					filename = "main", -- the filename of the scratch file in the new directory
+					content = { "package main", "", "func main() {", "  ", "}" },
+					cursor = {
+						location = { 4, 2 },
+						insert_mode = true,
+					},
+				},
+			},
+			localKeys = {
+				{
+					filenameContains = { "sh" },
+					LocalKeys = {
+						{
+							cmd = "<CMD>RunShellCurrentLine<CR>",
+							key = "<C-r>",
+							modes = { "n", "i", "v" },
+						},
+					},
+				},
+			},
+			hooks = {
+				{
+					callback = function()
+						vim.api.nvim_buf_set_lines(0, 0, -1, false, { "hello", "world" })
+					end,
+				},
+			},
+		})
+		vim.keymap.set("n", "<leader>sc", "<cmd>Scratch<cr>")
+		vim.keymap.set("n", "<leader>so", "<cmd>ScratchOpen<cr>")
+	end,
+}
+
+Файл: tabby.lua
+Содержимое:
+return {
+	{
+		"nanozuki/tabby.nvim",
+		-- event = 'VimEnter', -- if you want lazy load, see below
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			local theme = {
+				fill = "TabLineFill",
+				-- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+				head = "TabLine",
+				current_tab = "TabLineSel",
+				tab = "TabLine",
+				win = "TabLine",
+				tail = "TabLine",
+			}
+			require("tabby").setup({
+				line = function(line)
+					return {
+						{
+							{ "  ", hl = theme.head },
+							line.sep("", theme.head, theme.fill),
+						},
+						line.tabs().foreach(function(tab)
+							local hl = tab.is_current() and theme.current_tab or theme.tab
+							return {
+								line.sep("", hl, theme.fill),
+								-- tab.number(),
+								tab.name(),
+								tab.close_btn(""),
+								line.sep("", hl, theme.fill),
+								hl = hl,
+								margin = " ",
+							}
+						end),
+					}
+				end,
+				-- option = {}, -- setup modules' option,
+			})
+		end,
+	},
+}
+
+Файл: telescope.lua
+Содержимое:
+-- return {
+--     {
+--         "nvim-telescope/telescope-fzf-native.nvim",
+--         -- build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+--         build = "make CMAKE_ARGS='-DCMAKE_POLICY_VERSION_MINIMUM=3.5'",
+--     },
+--     {
+--         "nvim-telescope/telescope-file-browser.nvim",
+--         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+--         config = function()
+--             -- open file_browser with the path of the current buffer
+--             -- vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+--             vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+--             -- vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { noremap = true, silent = true})
+--         end,
+--     },
+--     {
+--         "nvim-telescope/telescope.nvim",
+--         -- tag = "0.1.8",
+--         dependencies = { "nvim-lua/plenary.nvim" },
+--         config = function()
+--             require("telescope").setup({
+--                 pickers = {
+--                     find_files = {
+--                         hidden = true,
+--                     },
+--                     buffers = {
+--                         ignore_current_buffer = true,
+--                         sort_mru = true,
+--                     },
+--                 },
+--                 extensions = {
+--                     ["ui-select"] = {
+--                         require("telescope.themes").get_dropdown({}),
+--                     },
+--                     file_browser = {
+--                         cwd_to_path = true,
+--                         hidden = true,
+--                         follow_symlinks = true,
+--                     },
+--                     fzf = {
+--                         fuzzy = true, -- включить нечеткий поиск
+--                         override_generic_sorter = true, -- переопределить общий сортировщик
+--                         override_file_sorter = true, -- переопределить сортировщик файлов
+--                         case_mode = "smart_case", -- использовать умный регистр
+--                     },
+--                 },
+--                 defaults = {
+--                     mappings = {
+--                         i = {
+--                             ["<C-d>"] = require("telescope.actions").delete_buffer,
+--                             ["<C-o>"] = function(prompt_bufnr)
+--                                 local selection = require("telescope.actions.state").get_selected_entry()
+--                                 require("telescope.actions").close(prompt_bufnr)
+--                                 -- Для macOS заменить на:
+--                                 vim.fn.jobstart({ "open", selection.path })
+--                             end,
+--                         },
+--                         n = {
+--                             ["d"] = require("telescope.actions").delete_buffer,
+--                         },
+--                     },
+--                     path_display = { "tail" },
+--                     -- path_display = { "smart" },
+--                 },
+--             })
+--             local builtin = require("telescope.builtin")
+--             -- vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Open file" })
+--             vim.keymap.set("n", "<leader>ff", function()
+--                 local buf_path = vim.fn.expand("%:p:h")
+--                 builtin.find_files({ cwd = buf_path })
+--             end, { desc = "Open file" })
+--             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fine grep" })
+--             vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "Old files" })
+--             -- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+--             vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Telescope buffers" })
+--             vim.keymap.set("n", "<leader>cs", builtin.colorscheme, { desc = "Change color scheme" })
+--             vim.keymap.set("n", "<leader>lsd", builtin.lsp_document_symbols, { desc = "Lsp Document's symbols" })
+--             vim.keymap.set("n", "<leader>lsw", builtin.lsp_workspace_symbols, { desc = "Lsp Workspase's symbols" })
+--             -- vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" }d
+--             vim.keymap.set("n", "<leader>rg", builtin.registers, { desc = "Registers" })
+--             vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "Key maps" })
+--             vim.keymap.set(
+--                 "n",
+--                 "<leader>ds",
+--                 builtin.lsp_document_symbols,
+--                 { desc = "Show all buffer lexical entities" }
+--             )
+--             -- vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
+--             -- vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "Key maps" })
+--             vim.api.nvim_set_keymap(
+--                 "n",
+--                 "<leader>rn",
+--                 "<cmd>lua vim.lsp.buf.rename()<CR>",
+--                 { noremap = true, silent = true }
+--             )
+--             vim.keymap.set("n", "<leader>fp", "<cmd>TelescopePath<CR>", { desc = "Key maps" })
+--             -- vim.api.nvim_set_keymap(
+--             -- 	"c",
+--             -- 	"<C-p>",
+--             -- 	'<Cmd>lua require("telescope.builtin").commands()<CR>',
+--             -- 	{ noremap = true, silent = true }
+--             -- )
+--
+--             require("telescope").load_extension("fzf")
+--             require("telescope").load_extension("ui-select")
+--             require("telescope").load_extension("file_browser")
+--             -- vim.api.nvim_create_user_command("TelescopePath", function()
+--             --     vim.ui.input({ prompt = "Path: ", completion = "dir" }, function(path)
+--             --         if path then
+--             --             require("telescope.builtin").find_files({ cwd = path })
+--             --         end
+--             --     end)
+--             -- end, {})
+--         end,
+--     },
+--     {
+--         "nvim-telescope/telescope-ui-select.nvim",
+--     },
+--
+--     -- ~/.config/nvim/lua/plugins/telescope-undo.lua
+--     -- {
+--     --     "debugloop/telescope-undo.nvim",
+--     --     dependencies = {
+--     --         -- сам Telescope и его зависимость
+--     --         {
+--     --             "nvim-telescope/telescope.nvim",
+--     --             dependencies = { "nvim-lua/plenary.nvim" },
+--     --         },
+--     --     },
+--     --     -- Клавиша открытия undo-дерева (нормальный режим)
+--     --     keys = {
+--     --         { "<leader>u", "<cmd>Telescope undo<cr>", desc = "История undo" },
+--     --     },
+--     --     -- Опции – только то, что относится к расширению undo
+--     --     opts = {
+--     --         extensions = {
+--     --             undo = {
+--     --                 -- Показывать дифы рядом (требует delta)
+--     --                 side_by_side = true,
+--     --                 -- Чуть больше места превью
+--     --                 -- layout_strategy = "vertical",
+--     --                 layout_config = {
+--     --                     preview_height = 0.65,
+--     --                 },
+--     --                 -- Дополнительно: выводить только сохранённые состояния
+--     --                 -- saved_only = true,
+--     --             },
+--     --         },
+--     --     },
+--     --     config = function(_, opts)
+--     --         -- объединяем конфиги Telescope из разных файлов
+--     --         require("telescope").setup(opts)
+--     --         -- подключаем расширение
+--     --         require("telescope").load_extension("undo")
+--     --     end,
+--     -- },
+-- }
+
+return {
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		-- build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+		build = "make CMAKE_ARGS='-DCMAKE_POLICY_VERSION_MINIMUM=3.5'",
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		config = function()
+			-- open file_browser with the path of the current buffer
+			-- vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+			vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+			-- vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>", { noremap = true, silent = true})
+		end,
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		-- tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
+
+			local insert_path_in_cmdline = function(prompt_bufnr)
+				local selection = action_state.get_selected_entry()
+				actions.close(prompt_bufnr)
+				if selection then
+					-- Assuming the full path is in selection.value.path or selection.absolute_path; based on docs, it's selection.Path for file_browser
+					local full_path = selection.Path:string() -- Adjust based on entry structure (may be selection[1] or selection.absolute_path)
+					vim.api.nvim_put({ full_path }, "c", true, true)
+				end
+			end
+
+			local telescope_file_browser_in_cmdline = function()
+				require("telescope").extensions.file_browser.file_browser({
+					path = vim.fn.expand("%:p:h"),
+					select_buffer = true,
+					attach_mappings = function(_, map)
+						map("i", "<CR>", insert_path_in_cmdline)
+						map("n", "<CR>", insert_path_in_cmdline)
+						return true
+					end,
+				})
+			end
+
+			require("telescope").setup({
+				pickers = {
+					find_files = {
+						hidden = true,
+					},
+					buffers = {
+						ignore_current_buffer = true,
+						sort_mru = true,
+					},
+				},
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
+					file_browser = {
+						cwd_to_path = true,
+						hidden = true,
+						follow_symlinks = true,
+					},
+					fzf = {
+						fuzzy = true, -- включить нечеткий поиск
+						override_generic_sorter = true, -- переопределить общий сортировщик
+						override_file_sorter = true, -- переопределить сортировщик файлов
+						case_mode = "smart_case", -- использовать умный регистр
+					},
+				},
+				defaults = {
+					mappings = {
+						i = {
+							["<C-d>"] = require("telescope.actions").delete_buffer,
+							["<C-o>"] = function(prompt_bufnr)
+								local selection = require("telescope.actions.state").get_selected_entry()
+								require("telescope.actions").close(prompt_bufnr)
+								-- Для macOS заменить на:
+								vim.fn.jobstart({ "open", selection.path })
+							end,
+						},
+						n = {
+							["d"] = require("telescope.actions").delete_buffer,
+						},
+					},
+					path_display = { "tail" },
+					-- path_display = { "smart" },
+				},
+			})
+			local builtin = require("telescope.builtin")
+			-- vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Open file" })
+			vim.keymap.set("n", "<leader>ff", function()
+				local buf_path = vim.fn.expand("%:p:h")
+				builtin.find_files({ cwd = buf_path })
+			end, { desc = "Open file" })
+			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fine grep" })
+			vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, { desc = "Old files" })
+			-- vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+			vim.keymap.set("n", "<leader>,", builtin.buffers, { desc = "Telescope buffers" })
+			vim.keymap.set("n", "<leader>cs", builtin.colorscheme, { desc = "Change color scheme" })
+			vim.keymap.set("n", "<leader>lsd", builtin.lsp_document_symbols, { desc = "Lsp Document's symbols" })
+			vim.keymap.set("n", "<leader>lsw", builtin.lsp_workspace_symbols, { desc = "Lsp Workspase's symbols" })
+			-- vim.keymap.set("n", "<leader>ma", builtin.marks, { desc = "Display marks" }d
+			vim.keymap.set("n", "<leader>rg", builtin.registers, { desc = "Registers" })
+			vim.keymap.set("n", "<leader>km", builtin.keymaps, { desc = "Key maps" })
+			vim.keymap.set(
+				"n",
+				"<leader>ds",
+				builtin.lsp_document_symbols,
+				{ desc = "Show all buffer lexical entities" }
+			)
+			-- vim.keymap.set("n", "<leader>ch", builtin.command_history, { desc = "Key maps" })
+			-- vim.keymap.set("n", "<leader>ht", builtin.help_tags, { desc = "Key maps" })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>rn",
+				"<cmd>lua vim.lsp.buf.rename()<CR>",
+				{ noremap = true, silent = true }
+			)
+			vim.keymap.set("n", "<leader>fp", "<cmd>TelescopePath<CR>", { desc = "Key maps" })
+			-- vim.api.nvim_set_keymap(
+			-- "c",
+			-- "<C-p>",
+			-- '<Cmd>lua require("telescope.builtin").commands()<CR>',
+			-- { noremap = true, silent = true }
+			-- )
+			require("telescope").load_extension("fzf")
+			require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("file_browser")
+			vim.keymap.set("c", "<Tab>", telescope_file_browser_in_cmdline, { silent = true })
+			-- vim.api.nvim_create_user_command("TelescopePath", function()
+			-- vim.ui.input({ prompt = "Path: ", completion = "dir" }, function(path)
+			-- if path then
+			-- require("telescope.builtin").find_files({ cwd = path })
+			-- end
+			-- end)
+			-- end, {})
+		end,
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+	},
+	-- ~/.config/nvim/lua/plugins/telescope-undo.lua
+	-- {
+	-- "debugloop/telescope-undo.nvim",
+	-- dependencies = {
+	-- -- сам Telescope и его зависимость
+	-- {
+	-- "nvim-telescope/telescope.nvim",
+	-- dependencies = { "nvim-lua/plenary.nvim" },
+	-- },
+	-- },
+	-- -- Клавиша открытия undo-дерева (нормальный режим)
+	-- keys = {
+	-- { "<leader>u", "<cmd>Telescope undo<cr>", desc = "История undo" },
+	-- },
+	-- -- Опции – только то, что относится к расширению undo
+	-- opts = {
+	-- extensions = {
+	-- undo = {
+	-- -- Показывать дифы рядом (требует delta)
+	-- side_by_side = true,
+	-- -- Чуть больше места превью
+	-- -- layout_strategy = "vertical",
+	-- layout_config = {
+	-- preview_height = 0.65,
+	-- },
+	-- -- Дополнительно: выводить только сохранённые состояния
+	-- -- saved_only = true,
+	-- },
+	-- },
+	-- },
+	-- config = function(_, opts)
+	-- -- объединяем конфиги Telescope из разных файлов
+	-- require("telescope").setup(opts)
+	-- -- подключаем расширение
+	-- require("telescope").load_extension("undo")
+	-- end,
+	-- },
+}
+
+Файл: todoPicker.lua
+Содержимое:
+return {
+	dir = vim.fn.stdpath("config") .. "/lua/todo_picker", -- папка с init.lua
+	name = "todo-picker.nvim",
+	lazy = false, -- или true, если хотите загружать по требованию
+	config = function()
+		require("todo_picker").setup({
+			todo_file = "~/todo.md",
+			keymaps = { add = "<localleader>ta", list = "<localleader>tt" },
+		})
+	end,
+	dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+}
+
+Файл: treesitter.lua
+Содержимое:
+return {
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				-- Your textobject-related config here
+				textobjects = {
+					lsp_interop = {
+						enable = true,
+						border = "single",
+						floating_preview_opts = {},
+						peek_definition_code = {
+							-- ["<leader>df"] = "@function.outer",
+						},
+					},
+					select = {
+						-- enable = true,
+						enable = true,
+						lookahead = true, -- Автоматический переход к следующему совпадению
+						keymaps = {
+							["af"] = "@call.outer", -- Выделение вызова функции целиком
+							["if"] = "@call.inner", -- Выделение внутренней части вызова функции
+							["aF"] = "@function.outer", -- Выделение определения функции целиком
+							["if"] = "@function.inner", -- Выделение тела функции
+							-- Условные конструкции
+							["ai"] = "@conditional.outer", -- if/else целиком
+							["ii"] = "@conditional.inner", -- тело if/else
+
+							-- Циклы
+							["al"] = "@loop.outer", -- цикл целиком
+							["il"] = "@loop.inner", -- тело цикла
+
+							-- Блоки
+							["ab"] = "@block.outer", -- блок целиком
+							["ib"] = "@block.inner", -- содержимое блока
+
+							-- Параметры
+							["aa"] = "@parameter.outer", -- параметр с запятыми
+							["ia"] = "@parameter.inner", -- только параметр
+						},
+					},
+					move = {
+						enable = true,
+						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["<leader>ns"] = "@function.outer",
+							-- ["]]"] = "@class.outer",
+						},
+						goto_next = {
+							["]f"] = { query = { "@function.inner", "@function.outer" } },
+							["]["] = "@class.outer",
+						},
+						-- goto_previous_start = {
+						-- 	["[m"] = "@function.outer",
+						-- 	["[["] = "@class.outer",
+						-- },
+						-- goto_previous_end = {
+						-- 	["[M"] = "@function.outer",
+						-- 	["[]"] = "@class.outer",
+						-- },
+					},
+					swap = {
+						enable = true,
+						swap_next = { ["<leader>sp"] = "@parameter.inner" },
+						swap_previous = { ["<leader>sP"] = "@parameter.inner" },
+					},
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						-- init_selection = "<CR>", -- начать выделение
+						-- node_incremental = "<CR>", -- увеличить выделение
+						-- scope_incremental = "<S-CR>", -- увеличить до следующей области видимости
+						node_decremental = "<BS>", -- уменьшить выделение
+					},
+				},
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+			-- Add custom parser for Gherkin (Cucumber)
+			parser_configs.gherkin = {
+				install_info = {
+					url = "https://github.com/SamyAB/tree-sitter-gherkin.git",
+					files = { "src/parser.c" },
+					branch = "main",
+				},
+				filetype = "cucumber", -- Associates with Neovim's default filetype for .feature files
+			}
+			local configs = require("nvim-treesitter.configs")
+
+			configs.setup({
+				ensure_installed = {
+					"lua",
+					"python",
+					"javascript",
+					"typescript",
+					"latex",
+					"html",
+					"css",
+					"c",
+					"markdown",
+					"markdown_inline",
+					"norg",
+					"vimdoc",
+					"vim",
+					"markdown", -- для документации
+					"bash",
+					"scheme",
+					"clojure",
+					"racket",
+					"gherkin",
+					-- "org",
+				},
+				autoinstall = true,
+				-- ignore_install = { "org" },
+				highlight = {
+					enable = true,
+					disable = { "latex" },
+				},
+				indent = {
+					enable = true,
+					disable = { "html" },
+				},
+				-- autopairs = { enable = true },
+				-- autopairs = { enable = false },
+
+				-- чтобы старые режимы не мешали
+				vim.api.nvim_create_autocmd("FileType", {
+					pattern = "python",
+					callback = function()
+						vim.bo.smartindent = false
+						vim.bo.cindent = false
+					end,
+				}),
+			})
+		end,
+	},
+}
+
+Файл: trouble.lua
+Содержимое:
+return {
+	"folke/trouble.nvim",
+	opts = {}, -- Использует настройки по умолчанию. Для кастомизации см. ниже.
+	cmd = "Trouble", -- Ленивая загрузка: плагин загрузится при вызове команды Trouble
+	keys = {
+		-- Эта секция настраивает горячие клавиши для вызова Trouble.
+		-- <leader> - это ваша главная клавиша-модификатор (обычно `пробел` или `\`)
+		{
+			"<leader>da",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Диагностика (весь проект)",
+		},
+		{
+			"<leader>df",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Диагностика (текущий файл)",
+		},
+		-- {
+		-- 	"<leader>cs",
+		-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
+		-- 	desc = "Символы документа",
+		-- },
+		-- {
+		-- 	"<leader>cl",
+		-- 	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+		-- 	desc = "LSP определения, ссылки и т.д.",
+		-- },
+		-- {
+		-- 	"<leader>xL",
+		-- 	"<cmd>Trouble loclist toggle<cr>",
+		-- 	desc = "Location List",
+		-- },
+		-- {
+		-- 	"<leader>xQ",
+		-- 	"<cmd>Trouble qflist toggle<cr>",
+		-- 	desc = "Quickfix List",
+		-- },
+	},
+}
+
+Файл: undotree.lua
+Содержимое:
+return {
+    "mbbill/undotree",
+    config = function()
+        vim.keymap.set("n", "<leader>ut", vim.cmd.UndotreeToggle)
+    end,
+}
+
+Файл: vim-sexp.lua
+Содержимое:
+return {
+	{
+		"guns/vim-sexp",
+		lazy = false,
+		dependencies = {
+			-- "tpope/vim-sexp-mappings-for-regular-people",
+			"tpope/vim-repeat",
+			-- "tpope/vim-surround",
+		},
+		ft = { "clojure", "scheme", "lisp", "racket" },
+		config = function()
+			-- Включаем для нужных файлов
+			vim.g.sexp_filetypes = "clojure,scheme,lisp,racket"
+			-- Настройка маппингов
+			local function sexp_maps()
+				for _, mode in ipairs({ "x", "o" }) do
+					-- Формы
+					vim.keymap.set(mode, "af", "<Plug>(sexp_outer_list)", { buffer = true })
+					vim.keymap.set(mode, "if", "<Plug>(sexp_inner_list)", { buffer = true })
+					vim.keymap.set(mode, "aF", "<Plug>(sexp_outer_top_list)", { buffer = true })
+					vim.keymap.set(mode, "iF", "<Plug>(sexp_inner_top_list)", { buffer = true })
+					-- Строки
+					-- vim.keymap.set(mode, "as", "<Plug>(sexp_outer_string)", { buffer = true })
+					-- vim.keymap.set(mode, "is", "<Plug>(sexp_inner_string)", { buffer = true })
+					-- Элементы
+					vim.keymap.set(mode, "ae", "<Plug>(sexp_outer_element)", { buffer = true })
+					vim.keymap.set(mode, "ie", "<Plug>(sexp_inner_element)", { buffer = true })
+				end
+
+				-- Движение по формам (normal, visual, operator)
+				for _, mode in ipairs({ "n", "x", "o" }) do
+					-- По скобкам
+					-- vim.keymap.set(mode, "(", "<Plug>(sexp_move_to_prev_bracket)", { buffer = true })
+					-- vim.keymap.set(mode, ")", "<Plug>(sexp_move_to_next_bracket)", { buffer = true })
+					-- По элементам
+					vim.keymap.set(mode, "B", "<Plug>(sexp_move_to_prev_element_head)", { buffer = true })
+					vim.keymap.set(mode, "W", "<Plug>(sexp_move_to_next_element_head)", { buffer = true })
+					-- vim.keymap.set(mode, "gE", "<Plug>(sexp_move_to_prev_element_tail)", { buffer = true })
+					-- vim.keymap.set(mode, "E", "<Plug>(sexp_move_to_next_element_tail)", { buffer = true })
+					-- По верхнеуровневым элементам
+					vim.keymap.set(mode, "[[", "<Plug>(sexp_move_to_prev_top_element)", { buffer = true })
+					vim.keymap.set(mode, "]]", "<Plug>(sexp_move_to_next_top_element)", { buffer = true })
+				end
+
+				-- Flow commands (normal, visual)
+				for _, mode in ipairs({ "n", "x" }) do
+					vim.keymap.set(mode, "(", "<Plug>(sexp_flow_to_prev_open)", { buffer = true })
+					vim.keymap.set(mode, ")", "<Plug>(sexp_flow_to_next_close)", { buffer = true })
+					vim.keymap.set(mode, "<C-0>", "<Plug>(sexp_flow_to_prev_close)", { buffer = true })
+					vim.keymap.set(mode, "<C-9>", "<Plug>(sexp_flow_to_next_open)", { buffer = true })
+					vim.keymap.set(mode, "<M-0>", "<Plug>(sexp_flow_to_prev_close)", { buffer = true })
+					vim.keymap.set(mode, "<M-9>", "<Plug>(sexp_flow_to_next_open)", { buffer = true })
+					-- vim.keymap.set(mode, "<M-{>", "<Plug>(sexp_flow_to_prev_open)", { buffer = true })
+					-- vim.keymap.set(mode, "<>", "<Plug>(sexp_flow_to_prev_close)", { buffer = true })
+					-- vim.keymap.set(mode, "<leader>(", "<Plug>(sexp_round_head_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "B", "<Plug>(sexp_flow_to_prev_leaf_head)", { buffer = true })
+					vim.keymap.set(mode, "W", "<Plug>(sexp_flow_to_next_leaf_head)", { buffer = true })
+					-- vim.keymap.set(mode, "<localleader>e", "<Plug>(sexp_flow_to_prev_leaf_tail)", { buffer = true })
+					vim.keymap.set(mode, "E", "<Plug>(sexp_flow_to_next_leaf_tail)", { buffer = true })
+
+					vim.keymap.set(mode, "<leader>(", "<Plug>(sexp_round_head_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "<leader>)", "<Plug>(sexp_round_tail_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "<leader>[", "<Plug>(sexp_square_head_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "<leader>]", "<Plug>(sexp_square_tail_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "<leader>{", "<Plug>(sexp_curly_head_wrap_list)", { buffer = true })
+					vim.keymap.set(mode, "<leader>}", "<Plug>(sexp_curly_tail_wrap_list)", { buffer = true })
+
+					vim.keymap.set(mode, "<leader>e(", "<Plug>(sexp_round_head_wrap_element)", { buffer = true })
+					vim.keymap.set(mode, "<leader>e)", "<Plug>(sexp_round_tail_wrap_element)", { buffer = true })
+					vim.keymap.set(mode, "<leader>e[", "<Plug>(sexp_square_head_wrap_element)", { buffer = true })
+					vim.keymap.set(mode, "<leader>e]", "<Plug>(sexp_square_tail_wrap_element)", { buffer = true })
+					vim.keymap.set(mode, "<leader>e{", "<Plug>(sexp_curly_head_wrap_element)", { buffer = true })
+					vim.keymap.set(mode, "<leader>e}", "<Plug>(sexp_curly_tail_wrap_element)", { buffer = true })
+				end
+
+				-- Манипуляции с формами
+				for _, mode in ipairs({ "n", "x" }) do
+					-- Swap commands
+					vim.keymap.set(mode, "<f", "<Plug>(sexp_swap_list_backward)", { buffer = true })
+					vim.keymap.set(mode, ">f", "<Plug>(sexp_swap_list_forward)", { buffer = true })
+					vim.keymap.set(mode, "<e", "<Plug>(sexp_swap_element_backward)", { buffer = true })
+					vim.keymap.set(mode, ">e", "<Plug>(sexp_swap_element_forward)", { buffer = true })
+
+					-- Emit/Capture
+					vim.keymap.set(mode, "<(", "<Plug>(sexp_emit_head_element)", { buffer = true })
+					vim.keymap.set(mode, ">)", "<Plug>(sexp_emit_tail_element)", { buffer = true })
+					vim.keymap.set(mode, ">(", "<Plug>(sexp_capture_prev_element)", { buffer = true })
+					vim.keymap.set(mode, "<)", "<Plug>(sexp_capture_next_element)", { buffer = true })
+				end
+				vim.keymap.set("n", "<Localleader>(", "<Plug>(sexp_insert_at_list_head)", { buffer = true })
+				vim.keymap.set("n", "<Localleader>)", "<Plug>(sexp_insert_at_list_tail)", { buffer = true })
+
+				-- Insert mode mappings
+				local insert_mappings = {
+					["("] = "sexp_insert_opening_round",
+					[")"] = "sexp_insert_closing_round",
+					["["] = "sexp_insert_opening_square",
+					["]"] = "sexp_insert_closing_square",
+					["{"] = "sexp_insert_opening_curly",
+					["}"] = "sexp_insert_closing_curly",
+					['"'] = "sexp_insert_double_quote",
+					["<BS>"] = "sexp_insert_backspace",
+					["<C-h>"] = "sexp_insert_backspace",
+				}
+
+				for key, plug in pairs(insert_mappings) do
+					vim.keymap.set("i", key, string.format("<Plug>(%s)", plug), { buffer = true })
+				end
+
+				-- Дополнительные маппинги для работы с формами
+				vim.keymap.set("n", "==", "<Plug>(sexp_indent)", { buffer = true })
+				vim.keymap.set("n", "=-", "<Plug>(sexp_indent_top)", { buffer = true })
+				vim.keymap.set("n", "<leader>@", "<plug>(sexp_splice_list)", { buffer = true })
+				vim.keymap.set("n", "<leader>?", "<Plug>(sexp_convolute)", { buffer = true })
+				vim.keymap.set("n", "<leader>rf", "<Plug>(sexp_raise_list)", { buffer = true })
+				vim.keymap.set("n", "<leader>re", "<Plug>(sexp_raise_element)", { buffer = true })
+			end
+
+			-- Автоматически применяем маппинги для нужных типов файлов
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "clojure", "scheme", "lisp", "racket"},
+				callback = sexp_maps,
+			})
+		end,
+	},
+}
+
+Файл: vim-table-mode.lua
+Содержимое:
+-- Задаём переменные до загрузки плагина:
+vim.g.table_mode_disable_mappings = 1
+vim.g.table_mode_disable_tableize_mappings = 1
+
+
+return {
+  "dhruvasagar/vim-table-mode",
+  config = function()
+  end,
+}
+
+Файл: yankassasin.lua
+Содержимое:
+-- ~/.config/nvim/lua/plugins/yankassassin.lua
+return {
+	dir = vim.fn.stdpath("config") .. "/lua/yankassassin",
+	name = "yankassassin",
+	event = "VimEnter",
+	config = function()
+		require("yankassassin").setup({
+			-- auto_normal = true: Автоматически применять логику "не перемещать курсор"
+			-- для стандартной команды 'y' в нормальном режиме.
+			-- Если false, стандартный 'y' будет работать как обычно,
+			-- и вам нужно будет использовать <Plug>(YANoMove) (например, через <leader>y).
+			auto_normal = true,
+
+			-- auto_visual = true: То же самое, но для визуального режима.
+			auto_visual = true,
+		})
+
+		-- == Опциональные пользовательские маппинги ==
+		-- Если вы хотите иметь *и* стандартное поведение, *и* поведение без перемещения,
+		-- вы можете настроить маппинги.
+
+		-- Пример:
+		-- gy -> стандартное поведение (курсор перемещается)
+		vim.keymap.set(
+			{ "n", "x", "v" },
+			"gy",
+			"<Plug>(YADefault)",
+			{ silent = true, desc = "Yank (Default behavior)" }
+		)
+
+		-- -- <leader>y -> поведение без перемещения курсора
+		-- vim.keymap.set(
+		-- 	{ "n", "x", "v" },
+		-- 	"<leader>y",
+		-- 	"<Plug>(YANoMove)",
+		-- 	{ silent = true, desc = "Yank (Don't move cursor)" }
+		-- )
+
+		-- Если auto_normal = true и auto_visual = true, то стандартные 'y' и 'Y'
+		-- УЖЕ будут вести себя как <Plug>(YANoMove) (т.е. не перемещать курсор),
+		-- кроме как в буферах nvim-tree, где они будут вести себя как обычно.
+		-- В этом случае маппинг <leader>y выше становится избыточным,
+		-- но маппинг 'gy' все еще полезен, если вам иногда нужно стандартное поведение.
+	end,
+}
+
+Файл: zellij-nav.lua
+Содержимое:
+return {
+	"https://git.sr.ht/~swaits/zellij-nav.nvim",
+	lazy = true,
+	event = "VeryLazy",
+	keys = {
+		{ "<c-h>", "<cmd>ZellijNavigateLeftTab<cr>", { silent = true, desc = "navigate left or tab" } },
+		{ "<c-j>", "<cmd>ZellijNavigateDown<cr>", { silent = true, desc = "navigate down" } },
+		{ "<c-k>", "<cmd>ZellijNavigateUp<cr>", { silent = true, desc = "navigate up" } },
+		{ "<c-l>", "<cmd>ZellijNavigateRightTab<cr>", { silent = true, desc = "navigate right or tab" } },
+	},
+	opts = {},
+}
+
+Файл: zen-mode.lua
+Содержимое:
+return -- Lua
+{
+  "folke/zen-mode.nvim",
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+}
+

@@ -139,14 +139,14 @@
         org-agenda-current-time-string "◀── now ─────────────────────────────────────────────────"
         org-format-latex-options (plist-put org-format-latex-options :scale 1.9)))
 
-;; Настройка yasnippet
-(use-package yasnippet
-  :config
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  (yas-global-mode 1)
-  ;; ;; ;; Переназначаем на M-<tab>
-  (define-key yas-minor-mode-map (kbd "<tab>") yas-maybe-expand)
-  )
+;; ;; Настройка yasnippet
+;; (use-package yasnippet
+;;   :config
+;;   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+;;   (yas-global-mode 1)
+;;   ;; ;; ;; Переназначаем на M-<tab>
+;;   (define-key yas-minor-mode-map (kbd "<tab>") yas-maybe-expand)
+;;   )
 
 ;; Настройка cdlatex
 (use-package cdlatex
@@ -268,162 +268,162 @@
     (kbd "<leader>cv") 'my-latex-compile-and-view))
 
 ;; Настройка aas
-(use-package aas
-  :hook ((LaTeX-mode . aas-activate-for-major-mode)
-         (org-mode . aas-activate-for-major-mode)
-         (TeX-mode . aas-activate-for-major-mode))
-  :config
-  (defun my/real-math-p ()
-    "Истинно только внутри $…$, \\(…\\), \\[…\\] или *реального* math‑env."
-    (let ((info (texmathp)))
-      (and info
-           (memq (car info)         ; первый элемент описывает «где» мы находимся
-		         '(in-dollar in-paren in-env)))))
-  (aas-set-snippets 'text-mode
-                    ";o-" "ō"
-                    ";i-" "ī"
-                    ";a-" "ā"
-                    ";u-" "ū"
-                    ";e-" "ē")
-  (aas-set-snippets 'org-mode
-                    ";latex" (lambda ()
-	                           (interactive)
-	                           (yas-expand-snippet (yas-lookup-snippet "latexCode")))
-                    ;; Добавьте остальные сниппеты здесь
-                    )
-  (aas-set-snippets 'LaTeX-mode
-                    "mk" (lambda ()
-	                       (interactive)
-	                       (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
-                    "dm" (lambda ()
-	                       (interactive)
-	                       (yas-expand-snippet (yas-lookup-snippet "makeMathBlockEnv")))
+;; (use-package aas
+;;   :hook ((LaTeX-mode . aas-activate-for-major-mode)
+;;          (org-mode . aas-activate-for-major-mode)
+;;          (TeX-mode . aas-activate-for-major-mode))
+;;   :config
+;;   (defun my/real-math-p ()
+;;     "Истинно только внутри $…$, \\(…\\), \\[…\\] или *реального* math‑env."
+;;     (let ((info (texmathp)))
+;;       (and info
+;;            (memq (car info)         ; первый элемент описывает «где» мы находимся
+;; 		         '(in-dollar in-paren in-env)))))
+;;   (aas-set-snippets 'text-mode
+;;                     ";o-" "ō"
+;;                     ";i-" "ī"
+;;                     ";a-" "ā"
+;;                     ";u-" "ū"
+;;                     ";e-" "ē")
+;;   (aas-set-snippets 'org-mode
+;;                     ";latex" (lambda ()
+;; 	                           (interactive)
+;; 	                           (yas-expand-snippet (yas-lookup-snippet "latexCode")))
+;;                     ;; Добавьте остальные сниппеты здесь
+;;                     )
+;;   (aas-set-snippets 'LaTeX-mode
+;;                     "mk" (lambda ()
+;; 	                       (interactive)
+;; 	                       (yas-expand-snippet (yas-lookup-snippet "makeMathEnv")))
+;;                     "dm" (lambda ()
+;; 	                       (interactive)
+;; 	                       (yas-expand-snippet (yas-lookup-snippet "makeMathBlockEnv")))
 
-                    "RR" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathbb{R} ")
-	                         (insert "$\\mathbb{R}$ ")))
-                    ";A" "$\\mathrm{A}$"
-                    ";B" "$\\mathrm{B}$"
-                    ";L" "$\\mathrm{L}$"
-                    ";P" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathrm{P}")
-	                         (insert "$\\mathrm{P}$")))
-                    ";R" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathrm{R}")
-	                         (insert "$\\mathrm{R}$")))
-                    ";S" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathrm{S}")
-	                         (insert "$\\mathrm{S}$")))
-                    ";T" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathrm{T}")
-	                         (insert "$\\mathrm{T}$")))
+;;                     "RR" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathbb{R} ")
+;; 	                         (insert "$\\mathbb{R}$ ")))
+;;                     ";A" "$\\mathrm{A}$"
+;;                     ";B" "$\\mathrm{B}$"
+;;                     ";L" "$\\mathrm{L}$"
+;;                     ";P" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathrm{P}")
+;; 	                         (insert "$\\mathrm{P}$")))
+;;                     ";R" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathrm{R}")
+;; 	                         (insert "$\\mathrm{R}$")))
+;;                     ";S" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathrm{S}")
+;; 	                         (insert "$\\mathrm{S}$")))
+;;                     ";T" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathrm{T}")
+;; 	                         (insert "$\\mathrm{T}$")))
 
-                    ";X" (lambda ()
-	                       (interactive)
-	                       (if (not (texmathp)) 
-	                           (insert "$\\mathrm{X}$")
-	                         ))
+;;                     ";X" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (not (texmathp)) 
+;; 	                           (insert "$\\mathrm{X}$")
+;; 	                         ))
 
-                    ";Y" "$\\mathrm{Y}$"
-                    ";Z" (lambda ()
-	                       (interactive)
-	                       (if (not (texmathp)) 
-	                           (insert "$\\mathrm{Z}$")
-	                         ))
-
-
-                    ",F" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathcal{F}")
-	                         (insert "$\\mathcal{F}$")))
-                    ",G" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathcal{G}")
-	                         (insert "$\\mathcal{G}$")))
-                    ",R" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\mathcal{R}")
-	                         (insert "$\\mathcal{R}$")))
-                    ",P" "$\\mathcal{P}$"
+;;                     ";Y" "$\\mathrm{Y}$"
+;;                     ";Z" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (not (texmathp)) 
+;; 	                           (insert "$\\mathrm{Z}$")
+;; 	                         ))
 
 
-                    "=>" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\implies")
-	                         (insert "$\\implies$")))
-
-                    "->" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\to ")
-	                         (insert "$\\to $ ")))
-
-                    "!=" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\neq ")
-	                         (insert "$\\neq$")))
-                    "OO" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\varnothing ")
-	                         (insert "$\\varnothing$ ")))
-                    "CC" (lambda ()
-	                       (interactive)
-	                       (if (texmathp) 
-	                           (insert "\\subseteq ")
-	                         (insert "$\\subseteq$ ")))
-
-                    ";CC" (lambda ()
-	                        (interactive)
-	                        (if (texmathp) 
-		                        (insert "\\supseteq")
-	                          (insert "$\\supseteq$")))
+;;                     ",F" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathcal{F}")
+;; 	                         (insert "$\\mathcal{F}$")))
+;;                     ",G" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathcal{G}")
+;; 	                         (insert "$\\mathcal{G}$")))
+;;                     ",R" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\mathcal{R}")
+;; 	                         (insert "$\\mathcal{R}$")))
+;;                     ",P" "$\\mathcal{P}$"
 
 
-                    ;; "oo" (lambda ()
-                    ;; 	   (interactive)
-                    ;; 	   (if (texmathp)
-                    ;; 	       (insert "\\circ ")))
+;;                     "=>" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\implies")
+;; 	                         (insert "$\\implies$")))
 
-                    :cond #'texmathp
-                    "oo" "\\circ "
-                    "AA" "\\forall "
-                    "EE" "\\exists "
-                    "EU" "\\exists! "
-                    "inn" "\\in "
-                    "iff" "\\iff "
-                    "&&" "\\land"
-                    "||" "\\lor"
-                    "o+" "\\oplus "
-                    "==" "&= "
-                    ">=" "\\ge"
-                    "<=" "\\le"
-                    "**" "\\cdot "
+;;                     "->" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\to ")
+;; 	                         (insert "$\\to $ ")))
 
-                    "nn" "\\cap "
+;;                     "!=" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\neq ")
+;; 	                         (insert "$\\neq$")))
+;;                     "OO" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\varnothing ")
+;; 	                         (insert "$\\varnothing$ ")))
+;;                     "CC" (lambda ()
+;; 	                       (interactive)
+;; 	                       (if (texmathp) 
+;; 	                           (insert "\\subseteq ")
+;; 	                         (insert "$\\subseteq$ ")))
 
-                    "xx" "\\times "
+;;                     ";CC" (lambda ()
+;; 	                        (interactive)
+;; 	                        (if (texmathp) 
+;; 		                        (insert "\\supseteq")
+;; 	                          (insert "$\\supseteq$")))
 
-                    "rct" "\\!\\upharpoonright "
-                    "txt" (lambda ()
-	                        (interactive)
-	                        (yas-expand-snippet (yas-lookup-snippet "text")))
-                    ))
+
+;;                     ;; "oo" (lambda ()
+;;                     ;; 	   (interactive)
+;;                     ;; 	   (if (texmathp)
+;;                     ;; 	       (insert "\\circ ")))
+
+;;                     :cond #'texmathp
+;;                     "oo" "\\circ "
+;;                     "AA" "\\forall "
+;;                     "EE" "\\exists "
+;;                     "EU" "\\exists! "
+;;                     "inn" "\\in "
+;;                     "iff" "\\iff "
+;;                     "&&" "\\land"
+;;                     "||" "\\lor"
+;;                     "o+" "\\oplus "
+;;                     "==" "&= "
+;;                     ">=" "\\ge"
+;;                     "<=" "\\le"
+;;                     "**" "\\cdot "
+
+;;                     "nn" "\\cap "
+
+;;                     "xx" "\\times "
+
+;;                     "rct" "\\!\\upharpoonright "
+;;                     "txt" (lambda ()
+;; 	                        (interactive)
+;; 	                        (yas-expand-snippet (yas-lookup-snippet "text")))
+;;                     ))
 
 
 
@@ -540,7 +540,12 @@
   ;; Опционально: показывать diff для выбранного узла автоматически.
   )
 
-;; Настройка evil-mode (убрали undo-tree ссылки, стандартизировали на undo-fu)
+(setq evil-want-keybinding nil
+      evil-want-integration t
+      evil-want-C-u-scroll t
+      evil-want-C-i-jump nil)   ;; ← НОВОЕ
+
+;;Настройка evil-mode (убрали undo-tree ссылки, стандартизировали на undo-fu)
 (use-package evil
   :ensure t
   :init
@@ -888,12 +893,19 @@
   :after (treemacs projectile))
 
 
+(use-package emsnip
+  :load-path (lambda () (list (expand-file-name "lisp" "~/projects/emsnip")))
+  :commands (emsnip-mode emsnip-register-demo-snippets)
+  :init (emsnip-mode 1)
+  :config (emsnip-register-demo-snippets))
+
+
 ;;;; ─────────────────────────────────────────────────────────────────────
 (use-package harpoon
-  :ensure t                ;; берём из MELPA
+  :ensure t ;; берём из MELPA
   :custom
   ;; 1) полностью игнорировать систему проектов
-  (harpoon-project-package nil)       ;; → буфер считается «вне проекта»
+  (harpoon-project-package nil) ;; → буфер считается «вне проекта»
   ;; 2) не плодить отдельные списки на git-ветки
   (harpoon-separate-by-branch nil)
   ;; 3) а когда «вне проекта» — всегда использовать
@@ -911,7 +923,7 @@
   ;;  ("C-c h 6" . harpoon-go-to-6)
   ;;  ("C-c h 7" . harpoon-go-to-7)
   ;;  ("C-c h 8" . harpoon-go-to-8)
-  ;;  ("C-c h 9" . harpoon-go-to-9))
+
   :config 
   (evil-define-key 'normal 'global (kbd "<leader>;") #'harpoon-quick-menu-hydra)
   (evil-define-key 'normal 'global (kbd "<leader>a h") #'harpoon-add-file))
@@ -977,14 +989,14 @@
               xhg-mq-mode xhg-mq-sub-mode xhg-status-extra-mode))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(0x0 aas atomic-chrome auctex cape catppuccin-theme cdlatex
-         clang-format claude-code corfu embark-consult evil-collection
-         evil-goggles evil-leader evil-mc evil-surround
-         exec-path-from-shell expand-region gruvbox-theme harpoon hop
-         iedit lsp-pyright lsp-ui marginalia modus-themes orderless
-         org-roam paredit pdf-tools pos-tip racket-mode treemacs-evil
+   '(0x0 atomic-chrome auctex cape catppuccin-theme cdlatex clang-format
+         claude-code corfu embark-consult evil-collection evil-goggles
+         evil-leader evil-mc evil-surround exec-path-from-shell
+         expand-region gruvbox-theme harpoon hop iedit lsp-pyright
+         lsp-ui marginalia modus-themes orderless org-roam paredit
+         pdf-tools pos-tip racket-mode treemacs-evil
          treemacs-icons-dired treemacs-projectile treesit-auto undo-fu
-         undo-fu-session vertico vterm vundo yasnippet))
+         undo-fu-session vertico vterm vundo))
  '(package-vc-selected-packages
    '((claude-code :url "https://github.com/stevemolitor/claude-code.el")
      (pcre :url "https://github.com/syohex/emacs-pcre.git" :branch
@@ -999,5 +1011,5 @@
  ;; If there is more than one, they won't work right.
  '(evil-goggles-yank-face ((t (:background "#00afff" :foreground "black")))))
 
- (load-file "~/dotfiles/emacs/.emacs.d/config.el")
+(load-file "~/dotfiles/emacs/.emacs.d/config.el")
 

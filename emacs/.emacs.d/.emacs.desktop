@@ -2,90 +2,102 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Aug  9 10:01:33 2025
+;; Created Wed Aug 27 10:07:55 2025
 ;; Desktop file format version 208
-;; Emacs version 30.1
+;; Emacs version 30.2
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (26774 62029 817218 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-16-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#ffffff") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground . "#9f9f9f") (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "#000000") (font-parameter) (environment) (last-focus-update) (frameset--id . "1348-4E95-3B20-FF93") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (visibility . t) (height . 52) (width . 207) (left . 2) (top . 3)) ((min-height . 8) (min-width . 10) (min-height-ignore . 6) (min-width-ignore . 4) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 160) (min-pixel-width . 80) (min-pixel-height-ignore . 120) (min-pixel-width-ignore . 32) (min-pixel-height-safe . 40) (min-pixel-width-safe . 16)) vc (pixel-width . 1672) (pixel-height . 1020) (total-width . 209) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 1672) (pixel-height . 520) (total-width . 209) (total-height . 26) (normal-height . 0.5151515151515151) (normal-width . 1.0) (buffer "gemini.md" (selected) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 5590) (start . 5564)) (prev-buffers ("mdlist.lua" 67 481) ("vim-options.lua" 5241 5739) ("gemini.md" 1 1) ("init.el" 1 78) ("config.el" 31654 32946) ("*scratch*" 1 1))) (leaf (last . t) (pixel-width . 1672) (pixel-height . 500) (total-width . 209) (total-height . 25) (normal-height . 0.48484848484848486) (normal-width . 1.0) (buffer "grok.md" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 4490) (start . 4060)) (prev-buffers ("gemini.md" 1 1)))))])
+(setq desktop-saved-frameset [frameset 1 (26798 44747 30813 0) (desktop . "208") "chestnykh@MacBook-Pro-Anastasia.local" nil nil ((((minibuffer . t) (fontsize . 0) (font . "-*-Iosevka Nerd Font-regular-normal-normal-*-16-*-*-*-p-0-iso10646-1") (border-width . 0) (internal-border-width . 2) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#ffffff") (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (undecorated) (undecorated-round) (ns-appearance) (ns-transparent-titlebar) (z-group) (no-focus-on-map) (no-accept-focus) (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (inhibit-double-buffering) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 15) (scroll-bar-height . 15) (alpha) (alpha-background) (fullscreen . fullboth) (scroll-bar-foreground . "#9f9f9f") (scroll-bar-background) (display-type . color) (background-mode . light) (cursor-color . "#000000") (font-parameter) (environment) (last-focus-update . t) (frameset--id . "1348-4E95-3B20-FF93") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . "MacBook-Pro-Anastasia.local") (explicit-name) (tool-bar-position . top) (tabs (current-tab (name . "keymaps.lua") (explicit-name))) (visibility . t) (height . 52) (width . 207) (left . 2) (top . 3)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 80) (min-pixel-width . 80) (min-pixel-height-ignore . 60) (min-pixel-width-ignore . 32) (min-pixel-height-safe . 20) (min-pixel-width-safe . 16)) leaf (pixel-width . 1672) (pixel-height . 1020) (total-width . 209) (total-height . 51) (normal-height . 1.0) (normal-width . 1.0) (buffer "keymaps.lua" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 11060) (start . 9226)) (prev-buffers ("vim-options.lua" 1568 2216) ("keymaps.lua" 8111 8411) ("*scratch*" 1 198) ("init.el" 33610 34178) ("gemini.md" 8901 9270))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring nil)
+(setq search-ring '(#("Нат" 0 3 (isearch-case-fold-search nil isearch-regexp-function nil)) #(":w" 0 2 (isearch-case-fold-search t isearch-regexp-function nil))))
 (setq regexp-search-ring nil)
-(setq register-alist nil)
+(setq register-alist '((48 . #("function name some test  print()\n" 0 9 (yank-handler (evil-yank-line-handler nil t) fontified t) 9 13 (yank-handler (evil-yank-line-handler nil t) fontified t) 13 24 (yank-handler (evil-yank-line-handler nil t) fontified t) 24 31 (yank-handler (evil-yank-line-handler nil t) fontified t) 31 32 (yank-handler (evil-yank-line-handler nil t) fontified t) 32 33 (yank-handler (evil-yank-line-handler nil t)))) (105)))
 (setq file-name-history '("~/dotfiles/nvim/.config/nvim/lua/" "~/Desktop/grok.md" "~/Desktop/gemini.md" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/Desktop/gemini.md" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/grok.md" "~/Desktop/gemini.md" "~/Desktop/Emacs_sessions/" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/init.el" "~/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/Org_files/test.tex" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/test.tex" "~/docs/Org_files/How_to_prove.pdf" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/textbf" "~/.emacs.d/snippets/LaTeX-mode/iff" "~/.emacs.d/snippets/LaTeX-mode/textbf" "~/.emacs.d/snippets/LaTeX-mode/set" "~/.emacs.d/snippets/LaTeX-mode/cdot" "~/.emacs.d/snippets/LaTeX-mode/proof" "~/.emacs.d/snippets/LaTeX-mode/item" "~/docs/Org_files/How_to_prove.pdf" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/mk" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/.emacs.d/snippets/LaTeX-mode/emp" "~/.emacs.d/snippets/LaTeX-mode/\\mathrmA" "~/.emacs.d/snippets/python-mode/Simple Function Definition" "~/.emacs.d/snippets/text-mode/link" "~/.emacs.d/snippets/text-mode/Simple Hello" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/docs/Org_files/How_to_prove.pdf" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/enumerate" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/begin.yasnippet" "~/dotfiles/emacs/.emacs.d/config.el" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/definition" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/begin.yasnippet" "~/dotfiles/emacs/.emacs.d/snippets/LaTeX-mode/theorema" "~/dotfiles/emacs/.emacs.d/config.el" "~/docs/Org_files/How_to_prove.tex" "~/dotfiles/emacs/.emacs.d/config.el" "~/" "~/docs/sicp/LuaCourse/Functions.md" "~/Desktop/Ege/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/sicp/test.rkt" "~/dotfiles/emacs/.emacs.d/init.el" "~/docs/sicp/test.scm" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jedi/third_party/typeshed/stdlib/3/os/" "~/dotfiles/emacs/.emacs.d/init.el" "~/Desktop/Ege/main.py" "~/.emacs.d/snippets/python-mode/./" "~/dotfiles/emacs/.emacs.d/snippets/org-mode/" "~/.emacs.d/snippets/" "~/dotfiles/emacs/.emacs.d/init.el" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/Ege/main.py" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/gemini_image_analysis_results.txt" "~/PycharmProjects/klllll/langImg_openrouter.txt" "~/docs/Org_files/test.md" "~/PycharmProjects/klllll/langImg.txt" "~/PycharmProjects/klllll/langImg.py" "~/Desktop/Ege/main.py" "~/.emacs.d/init.el" "~/PycharmProjects/klllll/" "~/PycharmProjects/klllll/langImg.txt" "~/.emacs.d/init.el" "~/Desktop/htdp/ortur.rkt" "~/Desktop/htdp/olan.rkt" "~/Desktop/htdp/Using_abstractions.rkt" "~/PycharmProjects/klllll/langImg.txt" "~/Desktop/htdp/Similarities.rkt" "~/Desktop/htdp/Intermezzo_1.rkt" "~/dotfiles/emacs/.emacs.d/config.el" "~/Desktop/htdp/Itunes.rkt" "~/docs/Org_files/test.md" "~/Desktop/Ege/main.py" "~/Desktop/htdp/Numbers.rkt"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 208
-  "/Users/chestnykh/Desktop/grok.md"
-  "grok.md"
-  'markdown-mode
-  '(display-line-numbers-mode evil-mc-mode corfu-mode evil-surround-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode eldoc-mode font-lock-mode)
-  4490
-  '(4505 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 26774 23465 297800 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/chestnykh/Desktop/gemini.md"
-  "gemini.md"
-  'markdown-mode
-  '(display-line-numbers-mode evil-mc-mode corfu-mode evil-surround-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode eldoc-mode font-lock-mode)
-  5590
-  '(5643 nil)
-  nil
-  nil
-  '((tab-width . 4) (buffer-display-time 26774 23465 297800 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1))))
-
-(desktop-create-buffer 208
-  "/Users/chestnykh/dotfiles/nvim/.config/nvim/lua/mdlist.lua"
-  "mdlist.lua"
+  "/Users/chestnykh/dotfiles/nvim/.config/nvim/lua/core/keymaps.lua"
+  "keymaps.lua"
   'fundamental-mode
-  '(font-lock-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
-  481
-  '(66 nil)
+  '(font-lock-mode evil-local-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode undo-fu-session-mode)
+  11060
+  '(8411 nil)
   nil
   nil
-  '((buffer-display-time 26774 22049 923258 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1))))
+  '((buffer-display-time 26798 44743 880692 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (8411 11064 12146 11952 8411))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/nvim/.config/nvim/lua/vim-options.lua"
   "vim-options.lua"
   'fundamental-mode
-  '(font-lock-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode)
-  5741
-  '(5739 nil)
+  '(evil-collection-unimpaired-mode evil-mc-mode corfu-mode evil-surround-mode evil-local-mode font-lock-mode undo-fu-session-mode)
+  2216
+  '(2216 nil)
   nil
   nil
-  '((buffer-display-time 26773 36053 982708 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (5739 5739 5739 5739 5739 5361 278))))
+  '((buffer-display-time 26798 44617 440580 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (2216 5739 5739 5739 5739 5739 5739 5361 278))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/emacs/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
-  '(font-lock-mode eldoc-mode yas-minor-mode evil-local-mode evil-collection-unimpaired-mode evil-surround-mode corfu-mode evil-mc-mode paredit-mode display-line-numbers-mode)
-  78
-  '(39092 nil)
+  '(evil-collection-unimpaired-mode evil-local-mode evil-mc-mode corfu-mode evil-surround-mode display-line-numbers-mode paredit-mode eldoc-mode font-lock-mode undo-fu-session-mode)
+  34178
+  '(34178 nil)
   nil
   nil
-  '((buffer-display-time 26770 64503 73612 373000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (765))))
+  '((buffer-display-time 26784 20818 49513 640000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (20606 20606 20539 21454 21149 21139 21054 18612 18534 10150 10103 10171 10171 16460 10184 4979))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/gemini.md"
+  "gemini.md"
+  'markdown-mode
+  '(evil-collection-unimpaired-mode evil-mc-mode corfu-mode evil-surround-mode font-lock-mode eldoc-mode evil-local-mode display-line-numbers-mode undo-fu-session-mode)
+  9270
+  '(9270 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26784 20793 931694 640000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (7951 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/Desktop/grok.md"
+  "grok.md"
+  'markdown-mode
+  '(evil-collection-unimpaired-mode evil-mc-mode corfu-mode evil-surround-mode font-lock-mode eldoc-mode evil-local-mode display-line-numbers-mode undo-fu-session-mode)
+  9188
+  '(8773 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-display-time 26783 60892 334426 900000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1))))
 
 (desktop-create-buffer 208
   "/Users/chestnykh/dotfiles/emacs/.emacs.d/config.el"
   "config.el"
   'emacs-lisp-mode
-  '(display-line-numbers-mode paredit-mode evil-mc-mode corfu-mode evil-surround-mode evil-collection-unimpaired-mode evil-local-mode yas-minor-mode eldoc-mode font-lock-mode)
-  32946
-  '(1187 nil)
+  '(evil-collection-unimpaired-mode evil-mc-mode corfu-mode evil-surround-mode font-lock-mode eldoc-mode evil-local-mode paredit-mode display-line-numbers-mode undo-fu-session-mode)
+  5079
+  '(32390 nil)
   nil
   nil
-  '((buffer-display-time 26773 35434 375657 0) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
-  '((mark-ring (1465))))
+  '((buffer-display-time 26778 23586 255014 934000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (31877 25730 4945 32390 31877 25730 25657 25657 32946 1187 1465))))
+
+(desktop-create-buffer 208
+  "/Users/chestnykh/dotfiles/nvim/.config/nvim/lua/mdlist.lua"
+  "mdlist.lua"
+  'fundamental-mode
+  '(evil-collection-unimpaired-mode evil-mc-mode corfu-mode evil-surround-mode evil-local-mode font-lock-mode undo-fu-session-mode)
+  481
+  '(66 nil)
+  nil
+  nil
+  '((buffer-display-time 26777 44809 311749 667000) (buffer-file-coding-system . utf-8-unix) (overwrite-mode))
+  '((mark-ring (1))))
 
